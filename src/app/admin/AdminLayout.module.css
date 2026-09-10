@@ -1,0 +1,12 @@
+.adminLayout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa; /* Light spacious background */
+}
+
+.mainContent {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  max-width: 100%;
+}

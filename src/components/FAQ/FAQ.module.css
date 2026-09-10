@@ -1,0 +1,144 @@
+.faqSection {
+  padding: var(--space-4xl) 0;
+  background-color: #fcfdfe; /* Very light subtle tint to match the image background */
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+/* Left Column */
+.leftCol {
+  flex: 1;
+  max-width: 500px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #3b4260;
+  line-height: 1.35;
+  margin-bottom: 32px;
+  max-width: 280px;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  background-color: #f4f5f6;
+  border-radius: 50px;
+  padding: 12px 24px;
+  margin-bottom: 40px;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+}
+
+.searchIcon {
+  color: #d1d5db;
+  cursor: pointer;
+}
+
+/* Accordion */
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordionItem {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.accordionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #3b4260;
+  transition: color 0.2s ease;
+}
+
+.questionOpen {
+  color: #3b4260;
+}
+
+.iconOpen {
+  color: #d1d5db;
+}
+
+.iconClosed {
+  color: #d1d5db;
+}
+
+.accordionBody {
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.answerText {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Right Column */
+.rightCol {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.illustrationWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 4 / 3;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .leftCol, .rightCol {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .title {
+    font-size: 2.8rem;
+    text-align: center;
+  }
+}

@@ -1,0 +1,317 @@
+/* Hero.module.css */
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px; /* Offset for navbar */
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.heroBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.9) 100%);
+}
+
+.heroContent {
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LEFT COLUMN */
+.leftCol {
+  flex: 1;
+  max-width: 600px;
+  position: relative;
+}
+
+.headline {
+  font-size: 5rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.inlineImageWrapper {
+  display: inline-block;
+  width: 120px;
+  height: 50px;
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+.inlineImageWrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.8) 100%);
+  border-radius: 40px;
+  pointer-events: none;
+}
+
+.inlineImage {
+  object-fit: cover;
+}
+
+.animatedDestContainer {
+  position: relative;
+  display: inline-block;
+  color: #a3e635; /* Bright green-yellow */
+  min-width: 250px;
+  height: 1.1em;
+  vertical-align: bottom;
+}
+
+.animatedDest {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.activeDest {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.subtextContainer {
+  margin-bottom: 40px;
+}
+
+.greenSubtext {
+  color: #a3e635;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.whiteWord {
+  color: white;
+}
+
+.whiteSubtext {
+  color: #e5e7eb;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.searchWrapper {
+  position: relative;
+  margin-top: 40px;
+  width: fit-content;
+}
+
+.searchBar {
+  display: flex;
+  background: white;
+  border-radius: 50px;
+  padding: 8px 8px 8px 24px;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  font-size: 1.1rem;
+  width: 250px;
+  color: #333;
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+}
+
+.searchBtn {
+  background-color: #0b63e5;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.searchBtn:hover {
+  background-color: #084eb8;
+}
+
+.drawnArrow {
+  position: absolute;
+  right: -80px;
+  top: -40px;
+  pointer-events: none;
+}
+
+/* RIGHT COLUMN - REVIEWS */
+.rightCol {
+  flex: 0 0 400px;
+  height: 450px;
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.reviewsContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.reviewsScroll {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: scrollVertical 20s linear infinite;
+}
+
+.reviewsScroll:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollVertical {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); /* Because array is duplicated */ }
+}
+
+.reviewCard {
+  background: rgba(31, 41, 55, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 24px;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.reviewCard:hover {
+  transform: scale(1.02);
+  background: rgba(31, 41, 55, 0.8);
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.reviewText {
+  color: #d1d5db;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* BOTTOM STATS */
+.statsSection {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.statBlock {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: white;
+}
+
+.statIcon {
+  color: white;
+}
+
+.statText h4 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  line-height: 1;
+}
+
+.statText p {
+  color: #e5e7eb;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.statDivider {
+  width: 1px;
+  height: 40px;
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 1024px) {
+  .heroContent {
+    flex-direction: column;
+    padding-top: 60px;
+  }
+  
+  .rightCol {
+    display: none; /* Hide reviews on small screens for better layout */
+  }
+  
+  .headline {
+    font-size: 3.5rem;
+  }
+  
+  .inlineImageWrapper {
+    width: 90px;
+    height: 40px;
+  }
+  
+  .statsSection {
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+  
+  .statDivider {
+    display: none;
+  }
+}

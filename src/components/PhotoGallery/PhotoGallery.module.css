@@ -1,0 +1,257 @@
+.gallerySection {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f4f8 100%);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ─── Header ─── */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 24px;
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6366f1;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 14px;
+  font-style: italic;
+  font-family: 'Georgia', serif;
+}
+
+.desc {
+  font-size: 1.05rem;
+  color: #6b7280;
+  line-height: 1.7;
+}
+
+/* ─── Filters ─── */
+.filtersWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 24px 10px;
+}
+
+.filtersWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.filtersList {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filterBtn {
+  padding: 10px 22px;
+  border-radius: 30px;
+  border: 1.5px solid #e5e7eb;
+  background: white;
+  color: #4b5563;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.filterBtn:hover {
+  border-color: #c7d2fe;
+  color: #4338ca;
+  background: #eef2ff;
+}
+
+.filterBtn.active {
+  background: #1e1b4b;
+  color: white;
+  border-color: #1e1b4b;
+}
+
+.viewMoreBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 30px;
+  border: 1.5px solid #1e1b4b;
+  background: white;
+  color: #1e1b4b;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.viewMoreBtn:hover {
+  background: #1e1b4b;
+  color: white;
+}
+
+/* ─── Swiper Wrapper (holds carousel + nav) ─── */
+.swiperWrapper {
+  position: relative;
+  padding: 30px 0 60px;
+}
+
+/* ─── Swiper Container ─── */
+.swiperContainer {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  overflow: visible;
+}
+
+/* Force Swiper slides to have explicit height via global selector inside module scope */
+.swiperContainer :global(.swiper-slide) {
+  width: 420px !important;
+  height: 500px !important;
+  border-radius: 22px;
+  overflow: hidden;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.swiperContainer :global(.swiper-slide-active) .slideInner {
+  box-shadow: 0 25px 60px rgba(30, 27, 75, 0.3), 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* ─── Slide Inner ─── */
+.slideInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ─── Overlay ─── */
+.slideOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 50%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 32px;
+  color: white;
+  z-index: 2;
+}
+
+.slideInner:hover .slideOverlay {
+  opacity: 1;
+}
+
+.expandIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  border-radius: 50%;
+  padding: 14px;
+  box-sizing: content-box;
+}
+
+.slideInner:hover .expandIcon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.caption {
+  font-size: 1.2rem;
+  font-weight: 600;
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.slideInner:hover .caption {
+  transform: translateY(0);
+}
+
+/* ─── Navigation Arrows ─── */
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid #d1d5db;
+  background: white;
+  color: #374151;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.navBtn:hover {
+  background: #1e1b4b;
+  color: white;
+  border-color: #1e1b4b;
+}
+
+.navPrev {
+  left: 24px;
+}
+
+.navNext {
+  right: 24px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .swiperContainer :global(.swiper-slide) {
+    width: 340px !important;
+    height: 420px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .swiperContainer :global(.swiper-slide) {
+    width: 280px !important;
+    height: 360px !important;
+  }
+
+  .navBtn {
+    display: none;
+  }
+}

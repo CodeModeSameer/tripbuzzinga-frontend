@@ -1,0 +1,148 @@
+.main {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding-top: 80px; /* Navbar offset */
+  padding-bottom: 80px;
+}
+
+.container {
+  max-width: 800px; /* Narrower width for reading */
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.notFound {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.notFound h1 {
+  font-size: 2.5rem;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.notFound p {
+  color: #6b7280;
+  margin-bottom: 32px;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2563eb;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.backBtn:hover {
+  background: #1d4ed8;
+}
+
+/* Header */
+.header {
+  padding: 40px 0 32px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 24px;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: #2563eb;
+}
+
+.categoryWrap {
+  margin-bottom: 16px;
+}
+
+.category {
+  display: inline-block;
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.metaData {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px 0;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4b5563;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Hero Image */
+.heroImageWrapper {
+  margin-bottom: 48px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* Article */
+.article {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #374151;
+}
+
+.paragraph {
+  margin-bottom: 24px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.25rem;
+  }
+  
+  .metaData {
+    gap: 16px;
+    flex-direction: column;
+  }
+}

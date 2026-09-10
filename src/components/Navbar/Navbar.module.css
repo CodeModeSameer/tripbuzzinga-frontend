@@ -1,0 +1,273 @@
+/* Navbar.module.css */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  z-index: 1000;
+  transition: box-shadow 0.3s ease, padding 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.scrolled {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.navInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 10px;
+}
+
+.logoGraphic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.wave1, .wave2 {
+  position: absolute;
+  bottom: -20px;
+  width: 200%;
+  height: 200%;
+  background: white;
+  border-radius: 40%;
+  animation: spin 5s linear infinite;
+}
+
+.wave1 {
+  left: -50%;
+  opacity: 0.3;
+}
+
+.wave2 {
+  left: -40%;
+  opacity: 0.5;
+  animation-duration: 7s;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #333;
+  line-height: 1;
+}
+
+.logoHighlight {
+  color: #333; 
+}
+
+.logoTagline {
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: #888;
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+/* Desktop Links */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.navLink:hover {
+  color: #0b63e5;
+}
+
+.dropdownIcon {
+  margin-left: 4px;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* Badge */
+.hasBadge {
+  border: 1px solid #10b981;
+  border-radius: 20px;
+  padding: 4px 12px;
+  color: #10b981;
+  gap: 8px;
+}
+
+.badge {
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* Right Actions */
+.rightActions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+}
+
+.phoneSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phoneIconWrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #555;
+}
+
+.phoneText {
+  display: flex;
+  flex-direction: column;
+}
+
+.phoneLabel {
+  font-size: 0.75rem;
+  color: #666;
+  line-height: 1.2;
+}
+
+.phoneNumber {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.2;
+}
+
+.iconButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #0b63e5;
+  color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color: #084eb8;
+  transform: scale(1.05);
+}
+
+/* Hamburger & Mobile - hidden on desktop */
+.hamburger {
+  display: none;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .navLinks {
+    display: none;
+  }
+
+  .rightActions {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .hamburgerLine {
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+    transition: all 0.3s ease;
+  }
+
+  .hamburgerOpen .hamburgerLine:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburgerOpen .hamburgerLine:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburgerOpen .hamburgerLine:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .mobileMenuOpen {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    padding: 16px;
+  }
+
+  .mobileNavLink {
+    padding: 12px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
