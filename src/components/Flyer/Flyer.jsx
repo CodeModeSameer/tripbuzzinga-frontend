@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./Flyer.module.css";
 
@@ -10,6 +10,23 @@ export default function Flyer() {
   const { flyer: flyers } = useSiteData(); // Now it's an array
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef(null);
+
+  useEffect(() => {
+    if (!Array.isArray(flyers) || flyers.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((current) => {
+        const nextIndex = (current + 1) % flyers.length;
+        if (scrollRef.current) {
+          const width = scrollRef.current.clientWidth;
+          scrollRef.current.scrollTo({ left: width * nextIndex, behavior: "smooth" });
+        }
+        return nextIndex;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [flyers]);
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -30,9 +47,9 @@ export default function Flyer() {
   return (
     <section className={styles.flyerSection}>
       <div className={styles.container}>
-        <div 
-          className={styles.carouselContainer} 
-          ref={scrollRef} 
+        <div
+          className={styles.carouselContainer}
+          ref={scrollRef}
           onScroll={handleScroll}
         >
           {Array.isArray(flyers) && flyers.map((f, i) => (
@@ -60,11 +77,11 @@ export default function Flyer() {
             </Link>
           ))}
         </div>
-        
+
         {/* Pagination Dots */}
         <div className={styles.pagination}>
           {Array.isArray(flyers) && flyers.map((_, idx) => (
-            <span 
+            <span
               key={idx}
               onClick={() => scrollTo(idx)}
               className={`${styles.dot} ${activeIndex === idx ? styles.activeDot : ''}`}

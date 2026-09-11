@@ -17,7 +17,6 @@ export default function TripCategories() {
           <div className={styles.scrollTrack}>
             {tripCategories.map((cat) => (
               <Link href="#" key={cat.id} className={styles.categoryItem}>
-                <div className={styles.imageRing}>
                   <div className={styles.imageWrapper}>
                     <Image 
                       src={cat.image}
@@ -26,7 +25,6 @@ export default function TripCategories() {
                       style={{ objectFit: "cover" }}
                     />
                   </div>
-                </div>
                 <span className={styles.label}>{cat.label}</span>
               </Link>
             ))}

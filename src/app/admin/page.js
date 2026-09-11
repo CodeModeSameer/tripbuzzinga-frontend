@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AdminSidebar from "@/components/AdminSidebar/AdminSidebar";
 import { useSiteData } from "@/context/SiteDataContext";
 import {
   Plus, Trash2, Save, Edit3, X, GripVertical,
-  Image as ImageIcon, Upload, ChevronDown, ChevronUp
+  Image as ImageIcon, Upload, ChevronDown, ChevronUp,
+  Lock, Eye, EyeOff
 } from "lucide-react";
 import styles from "./admin.module.css";
 
@@ -32,7 +33,17 @@ const FLAG_OPTIONS = [
   { name: "Other", flag: "🏳️" },
 ];
 
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "tripbuzzinga@2025";
+
 export default function AdminDashboard() {
+  // ─── ALL HOOKS MUST BE CALLED FIRST (Rules of Hooks) ───
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginUsername, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const {
     hero, setHero,
     popularDestinations: popular, setPopularDestinations: setPopular,
@@ -52,10 +63,77 @@ export default function AdminDashboard() {
   const [editingItinIdx, setEditingItinIdx] = useState(null);
   const [savedMsg, setSavedMsg] = useState("");
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (loginUsername === ADMIN_USERNAME && loginPassword === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      setLoginError("");
+    } else {
+      setLoginError("Invalid username or password");
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
   const showSaved = () => {
     setSavedMsg("Changes saved successfully!");
     setTimeout(() => setSavedMsg(""), 2500);
   };
+
+  // ─── LOGIN GATE ───
+  if (!isAuthenticated) {
+    return (
+      <div className={styles.loginPage}>
+        <div className={styles.loginCard}>
+          <div className={styles.loginHeader}>
+            <div className={styles.loginIconWrap}>
+              <Lock size={28} />
+            </div>
+            <h1 className={styles.loginTitle}>Admin Panel</h1>
+            <p className={styles.loginSubtitle}>Sign in to manage Trip Buzzinga</p>
+          </div>
+          <form onSubmit={handleLogin} className={styles.loginForm}>
+            <div className={styles.loginField}>
+              <label className={styles.loginLabel}>Username</label>
+              <input
+                type="text"
+                className={styles.loginInput}
+                value={loginUsername}
+                onChange={(e) => setLoginUsername(e.target.value)}
+                placeholder="Enter username"
+                autoFocus
+              />
+            </div>
+            <div className={styles.loginField}>
+              <label className={styles.loginLabel}>Password</label>
+              <div className={styles.loginPasswordWrap}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className={styles.loginInput}
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  placeholder="Enter password"
+                />
+                <button
+                  type="button"
+                  className={styles.loginEyeBtn}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+            </div>
+            {loginError && <p className={styles.loginError}>{loginError}</p>}
+            <button type="submit" className={styles.loginBtn}>Sign In</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  // ─── AUTHENTICATED DASHBOARD ───
 
   /* ─── HERO PANEL ─── */
   const renderHeroPanel = () => (
@@ -506,6 +584,7 @@ export default function AdminDashboard() {
             locations: [],
             categories: [],
             description: "",
+            detailedDays: [],
           }
         });
       }}><Plus size={16} /> Add Itinerary</button>
@@ -837,6 +916,41 @@ export default function AdminDashboard() {
                       );
                     })}
                   </div>
+                </div>
+
+                {/* Detailed Days Plan */}
+                <div className={styles.fieldGroup}>
+                  <label className={styles.fieldLabel} style={{ marginTop: '24px', borderBottom: '1px solid #e5e7eb', paddingBottom: '8px' }}>Day-wise Plan</label>
+                  {(data.detailedDays || []).map((day, idx) => (
+                    <div key={idx} style={{ padding: '16px', border: '1px solid #e5e7eb', borderRadius: '8px', marginBottom: '12px', background: '#f9fafb' }}>
+                      <div className={styles.fieldRow}>
+                        <div className={styles.fieldGroup} style={{ flex: 1 }}>
+                          <label className={styles.fieldLabel}>Day Title</label>
+                          <input className={styles.textInput} placeholder="e.g. Day 1: Arrival at Maldives" value={day.title || ""} onChange={(e) => {
+                            const updated = [...(data.detailedDays || [])];
+                            updated[idx] = { ...updated[idx], title: e.target.value };
+                            updateField("detailedDays", updated);
+                          }} />
+                        </div>
+                      </div>
+                      <div className={styles.fieldGroup}>
+                        <label className={styles.fieldLabel}>Description</label>
+                        <textarea className={styles.textArea} rows={3} placeholder="Describe the day's activities..." value={day.description || ""} onChange={(e) => {
+                          const updated = [...(data.detailedDays || [])];
+                          updated[idx] = { ...updated[idx], description: e.target.value };
+                          updateField("detailedDays", updated);
+                        }} />
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                        <button className={styles.deleteBtn} onClick={() => {
+                          updateField("detailedDays", (data.detailedDays || []).filter((_, i) => i !== idx));
+                        }}><Trash2 size={14} /> Remove Day</button>
+                      </div>
+                    </div>
+                  ))}
+                  <button className={styles.addSmallBtn} onClick={() => {
+                    updateField("detailedDays", [...(data.detailedDays || []), { title: "", description: "" }]);
+                  }}><Plus size={14} /> Add Day</button>
                 </div>
               </>
             )}

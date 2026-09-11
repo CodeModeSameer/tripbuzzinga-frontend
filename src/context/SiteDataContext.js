@@ -457,7 +457,8 @@ const initialTripCategories = [
   { id: 2, label: "Solo Travel", image: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&q=80&w=200" },
   { id: 3, label: "Family Group", image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=200" },
   { id: 4, label: "Global Group", image: "https://images.unsplash.com/photo-1529156069898-49953eb1b5b4?auto=format&fit=crop&q=80&w=200" },
-  { id: 5, label: "International", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200" },
+  { id: 5, label: "Iconic International", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200" },
+  { id: 6, label: "Discover Domestic", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=200" },
 ];
 
 const initialItinerariesData = [
