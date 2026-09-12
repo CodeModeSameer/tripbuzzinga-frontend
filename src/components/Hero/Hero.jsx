@@ -103,7 +103,7 @@ export default function Hero() {
                 <div key={idx} className={styles.reviewCard}>
                   <div className={styles.reviewHeader}>
                     <div className={styles.avatar}>
-                      <Image src={review.image} alt={review.name} fill style={{ objectFit: 'cover' }} />
+                      <Image src={(review.images?.[0] || review.image)} alt={review.name} fill style={{ objectFit: 'cover' }} />
                     </div>
                     <div className={styles.stars}>
                       <Star fill="#f59e0b" color="#f59e0b" size={14} />

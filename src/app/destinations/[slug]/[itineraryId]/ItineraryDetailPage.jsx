@@ -2,6 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-fade";
 import {
   ArrowLeft, ImageIcon, Star, Calendar, MapPin, Car,
   Wallet, CheckCircle2, XCircle, Building2, FileText,
@@ -79,18 +83,23 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
       <section
         className={styles.banner}
         ref={bannerRef}
-        style={{ background: itinerary.bannerGradient }}
       >
-        <div className={styles.bannerOverlay} />
-
-        {/* Gallery placeholders */}
-        <div className={styles.bannerGallery}>
-          {[1, 2, 3].map((n) => (
-            <div key={n} className={styles.bannerThumb}>
-              <ImageIcon size={20} className={styles.bannerThumbIcon} />
-            </div>
-          ))}
+        <div className={styles.bannerSwiperContainer}>
+          <Swiper
+            modules={[Autoplay, EffectFade]}
+            effect="fade"
+            autoplay={{ delay: 2000, disableOnInteraction: false }}
+            loop={true}
+            style={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0, zIndex: 0 }}
+          >
+            {(itinerary.images && itinerary.images.length > 0 ? itinerary.images : [itinerary.image || "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=1600"]).filter(Boolean).map((imgUrl, idx) => (
+              <SwiperSlide key={idx} style={{ width: "100%", height: "100%" }}>
+                <div style={{ backgroundImage: `url(${imgUrl})`, backgroundSize: "cover", backgroundPosition: "center", width: "100%", height: "100%" }} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
+        <div className={styles.bannerOverlay} style={{ zIndex: 1 }} />
 
         <div className={styles.bannerContent} ref={titleRef} style={{ visibility: "hidden" }}>
           <span className={styles.bannerDestLabel}>{itinerary.destinationName}</span>

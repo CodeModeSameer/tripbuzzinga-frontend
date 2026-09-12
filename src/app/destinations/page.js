@@ -29,7 +29,7 @@ export default function AllDestinationsPage() {
               <div key={dest.id} className={styles.card}>
                 <div className={styles.imageContainer}>
                   <Image 
-                    src={dest.image}
+                    src={(dest.images?.[0] || dest.image)}
                     alt={dest.name}
                     fill
                     style={{ objectFit: 'cover' }}

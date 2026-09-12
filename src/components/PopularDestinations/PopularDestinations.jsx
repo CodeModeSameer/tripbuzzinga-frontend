@@ -123,7 +123,7 @@ export default function PopularDestinations() {
               {/* Full background image */}
               <div className={styles.cardImageBg}>
                 <Image
-                  src={dest.image}
+                  src={(dest.images?.[0] || dest.image)}
                   alt={`${dest.city}, ${dest.country}`}
                   fill
                   sizes="(max-width: 768px) 80vw, 360px"

@@ -19,7 +19,7 @@ export default function TripCategories() {
               <Link href="#" key={cat.id} className={styles.categoryItem}>
                   <div className={styles.imageWrapper}>
                     <Image 
-                      src={cat.image}
+                      src={(cat.images?.[0] || cat.image)}
                       alt={cat.label}
                       fill
                       style={{ objectFit: "cover" }}

@@ -248,7 +248,7 @@ export default function AdminDashboard() {
             title: "",
             price: "₹",
             highlights: [""],
-            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"
+            images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"]
           }
         });
       }}><Plus size={16} /> Add Destination</button>
@@ -349,7 +349,7 @@ export default function AdminDashboard() {
               id: Date.now(),
               name: "",
               desc: "",
-              image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"
+              images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"]
             }
           });
         }}><Plus size={16} /> Add Destination</button>
@@ -524,7 +524,7 @@ export default function AdminDashboard() {
             author: "",
             category: "General",
             content: "",
-            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
+            images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"],
             isFeatured: false,
           }
         });
@@ -579,7 +579,7 @@ export default function AdminDashboard() {
             transfers: "Included",
             budget: "₹20,000",
             rating: 5,
-            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=600",
+            images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"],
             type: "domestic",
             locations: [],
             categories: [],
@@ -711,7 +711,15 @@ export default function AdminDashboard() {
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Price</label><input className={styles.textInput} value={data.price} onChange={(e) => updateField("price", e.target.value)} /></div>
                 </div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Title</label><input className={styles.textInput} value={data.title} onChange={(e) => updateField("title", e.target.value)} /></div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Image URL</label><input className={styles.textInput} value={data.image} onChange={(e) => updateField("image", e.target.value)} /></div>
+                <div className={styles.fieldGroup}>
+  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
+  <textarea 
+    className={styles.textArea} 
+    value={data.images ? data.images.join("\n") : (data.image || "")} 
+    onChange={(e) => updateField("images", e.target.value.split("\n").map(url => url.trim()).filter(Boolean))} 
+    rows={3} 
+  />
+</div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel}>Highlights</label>
                   {data.highlights.map((h, idx) => (
@@ -738,7 +746,15 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={3} value={data.desc} onChange={(e) => updateField("desc", e.target.value)} /></div>
                 <div className={styles.fieldRow}>
-                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Image URL</label><input className={styles.textInput} value={data.image} onChange={(e) => updateField("image", e.target.value)} /></div>
+                  <div className={styles.fieldGroup}>
+  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
+  <textarea 
+    className={styles.textArea} 
+    value={data.images ? data.images.join("\n") : (data.image || "")} 
+    onChange={(e) => updateField("images", e.target.value.split("\n").map(url => url.trim()).filter(Boolean))} 
+    rows={3} 
+  />
+</div>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Banner Gradient</label><input className={styles.textInput} value={data.bannerGradient || ""} onChange={(e) => updateField("bannerGradient", e.target.value)} /></div>
                 </div>
                 
@@ -824,7 +840,15 @@ export default function AdminDashboard() {
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Published At</label><input className={styles.textInput} value={data.publishedAt} onChange={(e) => updateField("publishedAt", e.target.value)} /></div>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Reading Time</label><input className={styles.textInput} value={data.readingTime} onChange={(e) => updateField("readingTime", e.target.value)} /></div>
                 </div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Image URL</label><input className={styles.textInput} value={data.image} onChange={(e) => updateField("image", e.target.value)} /></div>
+                <div className={styles.fieldGroup}>
+  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
+  <textarea 
+    className={styles.textArea} 
+    value={data.images ? data.images.join("\n") : (data.image || "")} 
+    onChange={(e) => updateField("images", e.target.value.split("\n").map(url => url.trim()).filter(Boolean))} 
+    rows={3} 
+  />
+</div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Content</label><textarea className={styles.textArea} rows={6} value={data.content} onChange={(e) => updateField("content", e.target.value)} /></div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
@@ -855,7 +879,15 @@ export default function AdminDashboard() {
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Pickup</label><input className={styles.textInput} value={data.pickup} onChange={(e) => updateField("pickup", e.target.value)} /></div>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Transfers</label><input className={styles.textInput} value={data.transfers} onChange={(e) => updateField("transfers", e.target.value)} /></div>
                 </div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Image URL</label><input className={styles.textInput} value={data.image} onChange={(e) => updateField("image", e.target.value)} /></div>
+                <div className={styles.fieldGroup}>
+  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
+  <textarea 
+    className={styles.textArea} 
+    value={data.images ? data.images.join("\n") : (data.image || "")} 
+    onChange={(e) => updateField("images", e.target.value.split("\n").map(url => url.trim()).filter(Boolean))} 
+    rows={3} 
+  />
+</div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={3} value={data.description} onChange={(e) => updateField("description", e.target.value)} /></div>
 
                 {/* Locations multi-select */}

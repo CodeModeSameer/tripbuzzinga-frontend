@@ -56,7 +56,7 @@ export default function Flyer() {
             <Link key={f.id || i} href={f.linkUrl} className={styles.flyerLink}>
               <div className={styles.flyerWrapper}>
                 <Image
-                  src={f.image}
+                  src={(f.images?.[0] || f.image)}
                   alt={f.title}
                   fill
                   className={styles.flyerImage}

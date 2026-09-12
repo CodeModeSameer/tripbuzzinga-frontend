@@ -3,6 +3,10 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ImageIcon, Star, ArrowLeft, MapPin, Calendar, Car, Wallet, AlertCircle } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-fade";
 import styles from "./DestinationPage.module.css";
 import { useSiteData } from "@/context/SiteDataContext";
 import Navbar from "@/components/Navbar/Navbar";
@@ -102,8 +106,8 @@ export default function DestinationPage({ slug }) {
         className={styles.banner}
         ref={bannerRef}
         style={{
-          background: destination.image 
-            ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${destination.image})` 
+          background: (destination.images?.[0] || destination.image) 
+            ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${(destination.images?.[0] || destination.image)})` 
             : destination.bannerGradient || "var(--gradient-hero)",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -199,11 +203,23 @@ export default function DestinationPage({ slug }) {
 
                 {/* Image Placeholder */}
                 <div className={styles.itinImageWrap}>
-                  <img
-                    src={itin.image || `https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=600&random=${i}`}
-                    alt={itin.title}
-                    className={styles.itinImage}
-                  />
+                  <Swiper
+                    modules={[Autoplay, EffectFade]}
+                    effect="fade"
+                    autoplay={{ delay: 2000, disableOnInteraction: false }}
+                    loop={true}
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    {(itin.images && itin.images.length > 0 ? itin.images : [itin.image || `https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=600&random=${i}`]).filter(Boolean).map((imgUrl, idx) => (
+                      <SwiperSlide key={idx} style={{ width: "100%", height: "100%" }}>
+                        <img
+                          src={imgUrl}
+                          alt={itin.title}
+                          className={styles.itinImage}
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
                 </div>
               </div>
             );

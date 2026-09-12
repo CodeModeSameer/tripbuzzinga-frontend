@@ -32,7 +32,7 @@ export default function Blogs() {
               >
                 <div className={styles.regularImageWrapper}>
                   <Image 
-                    src={blog.image} 
+                    src={(blog.images?.[0] || blog.image)} 
                     alt={blog.title} 
                     fill 
                     className={styles.blogImage} 
@@ -56,7 +56,7 @@ export default function Blogs() {
               <Link href={`/blogs/${featuredBlog.id}`} className={styles.featuredCard}>
                 <div className={styles.featuredImageWrapper}>
                   <Image 
-                    src={featuredBlog.image} 
+                    src={(featuredBlog.images?.[0] || featuredBlog.image)} 
                     alt={featuredBlog.title} 
                     fill 
                     className={styles.blogImage} 

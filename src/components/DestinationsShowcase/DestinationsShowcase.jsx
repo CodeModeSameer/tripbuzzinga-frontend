@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-fade";
 import { ImageIcon, ArrowRight, Globe, MapPin } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./DestinationsShowcase.module.css";
@@ -248,13 +252,27 @@ export default function DestinationsShowcase() {
                 ref={(el) => (imageRefs.current[i] = el)}
               >
                 <div className={styles.imageContainer}>
-                  <Image 
-                    src={dest.image}
-                    alt={dest.name}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+                  
+                  <Swiper
+                    modules={[Autoplay, EffectFade]}
+                    effect="fade"
+                    autoplay={{ delay: 2000, disableOnInteraction: false }}
+                    loop={true}
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    {(dest.images || [dest.image]).filter(Boolean).map((imgUrl, idx) => (
+                      <SwiperSlide key={idx} style={{ width: "100%", height: "100%", position: "relative" }}>
+                        <Image 
+                          src={imgUrl}
+                          alt={dest.name}
+                          fill
+                          style={{ objectFit: "cover" }}
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+
                 </div>
               </div>
 

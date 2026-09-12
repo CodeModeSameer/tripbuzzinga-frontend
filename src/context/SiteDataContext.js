@@ -20,36 +20,31 @@ const initialHeroData = {
     {
       id: 1,
       name: "Traveler One",
-      image:
-        "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&q=80&w=100",
+      images: ["https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&q=80&w=100"],
       text: "Travelled with Justwravel on their Winter Spiti expedition. One of the best trip i have had.",
     },
     {
       id: 2,
       name: "Traveler Two",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100",
+      images: ["https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100"],
       text: "It was good experience with Justwravel. I have done spiti 4x4 expedition and enjoyed a lot.",
     },
     {
       id: 3,
       name: "Traveler Three",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100",
+      images: ["https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100"],
       text: "Awesome experience with JustWravel Tawang Bike trip. Awesome well planned 9/10 days.",
     },
     {
       id: 4,
       name: "Traveler Four",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100",
+      images: ["https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100"],
       text: "The best travel company I've ever traveled with. Highly recommended for solo travelers.",
     },
     {
       id: 5,
       name: "Traveler Five",
-      image:
-        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100",
+      images: ["https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=100"],
       text: "Incredible management and beautiful locations. Will definitely travel again next year.",
     },
   ],
@@ -70,8 +65,7 @@ const initialPopularData = [
       "Abu Dhabi Sheikh Zayed Mosque",
     ],
     price: "₹42,999",
-    image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800"],
   },
   {
     id: 2,
@@ -87,8 +81,7 @@ const initialPopularData = [
       "Floating Market Experience",
     ],
     price: "₹38,499",
-    image:
-      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&q=80&w=800"],
   },
   {
     id: 3,
@@ -104,8 +97,7 @@ const initialPopularData = [
       "Nusa Penida Snorkeling Trip",
     ],
     price: "₹49,999",
-    image:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=800"],
   },
   {
     id: 4,
@@ -121,8 +113,7 @@ const initialPopularData = [
       "Coral Reef Snorkeling",
     ],
     price: "₹74,999",
-    image:
-      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800"],
   },
   {
     id: 5,
@@ -138,8 +129,7 @@ const initialPopularData = [
       "Sentosa Island Adventure",
     ],
     price: "₹55,999",
-    image:
-      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&q=80&w=800"],
   },
   {
     id: 6,
@@ -155,8 +145,7 @@ const initialPopularData = [
       "Cruise in Mandovi River",
     ],
     price: "₹14,999",
-    image:
-      "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=800"],
   },
   {
     id: 7,
@@ -172,8 +161,7 @@ const initialPopularData = [
       "Periyar Wildlife Sanctuary",
     ],
     price: "₹18,999",
-    image:
-      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=800"],
   },
 ];
 
@@ -185,8 +173,7 @@ const initialFlyerData = [
     badge: "EARLY BIRD OFFER",
     discountLabel: "DISCOUNT UP TO",
     discountAmount: "₹ 5,500*",
-    image:
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop"],
     linkUrl: "/offers",
   },
   {
@@ -196,8 +183,7 @@ const initialFlyerData = [
     badge: "LIMITED TIME",
     discountLabel: "FLAT DISCOUNT",
     discountAmount: "₹ 3,000*",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop"],
     linkUrl: "/offers/summer",
   },
   {
@@ -207,8 +193,7 @@ const initialFlyerData = [
     badge: "NEW SEASON",
     discountLabel: "CASHBACK",
     discountAmount: "₹ 2,000*",
-    image:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop"],
     linkUrl: "/offers/trekking",
   }
 ];
@@ -220,7 +205,7 @@ const initialExploreIntl = [
     tagline: "Paradise on Earth",
     bannerGradient: "linear-gradient(160deg, #87CEEB 0%, #48CAE4 30%, #0077B6 60%, #005F8A 100%)",
     desc: "Crystal-clear turquoise waters, pristine white-sand beaches, and luxurious overwater villas make the Maldives a paradise unlike any other.",
-    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800"],
     itineraries: [
       { id: "mal-1", title: "Taj Coral Reef", days: "6 Days 5 Nights", pickup: "Air Port", transfers: "Included", budget: "₹50,000", rating: 5, imageGradient: "linear-gradient(135deg, #87CEEB, #48CAE4)" },
       { id: "mal-2", title: "Oblu Select Sangeli", days: "6 Days 5 Nights", pickup: "Air Port", transfers: "Included", budget: "₹50,000", rating: 5, imageGradient: "linear-gradient(135deg, #0077B6, #48CAE4)" },
@@ -232,7 +217,7 @@ const initialExploreIntl = [
     tagline: "The Land of Alps",
     bannerGradient: "linear-gradient(160deg, #B3E5FC 0%, #4FC3F7 30%, #29B6F6 60%, #0288D1 100%)",
     desc: "From the snow-capped peaks of the Alps to the serene lakeside towns, Switzerland offers a fairy-tale landscape at every turn.",
-    image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&q=80&w=800"],
     itineraries: [
       { id: "swi-1", title: "Swiss Alps Explorer", days: "8 Days 7 Nights", pickup: "Zurich Airport", transfers: "Included", budget: "₹1,20,000", rating: 5, imageGradient: "linear-gradient(135deg, #B3E5FC, #4FC3F7)" },
     ],
@@ -243,7 +228,7 @@ const initialExploreIntl = [
     tagline: "Where Tradition Meets Future",
     bannerGradient: "linear-gradient(160deg, #FFECB3 0%, #FFD54F 30%, #FF9800 60%, #F57C00 100%)",
     desc: "A mesmerizing blend of ancient traditions and cutting-edge modernity, Japan captivates with its stunning cherry blossoms.",
-    image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800"],
     itineraries: [
       { id: "jpn-1", title: "Tokyo & Kyoto Classic", days: "7 Days 6 Nights", pickup: "Narita Airport", transfers: "Bullet Train", budget: "₹1,10,000", rating: 5, imageGradient: "linear-gradient(135deg, #FFECB3, #FFD54F)" },
     ],
@@ -254,7 +239,7 @@ const initialExploreIntl = [
     tagline: "Land of Fire & Ice",
     bannerGradient: "linear-gradient(160deg, #E8EAF6 0%, #9FA8DA 30%, #5C6BC0 60%, #3F51B5 100%)",
     desc: "Witness the Northern Lights dancing across volcanic landscapes, soak in natural geothermal hot springs, and explore dramatic waterfalls.",
-    image: "https://images.unsplash.com/photo-1476610287331-b711a628ea8e?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1476610287331-b711a628ea8e?auto=format&fit=crop&q=80&w=800"],
     itineraries: [
       { id: "ice-1", title: "Northern Lights Chase", days: "6 Days 5 Nights", pickup: "Keflavik Airport", transfers: "Included", budget: "₹1,30,000", rating: 5, imageGradient: "linear-gradient(135deg, #9FA8DA, #5C6BC0)" },
     ],
@@ -265,7 +250,7 @@ const initialExploreIntl = [
     tagline: "City of Love",
     bannerGradient: "linear-gradient(160deg, #FFCDD2 0%, #EF9A9A 30%, #E57373 60%, #C62828 100%)",
     desc: "Experience the romance of Paris, the lavender fields of Provence, and the sun-drenched French Riviera.",
-    image: "https://images.unsplash.com/photo-1502602898657-3e907614f010?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1502602898657-3e907614f010?auto=format&fit=crop&q=80&w=800"],
     itineraries: [],
   },
   {
@@ -274,7 +259,7 @@ const initialExploreIntl = [
     tagline: "Renaissance Beauty",
     bannerGradient: "linear-gradient(160deg, #C8E6C9 0%, #81C784 30%, #43A047 60%, #1B5E20 100%)",
     desc: "Wander through the ancient ruins of Rome, glide along the canals of Venice, and marvel at the Renaissance masterpieces in Florence.",
-    image: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&q=80&w=800"],
     itineraries: [],
   },
 ];
@@ -286,7 +271,7 @@ const initialExploreDom = [
     tagline: "Sun, Sand & Soul",
     bannerGradient: "linear-gradient(160deg, #FFE0B2 0%, #FFCC80 30%, #FF9800 60%, #E65100 100%)",
     desc: "Sun-kissed beaches, vibrant nightlife, and Portuguese heritage create an irresistible coastal charm.",
-    image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=800"],
     itineraries: [
       { id: "goa-1", title: "North Goa Beach Bliss", days: "4 Days 3 Nights", pickup: "Goa Airport", transfers: "Included", budget: "₹15,000", rating: 4, imageGradient: "linear-gradient(135deg, #FFE0B2, #FFCC80)" },
     ],
@@ -297,7 +282,7 @@ const initialExploreDom = [
     tagline: "The Land of Kings",
     bannerGradient: "linear-gradient(160deg, #FFCDD2 0%, #EF9A9A 30%, #E57373 60%, #C62828 100%)",
     desc: "Step into a world of grand palaces, majestic forts, and golden deserts. Rajasthan's royal heritage comes alive through its colorful bazaars.",
-    image: "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&q=80&w=800"],
     itineraries: [
       { id: "raj-1", title: "Royal Rajasthan Circuit", days: "8 Days 7 Nights", pickup: "Jaipur Airport", transfers: "Included", budget: "₹32,000", rating: 5, imageGradient: "linear-gradient(135deg, #FFCDD2, #EF9A9A)" },
     ],
@@ -308,7 +293,7 @@ const initialExploreDom = [
     tagline: "God's Own Country",
     bannerGradient: "linear-gradient(160deg, #C8E6C9 0%, #81C784 30%, #43A047 60%, #1B5E20 100%)",
     desc: "Known as God's Own Country, Kerala enchants with its tranquil backwaters, lush tea plantations of Munnar, pristine hill stations.",
-    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=800"],
     itineraries: [
       { id: "ker-1", title: "Alleppey Houseboat Stay", days: "5 Days 4 Nights", pickup: "Kochi Airport", transfers: "Included", budget: "₹22,000", rating: 5, imageGradient: "linear-gradient(135deg, #C8E6C9, #81C784)" },
     ],
@@ -319,7 +304,7 @@ const initialExploreDom = [
     tagline: "The Roof of the World",
     bannerGradient: "linear-gradient(160deg, #CFD8DC 0%, #90A4AE 30%, #546E7A 60%, #37474F 100%)",
     desc: "A high-altitude wonderland of dramatic mountain passes, crystal-clear lakes, and ancient monasteries perched on clifftops.",
-    image: "https://images.unsplash.com/photo-1581793746485-04698e79a4e8?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1581793746485-04698e79a4e8?auto=format&fit=crop&q=80&w=800"],
     itineraries: [
       { id: "lad-1", title: "Leh Pangong Lake Tour", days: "6 Days 5 Nights", pickup: "Leh Airport", transfers: "4x4 Included", budget: "₹28,000", rating: 5, imageGradient: "linear-gradient(135deg, #CFD8DC, #90A4AE)" },
     ],
@@ -330,7 +315,7 @@ const initialExploreDom = [
     tagline: "Tropical Paradise",
     bannerGradient: "linear-gradient(160deg, #B3E5FC 0%, #4FC3F7 30%, #29B6F6 60%, #0288D1 100%)",
     desc: "Immerse yourself in a tropical paradise with pristine beaches, vibrant coral reefs, and dense rainforests.",
-    image: "https://images.unsplash.com/photo-1582650517303-b42616d56781?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1582650517303-b42616d56781?auto=format&fit=crop&q=80&w=800"],
     itineraries: [],
   },
   {
@@ -339,7 +324,7 @@ const initialExploreDom = [
     tagline: "Mountain Escape",
     bannerGradient: "linear-gradient(160deg, #C8E6C9 0%, #81C784 30%, #43A047 60%, #1B5E20 100%)",
     desc: "Nestled in the Himalayas, Himachal Pradesh boasts picturesque hill stations, apple orchards, and thrilling adventure sports.",
-    image: "https://images.unsplash.com/photo-1626714486259-7090b8f62fa2?auto=format&fit=crop&q=80&w=800",
+    images: ["https://images.unsplash.com/photo-1626714486259-7090b8f62fa2?auto=format&fit=crop&q=80&w=800"],
     itineraries: [],
   },
 ];
@@ -392,7 +377,7 @@ const initialBlogsData = [
     author: "Jane Doe",
     category: "Tips",
     content: "When it comes to planning an all-girls trip, safety and reliability are paramount. JustWravel provides the perfect blend of adventure and security, ensuring that you and your friends can focus purely on making memories. From curated itineraries to trusted local guides, we handle all the logistics. Whether it's exploring the mountains or relaxing by the beach, our group tours are designed to empower female travelers.",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop"],
     isFeatured: false,
   },
   {
@@ -403,7 +388,7 @@ const initialBlogsData = [
     author: "John Smith",
     category: "Guides",
     content: "Travel should be accessible to everyone. That's why JustWravel has introduced the Book Now, Pay Later feature. With easy EMI options, you no longer need to empty your savings for that dream trip. Simply choose your destination, select the EMI option at checkout, and get ready to pack your bags. We have partnered with leading financial institutions to offer zero or low-interest plans, ensuring your travel dreams don't come with a heavy financial burden.",
-    image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800&auto=format&fit=crop"],
     isFeatured: false,
   },
   {
@@ -414,7 +399,7 @@ const initialBlogsData = [
     author: "Alice Johnson",
     category: "Family",
     content: "School trips are crucial for experiential learning. Beyond the textbooks, students gain real-world exposure, build teamwork skills, and develop independence. JustWravel's educational tours are meticulously crafted to align with curriculum goals while ensuring a fun, engaging experience. We incorporate cultural immersions, nature trails, and historical explorations into our school packages, guaranteeing a holistic educational journey.",
-    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop"],
     isFeatured: false,
   },
   {
@@ -426,7 +411,7 @@ const initialBlogsData = [
     author: "Travel Desk",
     category: "Adventure",
     content: "September in India marks the beautiful transition from monsoon to autumn. The landscapes are lush green, the rivers are full, and the weather starts to cool down. If you haven't planned your trip yet, you're in for a treat. From the blooming Valley of Flowers in Uttarakhand to the serene backwaters of Kerala, India offers diverse experiences. In this comprehensive guide, we explore the top 25 destinations that are perfect for a September getaway. Discover hidden gems, adventure hubs, and tranquil retreats that will make your trip unforgettable.",
-    image: "https://images.unsplash.com/photo-1590118361008-6fb23d242cb6?q=80&w=800&auto=format&fit=crop",
+    images: ["https://images.unsplash.com/photo-1590118361008-6fb23d242cb6?q=80&w=800&auto=format&fit=crop"],
     isFeatured: true,
   }
 ];
@@ -453,12 +438,12 @@ const initialFaqData = [
 ];
 
 const initialTripCategories = [
-  { id: 1, label: "Honeymoon", image: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&q=80&w=200" },
-  { id: 2, label: "Solo Travel", image: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&q=80&w=200" },
-  { id: 3, label: "Family Group", image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=200" },
-  { id: 4, label: "Global Group", image: "https://images.unsplash.com/photo-1529156069898-49953eb1b5b4?auto=format&fit=crop&q=80&w=200" },
-  { id: 5, label: "Iconic International", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200" },
-  { id: 6, label: "Discover Domestic", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=200" },
+  { id: 1, label: "Honeymoon", images: ["https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&q=80&w=200"] },
+  { id: 2, label: "Solo Travel", images: ["https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&q=80&w=200"] },
+  { id: 3, label: "Family Group", images: ["https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=200"] },
+  { id: 4, label: "Global Group", images: ["https://images.unsplash.com/photo-1529156069898-49953eb1b5b4?auto=format&fit=crop&q=80&w=200"] },
+  { id: 5, label: "Iconic International", images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200"] },
+  { id: 6, label: "Discover Domestic", images: ["https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=200"] },
 ];
 
 const initialItinerariesData = [
@@ -470,7 +455,7 @@ const initialItinerariesData = [
     transfers: "Included",
     budget: "₹50,000",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=600",
+    images: ["https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=600"],
     type: "international",
     locations: ["Maldives"],
     categories: ["Honeymoon", "International"],
@@ -484,7 +469,7 @@ const initialItinerariesData = [
     transfers: "Included",
     budget: "₹50,000",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&q=80&w=600",
+    images: ["https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&q=80&w=600"],
     type: "international",
     locations: ["Maldives"],
     categories: ["Honeymoon"],
@@ -498,7 +483,7 @@ const initialItinerariesData = [
     transfers: "Included",
     budget: "₹1,20,000",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&q=80&w=600",
+    images: ["https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&q=80&w=600"],
     type: "international",
     locations: ["Switzerland"],
     categories: ["Solo Travel", "International"],
@@ -512,7 +497,7 @@ const initialItinerariesData = [
     transfers: "Included",
     budget: "₹15,000",
     rating: 4,
-    image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=600",
+    images: ["https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=600"],
     type: "domestic",
     locations: ["Goa"],
     categories: ["Family Group", "Solo Travel"],
@@ -526,7 +511,7 @@ const initialItinerariesData = [
     transfers: "Included",
     budget: "₹32,000",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&q=80&w=600",
+    images: ["https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&q=80&w=600"],
     type: "domestic",
     locations: ["Rajasthan"],
     categories: ["Family Group", "Global Group"],
@@ -540,7 +525,7 @@ const initialItinerariesData = [
     transfers: "4x4 Included",
     budget: "₹28,000",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1581793746485-04698e79a4e8?auto=format&fit=crop&q=80&w=600",
+    images: ["https://images.unsplash.com/photo-1581793746485-04698e79a4e8?auto=format&fit=crop&q=80&w=600"],
     type: "domestic",
     locations: ["Ladakh"],
     categories: ["Solo Travel", "Global Group"],
