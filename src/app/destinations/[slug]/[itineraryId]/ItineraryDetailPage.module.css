@@ -323,25 +323,7 @@
   line-height: 1.7;
 }
 
-.dayImagePlaceholder {
-  width: 100px;
-  min-height: 80px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
 
-.dayImagePlaceholder:hover {
-  transform: scale(1.05);
-}
-
-.dayImageIcon {
-  color: var(--color-gray-400);
-}
 
 /* =============================================
    INCLUSIONS & EXCLUSIONS

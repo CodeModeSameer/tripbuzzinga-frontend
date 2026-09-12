@@ -181,10 +181,6 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
                   <h3 className={styles.dayTitle}>{dp.title}</h3>
                   <p className={styles.dayDesc}>{dp.desc}</p>
                 </div>
-                {/* Image placeholder */}
-                <div className={styles.dayImagePlaceholder}>
-                  <ImageIcon size={20} className={styles.dayImageIcon} />
-                </div>
               </div>
             ))}
           </div>
