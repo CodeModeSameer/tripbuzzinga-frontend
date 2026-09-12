@@ -419,21 +419,52 @@ const initialBlogsData = [
 const initialFaqData = [
   {
     id: 1,
-    question: "About our profile?",
+    question: "Do I need a visa to travel to Bali?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod",
+      "For many nationalities, Indonesia offers a Visa on Arrival (VoA) or visa exemption for short stays. Please check the latest regulations for your specific passport before traveling.",
+    category: "Bali"
   },
   {
     id: 2,
-    question: "News and topics?",
+    question: "When is the BEST time for your Bali trip?",
     answer:
-      "Stay updated with our latest news, travel guides, and community topics across all our active destinations.",
+      "The best time to visit Bali is during the dry season, from April to October. You'll experience less rain, lower humidity, and plenty of sunshine.",
+    category: "Bali"
   },
   {
     id: 3,
-    question: "How to use?",
+    question: "What are some must-visit attractions in Bali?",
     answer:
-      "Simply browse through our destinations, select a package that fits your needs, and use our secure booking portal.",
+      "Some must-visit places include Uluwatu Temple, Tanah Lot, the Tegalalang Rice Terrace in Ubud, and the beautiful beaches of Seminyak and Nusa Dua.",
+    category: "Bali"
+  },
+  {
+    id: 4,
+    question: "Is it safe to drink tap water in Bali?",
+    answer:
+      "No, it is not recommended to drink tap water in Bali. Always use bottled or filtered water for drinking and brushing your teeth.",
+    category: "Bali"
+  },
+  {
+    id: 5,
+    question: "What is the best time to visit Maldives?",
+    answer:
+      "The best time to visit the Maldives is between November and April, outside of the monsoon season. During this time, the weather is warm and dry.",
+    category: "Maldives"
+  },
+  {
+    id: 6,
+    question: "What is the cancellation policy?",
+    answer:
+      "Our cancellation policy depends on the specific package and timing. Generally, cancellations made 30 days prior to departure receive a full refund minus processing fees.",
+    category: "Cancellations & Refunds"
+  },
+  {
+    id: 7,
+    question: "How to use our booking portal?",
+    answer:
+      "Simply browse through our destinations, select a package that fits your needs, and use our secure booking portal to complete your payment.",
+    category: "General"
   },
 ];
 

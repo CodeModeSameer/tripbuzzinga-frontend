@@ -435,11 +435,12 @@ export default function AdminDashboard() {
         setEditingItem({
           section: "faq",
           isNew: true,
-          data: {
-            id: Date.now(),
-            question: "",
-            answer: ""
-          }
+            data: {
+              id: Date.now(),
+              question: "",
+              answer: "",
+              category: "General"
+            }
         });
       }}><Plus size={16} /> Add Question</button>
 
@@ -826,6 +827,7 @@ export default function AdminDashboard() {
             {section === "faq" && (
               <>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Question</label><input className={styles.textInput} value={data.question} onChange={(e) => updateField("question", e.target.value)} /></div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Category</label><input className={styles.textInput} value={data.category || ""} placeholder="e.g. Bali, General, Payments..." onChange={(e) => updateField("category", e.target.value)} /></div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Answer</label><textarea className={styles.textArea} rows={4} value={data.answer} onChange={(e) => updateField("answer", e.target.value)} /></div>
               </>
             )}

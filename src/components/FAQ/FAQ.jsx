@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Search, Plus, Minus } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./FAQ.module.css";
@@ -33,7 +34,7 @@ export default function FAQ() {
           </div>
 
           <div className={styles.accordion}>
-            {FAQ_DATA.map((item, index) => {
+            {FAQ_DATA.slice(0, 4).map((item, index) => {
               const isOpen = openIndex === index;
               return (
                 <div key={item.id} className={styles.accordionItem}>
@@ -59,6 +60,12 @@ export default function FAQ() {
                 </div>
               );
             })}
+          </div>
+          
+          <div className={styles.viewMoreWrapper}>
+            <Link href="/faqs" className={styles.viewMoreBtn}>
+              View More FAQs
+            </Link>
           </div>
         </div>
 

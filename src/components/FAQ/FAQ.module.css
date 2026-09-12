@@ -142,3 +142,27 @@
     text-align: center;
   }
 }
+
+.viewMoreWrapper {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.viewMoreBtn {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(193, 39, 45, 0.2); /* assuming primary is the red color */
+}
+
+.viewMoreBtn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(193, 39, 45, 0.3);
+}
