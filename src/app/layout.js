@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Providers } from "./providers";
+import LeadPopup from "@/components/LeadPopup/LeadPopup";
 
 export const metadata = {
   title: "Trip Buzzinga — Buzz Your Vacation | Travel Packages & Destinations",
@@ -27,7 +28,10 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <LeadPopup />
+        </Providers>
       </body>
     </html>
   );
