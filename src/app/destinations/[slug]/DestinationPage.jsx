@@ -194,7 +194,7 @@ export default function DestinationPage({ slug }) {
                     </div>
                   </div>
 
-                  <Link href={`/destinations/${slug}/${itin.id}`} className={styles.bookBtn}>Book Now</Link>
+                  <Link href={`/destinations/${slug}/${itin.id}`} className={styles.bookBtn}>View More</Link>
                 </div>
 
                 {/* Image Placeholder */}

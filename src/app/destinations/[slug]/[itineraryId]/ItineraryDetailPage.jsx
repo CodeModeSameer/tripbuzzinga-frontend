@@ -283,7 +283,7 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
               </p>
             </div>
             <div className={styles.ctaBtns}>
-              <button className={styles.ctaBtnPrimary}>Book Now</button>
+              <button className={styles.ctaBtnPrimary}>View More</button>
               <button className={styles.ctaBtnSecondary}>Send Enquiry</button>
             </div>
           </div>
