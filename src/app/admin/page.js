@@ -627,47 +627,54 @@ export default function AdminDashboard() {
     };
 
     const saveEdit = () => {
+      // Convert raw _imagesText to a clean images array before saving
+      const cleanData = { ...data };
+      if (typeof cleanData._imagesText === 'string') {
+        cleanData.images = cleanData._imagesText.split("\n").map(url => url.trim()).filter(Boolean);
+        delete cleanData._imagesText;
+      }
+
       if (section === "popular") {
         const updated = [...popular];
-        if (editingItem.isNew) updated.unshift(data); // Add to beginning
-        else updated[editingItem.index] = data;
+        if (editingItem.isNew) updated.unshift(cleanData);
+        else updated[editingItem.index] = cleanData;
         setPopular(updated);
       } else if (section === "explore") {
         if (editingItem.tab === "international") {
           const updated = [...exploreIntl];
-          if (editingItem.isNew) updated.unshift(data);
-          else updated[editingItem.index] = data;
+          if (editingItem.isNew) updated.unshift(cleanData);
+          else updated[editingItem.index] = cleanData;
           setExploreIntl(updated);
         } else {
           const updated = [...exploreDom];
-          if (editingItem.isNew) updated.unshift(data);
-          else updated[editingItem.index] = data;
+          if (editingItem.isNew) updated.unshift(cleanData);
+          else updated[editingItem.index] = cleanData;
           setExploreDom(updated);
         }
       } else if (section === "reviews") {
         const updated = [...reviews];
-        if (editingItem.isNew) updated.unshift(data);
-        else updated[editingItem.index] = data;
+        if (editingItem.isNew) updated.unshift(cleanData);
+        else updated[editingItem.index] = cleanData;
         setReviews(updated);
       } else if (section === "faq") {
         const updated = [...faq];
-        if (editingItem.isNew) updated.push(data);
-        else updated[editingItem.index] = data;
+        if (editingItem.isNew) updated.push(cleanData);
+        else updated[editingItem.index] = cleanData;
         setFaq(updated);
       } else if (section === "blogs") {
         const updated = [...blogs];
-        if (editingItem.isNew) updated.unshift(data);
-        else updated[editingItem.index] = data;
+        if (editingItem.isNew) updated.unshift(cleanData);
+        else updated[editingItem.index] = cleanData;
         setBlogs(updated);
       } else if (section === "itineraries") {
         const updated = [...itineraries];
-        if (editingItem.isNew) updated.unshift(data);
-        else updated[editingItem.index] = data;
+        if (editingItem.isNew) updated.unshift(cleanData);
+        else updated[editingItem.index] = cleanData;
         setItineraries(updated);
       } else if (section === "gallery") {
         const updated = [...gallery];
-        if (editingItem.isNew) updated.unshift(data);
-        else updated[editingItem.index] = data;
+        if (editingItem.isNew) updated.unshift(cleanData);
+        else updated[editingItem.index] = cleanData;
         setGallery(updated);
       }
       setEditingItem(null);
@@ -712,14 +719,15 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Title</label><input className={styles.textInput} value={data.title} onChange={(e) => updateField("title", e.target.value)} /></div>
                 <div className={styles.fieldGroup}>
-  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
-  <textarea 
-    className={styles.textArea} 
-    value={data.images ? data.images.join("\n") : (data.image || "")} 
-    onChange={(e) => updateField("images", e.target.value.split("\n").map(url => url.trim()).filter(Boolean))} 
-    rows={3} 
-  />
-</div>
+                  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
+                  <textarea 
+                    className={styles.textArea} 
+                    value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))} 
+                    onChange={(e) => updateField("_imagesText", e.target.value)} 
+                    placeholder="Paste image URLs here, one per line"
+                    rows={3} 
+                  />
+                </div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel}>Highlights</label>
                   {data.highlights.map((h, idx) => (
@@ -747,14 +755,15 @@ export default function AdminDashboard() {
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={3} value={data.desc} onChange={(e) => updateField("desc", e.target.value)} /></div>
                 <div className={styles.fieldRow}>
                   <div className={styles.fieldGroup}>
-  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
-  <textarea 
-    className={styles.textArea} 
-    value={data.images ? data.images.join("\n") : (data.image || "")} 
-    onChange={(e) => updateField("images", e.target.value.split("\n").map(url => url.trim()).filter(Boolean))} 
-    rows={3} 
-  />
-</div>
+                    <label className={styles.fieldLabel}>Image URLs (One per line)</label>
+                    <textarea 
+                      className={styles.textArea} 
+                      value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))} 
+                      onChange={(e) => updateField("_imagesText", e.target.value)} 
+                      placeholder="Paste image URLs here, one per line"
+                      rows={3} 
+                    />
+                  </div>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Banner Gradient</label><input className={styles.textInput} value={data.bannerGradient || ""} onChange={(e) => updateField("bannerGradient", e.target.value)} /></div>
                 </div>
                 
@@ -841,14 +850,15 @@ export default function AdminDashboard() {
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Reading Time</label><input className={styles.textInput} value={data.readingTime} onChange={(e) => updateField("readingTime", e.target.value)} /></div>
                 </div>
                 <div className={styles.fieldGroup}>
-  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
-  <textarea 
-    className={styles.textArea} 
-    value={data.images ? data.images.join("\n") : (data.image || "")} 
-    onChange={(e) => updateField("images", e.target.value.split("\n").map(url => url.trim()).filter(Boolean))} 
-    rows={3} 
-  />
-</div>
+                  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
+                  <textarea 
+                    className={styles.textArea} 
+                    value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))} 
+                    onChange={(e) => updateField("_imagesText", e.target.value)} 
+                    placeholder="Paste image URLs here, one per line"
+                    rows={3} 
+                  />
+                </div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Content</label><textarea className={styles.textArea} rows={6} value={data.content} onChange={(e) => updateField("content", e.target.value)} /></div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
@@ -880,14 +890,15 @@ export default function AdminDashboard() {
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Transfers</label><input className={styles.textInput} value={data.transfers} onChange={(e) => updateField("transfers", e.target.value)} /></div>
                 </div>
                 <div className={styles.fieldGroup}>
-  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
-  <textarea 
-    className={styles.textArea} 
-    value={data.images ? data.images.join("\n") : (data.image || "")} 
-    onChange={(e) => updateField("images", e.target.value.split("\n").map(url => url.trim()).filter(Boolean))} 
-    rows={3} 
-  />
-</div>
+                  <label className={styles.fieldLabel}>Image URLs (One per line)</label>
+                  <textarea 
+                    className={styles.textArea} 
+                    value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))} 
+                    onChange={(e) => updateField("_imagesText", e.target.value)} 
+                    placeholder="Paste image URLs here, one per line"
+                    rows={3} 
+                  />
+                </div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={3} value={data.description} onChange={(e) => updateField("description", e.target.value)} /></div>
 
                 {/* Locations multi-select */}
