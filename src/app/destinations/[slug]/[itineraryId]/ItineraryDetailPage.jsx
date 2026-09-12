@@ -3,9 +3,10 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import "swiper/css/pagination";
 import {
   ArrowLeft, ImageIcon, Star, Calendar, MapPin, Car,
   Wallet, CheckCircle2, XCircle, Building2, FileText,
@@ -86,10 +87,12 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
       >
         <div className={styles.bannerSwiperContainer}>
           <Swiper
-            modules={[Autoplay, EffectFade]}
+            modules={[Autoplay, EffectFade, Pagination]}
             effect="fade"
             autoplay={{ delay: 2000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
             loop={true}
+            className="bannerSwiper"
             style={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0, zIndex: 0 }}
           >
             {(itinerary.images && itinerary.images.length > 0 ? itinerary.images : [itinerary.image || "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=1600"]).filter(Boolean).map((imgUrl, idx) => (

@@ -4,9 +4,10 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ImageIcon, Star, ArrowLeft, MapPin, Calendar, Car, Wallet, AlertCircle } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import "swiper/css/pagination";
 import styles from "./DestinationPage.module.css";
 import { useSiteData } from "@/context/SiteDataContext";
 import Navbar from "@/components/Navbar/Navbar";
@@ -204,10 +205,12 @@ export default function DestinationPage({ slug }) {
                 {/* Image Placeholder */}
                 <div className={styles.itinImageWrap}>
                   <Swiper
-                    modules={[Autoplay, EffectFade]}
+                    modules={[Autoplay, EffectFade, Pagination]}
                     effect="fade"
                     autoplay={{ delay: 2000, disableOnInteraction: false }}
+                    pagination={{ clickable: true }}
                     loop={true}
+                    className="itinCardSwiper"
                     style={{ width: "100%", height: "100%" }}
                   >
                     {(itin.images && itin.images.length > 0 ? itin.images : [itin.image || `https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=600&random=${i}`]).filter(Boolean).map((imgUrl, idx) => (

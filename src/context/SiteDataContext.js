@@ -608,6 +608,25 @@ function useStickyState(defaultValue, key) {
   return [value, setStickyValue];
 }
 
+// Migrate old `image` string fields to `images` arrays for backward compatibility
+function migrateImages(item) {
+  if (!item) return item;
+  const migrated = { ...item };
+  if (typeof migrated.image === 'string' && migrated.image && !migrated.images) {
+    migrated.images = [migrated.image];
+  }
+  // Also migrate nested itineraries inside explore destinations
+  if (Array.isArray(migrated.itineraries)) {
+    migrated.itineraries = migrated.itineraries.map(itin => migrateImages(itin));
+  }
+  return migrated;
+}
+
+function migrateArray(arr) {
+  if (!Array.isArray(arr)) return arr;
+  return arr.map(item => migrateImages(item));
+}
+
 export function SiteDataProvider({ children }) {
   const [hero, setHero] = useStickyState(initialHeroData, 'tripbuzzinga_hero');
   const [popularDestinations, setPopularDestinations] = useStickyState(initialPopularData, 'tripbuzzinga_popular');
@@ -620,6 +639,17 @@ export function SiteDataProvider({ children }) {
   const [tripCategories, setTripCategories] = useStickyState(initialTripCategories, 'tripbuzzinga_categories');
   const [itineraries, setItineraries] = useStickyState(initialItinerariesData, 'tripbuzzinga_itineraries');
   const [gallery, setGallery] = useStickyState(initialGalleryData, 'tripbuzzinga_gallery');
+
+  // Auto-migrate old `image` fields to `images` arrays on mount
+  useEffect(() => {
+    const needsMigration = (arr) => Array.isArray(arr) && arr.some(item => item.image && !item.images);
+    if (needsMigration(popularDestinations)) setPopularDestinations(migrateArray(popularDestinations));
+    if (needsMigration(exploreInternational)) setExploreInternational(migrateArray(exploreInternational));
+    if (needsMigration(exploreDomestic)) setExploreDomestic(migrateArray(exploreDomestic));
+    if (needsMigration(itineraries)) setItineraries(migrateArray(itineraries));
+    if (needsMigration(blogs)) setBlogs(migrateArray(blogs));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const value = {
     hero, setHero,

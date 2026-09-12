@@ -200,3 +200,43 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-primary-light);
   color: var(--color-white);
 }
+
+/* ═══════════ Swiper Pagination Dots ═══════════ */
+.swiper-pagination {
+  bottom: 12px !important;
+  z-index: 10;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  border: none;
+  transition: all 0.3s ease;
+  margin: 0 4px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff;
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+/* Banner-level dots need higher z-index */
+.bannerSwiper .swiper-pagination {
+  bottom: 20px !important;
+  z-index: 10;
+}
+
+.bannerSwiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+}
+
+.bannerSwiper .swiper-pagination-bullet-active {
+  width: 12px;
+  height: 12px;
+}
+

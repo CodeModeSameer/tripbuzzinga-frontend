@@ -4,9 +4,10 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import "swiper/css/pagination";
 import { ImageIcon, ArrowRight, Globe, MapPin } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./DestinationsShowcase.module.css";
@@ -254,10 +255,12 @@ export default function DestinationsShowcase() {
                 <div className={styles.imageContainer}>
                   
                   <Swiper
-                    modules={[Autoplay, EffectFade]}
+                    modules={[Autoplay, EffectFade, Pagination]}
                     effect="fade"
                     autoplay={{ delay: 2000, disableOnInteraction: false }}
+                    pagination={{ clickable: true }}
                     loop={true}
+                    className="destinationSwiper"
                     style={{ width: "100%", height: "100%" }}
                   >
                     {(dest.images || [dest.image]).filter(Boolean).map((imgUrl, idx) => (
