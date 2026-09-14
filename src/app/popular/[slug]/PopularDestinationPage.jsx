@@ -8,17 +8,16 @@ import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
-import styles from "./DestinationPage.module.css";
+import styles from "./PopularDestinationPage.module.css";
 import { useSiteData } from "@/context/SiteDataContext";
 import Navbar from "@/components/Navbar/Navbar";
 import GlobalBottomSections from "@/components/GlobalBottomSections/GlobalBottomSections";
 import Footer from "@/components/Footer/Footer";
 
-export default function DestinationPage({ slug }) {
-  const { exploreInternational, exploreDomestic } = useSiteData();
-  const allDestinations = [...exploreInternational, ...exploreDomestic];
-  const destination = allDestinations.find(
-    (d) => d.name.toLowerCase() === slug.toLowerCase()
+export default function PopularDestinationPage({ slug }) {
+  const { popularDestinations } = useSiteData();
+  const destination = popularDestinations.find(
+    (d) => d.slug?.toLowerCase() === slug.toLowerCase()
   );
 
   const bannerRef = useRef(null);
@@ -121,18 +120,10 @@ export default function DestinationPage({ slug }) {
           <div className={styles.bannerIcon}>
             <ImageIcon size={28} />
           </div>
-          <h1
-            className={styles.bannerTitle}
-            ref={bannerTitleRef}
-            style={{ visibility: "hidden" }}
-          >
-            {destination.name}
+          <h1 ref={bannerTitleRef} className={styles.bannerTitle} style={{ visibility: "hidden" }}>
+            {destination.title || destination.city}
           </h1>
-          <p
-            className={styles.bannerTagline}
-            ref={bannerTaglineRef}
-            style={{ visibility: "hidden" }}
-          >
+          <p ref={bannerTaglineRef} className={styles.bannerTagline} style={{ visibility: "hidden" }}>
             {destination.tagline}
           </p>
         </div>
@@ -201,11 +192,11 @@ export default function DestinationPage({ slug }) {
                     </div>
                   </div>
 
-                  <Link href={`/destinations/${slug}/${itin.id}`} className={styles.bookBtn}>View More</Link>
+                  <Link href={`/popular/${slug}/${itin.id}`} className={styles.bookBtn}>View More</Link>
                 </div>
 
                 {/* Image Placeholder */}
-                <div className={styles.itinImageWrap}>
+                <div className={styles.imagePlaceholder} style={{ background: itin.imageGradient || 'linear-gradient(135deg, #0077B6, #48CAE4)' }}>
                   <Swiper
                     modules={[Autoplay, EffectFade, Pagination]}
                     effect="fade"

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Plane } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./PopularDestinations.module.css";
@@ -119,7 +120,12 @@ export default function PopularDestinations() {
       >
         <div className={styles.carouselTrack}>
           {duplicatedDests.map((dest, idx) => (
-            <div className={styles.card} key={`${dest.id}-${idx}`}>
+            <Link 
+              href={dest.customRoute ? dest.customRoute : `/popular/${dest.slug}`}
+              className={styles.card} 
+              key={`${dest.id}-${idx}`}
+              style={{ textDecoration: 'none' }}
+            >
               {/* Full background image */}
               <div className={styles.cardImageBg}>
                 <Image
@@ -167,14 +173,14 @@ export default function PopularDestinations() {
                         per person onwards
                       </span>
                     </div>
-                    <a href="#" className={styles.viewLink}>
+                    <span className={styles.viewLink}>
                       VIEW ITINERARY →{" "}
                       <span className={styles.viewArrow}>→</span>
-                    </a>
+                    </span>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

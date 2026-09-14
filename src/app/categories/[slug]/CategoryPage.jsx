@@ -8,17 +8,16 @@ import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
-import styles from "./DestinationPage.module.css";
+import styles from "./CategoryPage.module.css";
 import { useSiteData } from "@/context/SiteDataContext";
 import Navbar from "@/components/Navbar/Navbar";
 import GlobalBottomSections from "@/components/GlobalBottomSections/GlobalBottomSections";
 import Footer from "@/components/Footer/Footer";
 
-export default function DestinationPage({ slug }) {
-  const { exploreInternational, exploreDomestic } = useSiteData();
-  const allDestinations = [...exploreInternational, ...exploreDomestic];
-  const destination = allDestinations.find(
-    (d) => d.name.toLowerCase() === slug.toLowerCase()
+export default function CategoryPage({ slug }) {
+  const { tripCategories } = useSiteData();
+  const category = tripCategories.find(
+    (c) => c.slug?.toLowerCase() === slug.toLowerCase()
   );
 
   const bannerRef = useRef(null);
@@ -75,13 +74,13 @@ export default function DestinationPage({ slug }) {
         });
       });
     };
-    if (destination) {
+    if (category) {
       initGSAP();
     }
     return () => ctx?.revert();
-  }, [destination]);
+  }, [category]);
 
-  if (!destination) {
+  if (!category) {
     return (
       <>
         <Navbar />
@@ -109,9 +108,9 @@ export default function DestinationPage({ slug }) {
         className={styles.banner}
         ref={bannerRef}
         style={{
-          background: (destination.images?.[0] || destination.image) 
-            ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${(destination.images?.[0] || destination.image)})` 
-            : destination.bannerGradient || "var(--gradient-hero)",
+          background: (category.images?.[0] || category.image) 
+            ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${(category.images?.[0] || category.image)})` 
+            : category.bannerGradient || "var(--gradient-hero)",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -126,14 +125,14 @@ export default function DestinationPage({ slug }) {
             ref={bannerTitleRef}
             style={{ visibility: "hidden" }}
           >
-            {destination.name}
+            {category.label}
           </h1>
           <p
             className={styles.bannerTagline}
             ref={bannerTaglineRef}
             style={{ visibility: "hidden" }}
           >
-            {destination.tagline}
+            {category.tagline}
           </p>
         </div>
 
@@ -151,7 +150,7 @@ export default function DestinationPage({ slug }) {
       {/* Itineraries */}
       <section className={styles.itineraries} ref={cardsContainerRef}>
         <div className={styles.itinerariesContainer}>
-          {(destination.itineraries || []).map((itin, i) => {
+          {(category.itineraries || []).map((itin, i) => {
             const isEven = i % 2 === 0;
             return (
               <div
@@ -201,7 +200,7 @@ export default function DestinationPage({ slug }) {
                     </div>
                   </div>
 
-                  <Link href={`/destinations/${slug}/${itin.id}`} className={styles.bookBtn}>View More</Link>
+                  <Link href={`/categories/${slug}/${itin.id}`} className={styles.bookBtn}>View More</Link>
                 </div>
 
                 {/* Image Placeholder */}

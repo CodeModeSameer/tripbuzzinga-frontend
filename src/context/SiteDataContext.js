@@ -59,6 +59,10 @@ const initialPopularData = [
     flag: "🇦🇪",
     duration: "5D / 4N",
     title: "Discover Dubai Essentials",
+    slug: "dubai-essentials",
+    tagline: "The City of Gold",
+    desc: "Experience the ultimate mix of modern luxury, desert adventure, and cultural heritage in Dubai.",
+    bannerGradient: "linear-gradient(160deg, #fdfbfb 0%, #ebedee 100%)",
     highlights: [
       "Desert Safari with BBQ Dinner",
       "Burj Khalifa 124th Floor Entry",
@@ -66,6 +70,7 @@ const initialPopularData = [
     ],
     price: "₹42,999",
     images: ["https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
   },
   {
     id: 2,
@@ -75,6 +80,10 @@ const initialPopularData = [
     flag: "🇹🇭",
     duration: "6D / 5N",
     title: "Thailand Tropical Escape",
+    slug: "thailand-tropical-escape",
+    tagline: "Land of Smiles",
+    desc: "A perfect blend of vibrant city life in Bangkok and relaxing island vibes in Phuket.",
+    bannerGradient: "linear-gradient(160deg, #ffecd2 0%, #fcb69f 100%)",
     highlights: [
       "Grand Palace & Emerald Buddha",
       "Phuket Island Hopping Tour",
@@ -82,6 +91,7 @@ const initialPopularData = [
     ],
     price: "₹38,499",
     images: ["https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
   },
   {
     id: 3,
@@ -91,6 +101,10 @@ const initialPopularData = [
     flag: "🇮🇩",
     duration: "7D / 6N",
     title: "Bali Paradise Adventure",
+    slug: "bali-paradise-adventure",
+    tagline: "Island of the Gods",
+    desc: "Immerse yourself in lush landscapes, ancient temples, and beautiful beaches in Bali.",
+    bannerGradient: "linear-gradient(160deg, #84fab0 0%, #8fd3f4 100%)",
     highlights: [
       "Ubud Monkey Forest & Rice Terraces",
       "Tanah Lot Temple Sunset Tour",
@@ -98,6 +112,7 @@ const initialPopularData = [
     ],
     price: "₹49,999",
     images: ["https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
   },
   {
     id: 4,
@@ -107,6 +122,10 @@ const initialPopularData = [
     flag: "🇲🇻",
     duration: "4D / 3N",
     title: "Maldives Luxury Retreat",
+    slug: "maldives-luxury-retreat",
+    tagline: "Tropical Haven",
+    desc: "Escape to the luxurious overwater villas and pristine waters of the Maldives.",
+    bannerGradient: "linear-gradient(160deg, #a1c4fd 0%, #c2e9fb 100%)",
     highlights: [
       "Overwater Villa Stay",
       "Sunset Dolphin Cruise",
@@ -114,6 +133,7 @@ const initialPopularData = [
     ],
     price: "₹74,999",
     images: ["https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
   },
   {
     id: 5,
@@ -123,6 +143,10 @@ const initialPopularData = [
     flag: "🇸🇬",
     duration: "5D / 4N",
     title: "Singapore City Wonders",
+    slug: "singapore-city-wonders",
+    tagline: "The Lion City",
+    desc: "Discover the spectacular futuristic gardens and world-class entertainment in Singapore.",
+    bannerGradient: "linear-gradient(160deg, #ff9a9e 0%, #fecfef 100%)",
     highlights: [
       "Marina Bay Sands SkyPark",
       "Universal Studios Full Day",
@@ -130,6 +154,7 @@ const initialPopularData = [
     ],
     price: "₹55,999",
     images: ["https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
   },
   {
     id: 6,
@@ -139,6 +164,10 @@ const initialPopularData = [
     flag: "🇮🇳",
     duration: "4D / 3N",
     title: "Goa Beach Bliss",
+    slug: "goa-beach-bliss",
+    tagline: "Sunshine State",
+    desc: "Relax on golden sands and experience the rich Portuguese heritage of Goa.",
+    bannerGradient: "linear-gradient(160deg, #f6d365 0%, #fda085 100%)",
     highlights: [
       "North Goa Beach Hopping",
       "Dudhsagar Waterfalls Trek",
@@ -146,6 +175,7 @@ const initialPopularData = [
     ],
     price: "₹14,999",
     images: ["https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
   },
   {
     id: 7,
@@ -155,6 +185,10 @@ const initialPopularData = [
     flag: "🇮🇳",
     duration: "5D / 4N",
     title: "Kerala Backwaters & Hills",
+    slug: "kerala-backwaters",
+    tagline: "God's Own Country",
+    desc: "Glide through serene backwaters and breathe in the fresh air of Munnar's tea gardens.",
+    bannerGradient: "linear-gradient(160deg, #d4fc79 0%, #96e6a1 100%)",
     highlights: [
       "Munnar Tea Gardens Tour",
       "Alleppey Houseboat Stay",
@@ -162,6 +196,7 @@ const initialPopularData = [
     ],
     price: "₹18,999",
     images: ["https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
   },
 ];
 
@@ -469,12 +504,66 @@ const initialFaqData = [
 ];
 
 const initialTripCategories = [
-  { id: 1, label: "Honeymoon", images: ["https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&q=80&w=200"] },
-  { id: 2, label: "Solo Travel", images: ["https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&q=80&w=200"] },
-  { id: 3, label: "Family Group", images: ["https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=200"] },
-  { id: 4, label: "Global Group", images: ["https://images.unsplash.com/photo-1529156069898-49953eb1b5b4?auto=format&fit=crop&q=80&w=200"] },
-  { id: 5, label: "Iconic International", images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200"] },
-  { id: 6, label: "Discover Domestic", images: ["https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=200"] },
+  { 
+    id: 1, 
+    label: "Honeymoon", 
+    slug: "honeymoon",
+    tagline: "Romantic Getaways",
+    desc: "Experience the most romantic and unforgettable honeymoon destinations tailored just for you and your partner.",
+    bannerGradient: "linear-gradient(160deg, #FF9A9E 0%, #FECFEF 100%)",
+    images: ["https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&q=80&w=200"],
+    itineraries: []
+  },
+  { 
+    id: 2, 
+    label: "Solo Travel", 
+    slug: "solo-travel",
+    tagline: "Discover Yourself",
+    desc: "Embark on a journey of self-discovery with our carefully curated solo travel packages designed for safety and adventure.",
+    bannerGradient: "linear-gradient(160deg, #a18cd1 0%, #fbc2eb 100%)",
+    images: ["https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&q=80&w=200"],
+    itineraries: []
+  },
+  { 
+    id: 3, 
+    label: "Family Group", 
+    slug: "family-group",
+    tagline: "Memories Together",
+    desc: "Create lasting memories with your loved ones. Family-friendly resorts, activities, and hassle-free travel arrangements.",
+    bannerGradient: "linear-gradient(160deg, #84fab0 0%, #8fd3f4 100%)",
+    images: ["https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=200"],
+    itineraries: []
+  },
+  { 
+    id: 4, 
+    label: "Global Group", 
+    slug: "global-group",
+    tagline: "Explore the World",
+    desc: "Join global group tours and travel with like-minded explorers to the most iconic destinations around the globe.",
+    bannerGradient: "linear-gradient(160deg, #fccb90 0%, #d57eeb 100%)",
+    images: ["https://images.unsplash.com/photo-1529156069898-49953eb1b5b4?auto=format&fit=crop&q=80&w=200"],
+    itineraries: []
+  },
+  { 
+    id: 5, 
+    label: "Iconic International", 
+    slug: "iconic-international",
+    tagline: "World Wonders",
+    desc: "Visit the most famous and sought-after international landmarks and cities for an iconic travel experience.",
+    bannerGradient: "linear-gradient(160deg, #e0c3fc 0%, #8ec5fc 100%)",
+    images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200"],
+    itineraries: []
+  },
+  { 
+    id: 6, 
+    label: "Discover Domestic", 
+    slug: "discover-domestic",
+    tagline: "Incredible India",
+    desc: "Uncover the hidden gems and rich cultural heritage of domestic destinations right in your backyard.",
+    bannerGradient: "linear-gradient(160deg, #f6d365 0%, #fda085 100%)",
+    images: ["https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=200"],
+    itineraries: []
+  },
 ];
 
 const initialItinerariesData = [
@@ -597,16 +686,11 @@ function useStickyState(defaultValue, key) {
     }
   }, [key]);
 
-  // Save to localStorage when state changes and sync to other tabs
+  // Save to localStorage when state changes
   const setStickyValue = useCallback((newValue) => {
     setValue((prev) => {
-      // Evaluate functional updates if provided
       const finalValue = typeof newValue === 'function' ? newValue(prev) : newValue;
       window.localStorage.setItem(key, JSON.stringify(finalValue));
-
-      // Dispatch custom event to notify other components in the SAME tab
-      window.dispatchEvent(new Event('local-storage-sync'));
-
       return finalValue;
     });
   }, [key]);
@@ -615,24 +699,18 @@ function useStickyState(defaultValue, key) {
   useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === key && e.newValue) {
-        setValue(JSON.parse(e.newValue));
-      }
-    };
-
-    // Listen for changes in SAME tab via our custom event
-    const handleLocalSync = () => {
-      const stickyValue = window.localStorage.getItem(key);
-      if (stickyValue !== null) {
-        setValue(JSON.parse(stickyValue));
+        try {
+          setValue(JSON.parse(e.newValue));
+        } catch (error) {
+          console.error(`Error parsing localStorage for ${key}`, error);
+        }
       }
     };
 
     window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("local-storage-sync", handleLocalSync);
 
     return () => {
       window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("local-storage-sync", handleLocalSync);
     };
   }, [key]);
 

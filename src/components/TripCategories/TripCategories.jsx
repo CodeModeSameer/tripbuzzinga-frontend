@@ -16,7 +16,7 @@ export default function TripCategories() {
         <div className={styles.pillContainer}>
           <div className={styles.scrollTrack}>
             {tripCategories.map((cat) => (
-              <Link href="#" key={cat.id} className={styles.categoryItem}>
+              <Link href={`/categories/${cat.slug}`} key={cat.id} className={styles.categoryItem}>
                   <div className={styles.imageWrapper}>
                     <Image 
                       src={(cat.images?.[0] || cat.image)}

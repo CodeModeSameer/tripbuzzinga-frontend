@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { Search, ChevronDown, ChevronUp, ChevronRight, ChevronLeft } from "lucide-react";
 import Navbar from "@/components/Navbar/Navbar";
+import GlobalBottomSections from "@/components/GlobalBottomSections/GlobalBottomSections";
 import Footer from "@/components/Footer/Footer";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./FaqsPage.module.css";
@@ -127,6 +128,7 @@ export default function FaqsPage() {
         </div>
       </section>
       
+      <GlobalBottomSections />
       <Footer />
     </main>
   );

@@ -12,12 +12,18 @@ import {
   Wallet, CheckCircle2, XCircle, Building2, FileText,
   Clock, ChevronDown,
 } from "lucide-react";
-import styles from "./ItineraryDetailPage.module.css";
+import styles from "./PopularItineraryPage.module.css";
+
+import { useSiteData } from "@/context/SiteDataContext";
 import Navbar from "@/components/Navbar/Navbar";
 import GlobalBottomSections from "@/components/GlobalBottomSections/GlobalBottomSections";
 import Footer from "@/components/Footer/Footer";
 
-export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
+export default function PopularItineraryPage({ slug, itineraryId }) {
+  const { popularDestinations } = useSiteData();
+  const destination = popularDestinations.find(d => d.slug?.toLowerCase() === slug.toLowerCase());
+  const itinerary = destination?.itineraries?.find(i => i.id === itineraryId);
+
   const bannerRef = useRef(null);
   const titleRef = useRef(null);
   const overviewRef = useRef(null);
@@ -71,18 +77,30 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
         });
       });
     };
-    initGSAP();
+    if (itinerary) initGSAP();
     return () => ctx?.revert();
-  }, []);
+  }, [itinerary]);
+
+  if (!itinerary) {
+    return (
+      <div className={styles.page} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
+        <h1 style={{ fontSize: '2rem', marginBottom: '16px' }}>Itinerary Not Found</h1>
+        <Link href={`/popular/${slug}`} className={styles.backBtn} style={{ background: '#3b82f6', color: 'white', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none' }}>
+          <ArrowLeft size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} />
+          <span>Back to Destination</span>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <>
       <Navbar />
       <div className={styles.page}>
       {/* Back Navigation */}
-      <Link href={`/destinations/${slug}`} className={styles.backBtn}>
+      <Link href={`/popular/${slug}`} className={styles.backBtn}>
         <ArrowLeft size={18} />
-        <span>Back to {itinerary.destinationName}</span>
+        <span>Back to {destination?.title || destination?.city}</span>
       </Link>
 
       {/* ===== BANNER ===== */}
@@ -186,7 +204,7 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
             <Clock size={22} /> Day-by-Day Itinerary
           </h2>
           <div className={styles.timeline}>
-            {itinerary.dayPlan.map((dp, i) => (
+            {(itinerary.dayPlan || []).map((dp, i) => (
               <div
                 key={i}
                 className={styles.dayCard}
@@ -214,7 +232,7 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
               <CheckCircle2 size={20} className={styles.inclIcon} /> Inclusions
             </h3>
             <ul className={styles.inclList}>
-              {itinerary.inclusions.map((item, i) => (
+              {(itinerary.inclusions || []).map((item, i) => (
                 <li key={i} className={styles.inclItem}>
                   <CheckCircle2 size={14} className={styles.inclCheckIcon} />
                   {item}
@@ -228,7 +246,7 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
               <XCircle size={20} className={styles.exclIcon} /> Exclusions
             </h3>
             <ul className={styles.exclList}>
-              {itinerary.exclusions.map((item, i) => (
+              {(itinerary.exclusions || []).map((item, i) => (
                 <li key={i} className={styles.exclItem}>
                   <XCircle size={14} className={styles.exclXIcon} />
                   {item}
@@ -248,7 +266,7 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
             <Building2 size={22} /> Hotel Details
           </h2>
           <div className={styles.hotelGrid}>
-            {itinerary.hotels.map((hotel, i) => (
+            {(itinerary.hotels || []).map((hotel, i) => (
               <div key={i} className={styles.hotelCard}>
                 <div className={styles.hotelImagePlaceholder}>
                   <ImageIcon size={24} className={styles.hotelPlaceholderIcon} />
@@ -276,7 +294,7 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
             <FileText size={22} /> Terms & Conditions
           </h2>
           <ul className={styles.termsList}>
-            {itinerary.terms.map((term, i) => (
+            {(itinerary.terms || []).map((term, i) => (
               <li key={i} className={styles.termsItem}>{term}</li>
             ))}
           </ul>
@@ -298,9 +316,9 @@ export default function ItineraryDetailPage({ itinerary, slug, itineraryId }) {
             <div className={styles.ctaBtns}>
               <button className={styles.ctaBtnPrimary}>View More</button>
               <button className={styles.ctaBtnSecondary}>Send Enquiry</button>
+            </div>
           </div>
         </div>
-      </div>{/* closes styles.ctaSection */}
       </div>{/* closes styles.content */}
       </div>{/* closes styles.page */}
       <GlobalBottomSections />

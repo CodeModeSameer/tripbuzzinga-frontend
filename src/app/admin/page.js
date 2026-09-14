@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import AdminSidebar from "@/components/AdminSidebar/AdminSidebar";
+import NestedItineraryEditor from "@/components/Admin/NestedItineraryEditor";
 import { useSiteData } from "@/context/SiteDataContext";
 import {
   Plus, Trash2, Save, Edit3, X, GripVertical,
@@ -50,6 +51,7 @@ export default function AdminDashboard() {
     flyer, setFlyer,
     exploreInternational: exploreIntl, setExploreInternational: setExploreIntl,
     exploreDomestic: exploreDom, setExploreDomestic: setExploreDom,
+    tripCategories, setTripCategories,
     reviews, setReviews,
     faq, setFaq,
     blogs, setBlogs,
@@ -375,6 +377,52 @@ export default function AdminDashboard() {
     );
   };
 
+  /* ─── TRIP CATEGORIES PANEL ─── */
+  const renderTripCategoriesPanel = () => {
+    return (
+      <div className={styles.panel}>
+        <div className={styles.panelHeader}>
+          <h2>Trip Categories</h2>
+          <p className={styles.panelDesc}>Manage the trip categories section on the homepage.</p>
+        </div>
+
+        <button className={styles.addBtn} onClick={() => {
+          setEditingItem({
+            section: "trip-categories",
+            isNew: true,
+            data: {
+              id: Date.now(),
+              slug: "",
+              label: "New Category",
+              tagline: "",
+              desc: "",
+              images: ["https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80&w=800"],
+              itineraries: []
+            }
+          });
+        }}><Plus size={16} /> Add Category</button>
+
+        <div className={styles.itemsList}>
+          {tripCategories.map((cat, i) => (
+            <div key={cat.id} className={styles.itemCard}>
+              <div className={styles.itemCardHeader}>
+                <div className={styles.itemCardTitle}>
+                  <GripVertical size={16} className={styles.gripIcon} />
+                  <span className={styles.itemIndex}>{i + 1}</span>
+                  <strong>{cat.label || "Untitled"}</strong>
+                </div>
+                <div className={styles.itemCardActions}>
+                  <button className={styles.editBtn} onClick={() => setEditingItem({ section: "trip-categories", index: i, data: { ...cat } })}><Edit3 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={() => setTripCategories(tripCategories.filter((_, idx) => idx !== i))}><Trash2 size={14} /></button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   /* ─── REVIEWS PANEL ─── */
   const renderReviewsPanel = () => (
     <div className={styles.panel}>
@@ -435,12 +483,12 @@ export default function AdminDashboard() {
         setEditingItem({
           section: "faq",
           isNew: true,
-            data: {
-              id: Date.now(),
-              question: "",
-              answer: "",
-              category: "General"
-            }
+          data: {
+            id: Date.now(),
+            question: "",
+            answer: "",
+            category: "General"
+          }
         });
       }}><Plus size={16} /> Add Question</button>
 
@@ -640,6 +688,11 @@ export default function AdminDashboard() {
         if (editingItem.isNew) updated.unshift(cleanData);
         else updated[editingItem.index] = cleanData;
         setPopular(updated);
+      } else if (section === "trip-categories") {
+        const updated = [...tripCategories];
+        if (editingItem.isNew) updated.unshift(cleanData);
+        else updated[editingItem.index] = cleanData;
+        setTripCategories(updated);
       } else if (section === "explore") {
         if (editingItem.tab === "international") {
           const updated = [...exploreIntl];
@@ -718,15 +771,18 @@ export default function AdminDashboard() {
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Duration</label><input className={styles.textInput} value={data.duration} onChange={(e) => updateField("duration", e.target.value)} /></div>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Price</label><input className={styles.textInput} value={data.price} onChange={(e) => updateField("price", e.target.value)} /></div>
                 </div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Title</label><input className={styles.textInput} value={data.title} onChange={(e) => updateField("title", e.target.value)} /></div>
+                <div className={styles.fieldRow}>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Title</label><input className={styles.textInput} value={data.title} onChange={(e) => updateField("title", e.target.value)} /></div>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Custom Route (Optional)</label><input className={styles.textInput} value={data.customRoute || ""} placeholder="/categories/some-category" onChange={(e) => updateField("customRoute", e.target.value)} /></div>
+                </div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel}>Image URLs (One per line)</label>
-                  <textarea 
-                    className={styles.textArea} 
-                    value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))} 
-                    onChange={(e) => updateField("_imagesText", e.target.value)} 
+                  <textarea
+                    className={styles.textArea}
+                    value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))}
+                    onChange={(e) => updateField("_imagesText", e.target.value)}
                     placeholder="Paste image URLs here, one per line"
-                    rows={3} 
+                    rows={3}
                   />
                 </div>
                 <div className={styles.fieldGroup}>
@@ -745,6 +801,31 @@ export default function AdminDashboard() {
                   ))}
                   <button className={styles.addSmallBtn} onClick={() => updateField("highlights", [...data.highlights, ""])}><Plus size={14} /> Add</button>
                 </div>
+
+              </>
+            )}
+            {section === "trip-categories" && (
+              <>
+                <div className={styles.fieldRow}>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Label</label><input className={styles.textInput} value={data.label} onChange={(e) => updateField("label", e.target.value)} /></div>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Slug</label><input className={styles.textInput} value={data.slug} onChange={(e) => updateField("slug", e.target.value)} /></div>
+                </div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Tagline</label><input className={styles.textInput} value={data.tagline} onChange={(e) => updateField("tagline", e.target.value)} /></div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={3} value={data.desc} onChange={(e) => updateField("desc", e.target.value)} /></div>
+                <div className={styles.fieldRow}>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.fieldLabel}>Image URLs (One per line)</label>
+                    <textarea
+                      className={styles.textArea}
+                      value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))}
+                      onChange={(e) => updateField("_imagesText", e.target.value)}
+                      placeholder="Paste image URLs here, one per line"
+                      rows={3}
+                    />
+                  </div>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Banner Gradient</label><input className={styles.textInput} value={data.bannerGradient || ""} onChange={(e) => updateField("bannerGradient", e.target.value)} /></div>
+                </div>
+                <NestedItineraryEditor itineraries={data.itineraries || []} onChange={(val) => updateField("itineraries", val)} />
               </>
             )}
             {section === "explore" && (
@@ -757,58 +838,18 @@ export default function AdminDashboard() {
                 <div className={styles.fieldRow}>
                   <div className={styles.fieldGroup}>
                     <label className={styles.fieldLabel}>Image URLs (One per line)</label>
-                    <textarea 
-                      className={styles.textArea} 
-                      value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))} 
-                      onChange={(e) => updateField("_imagesText", e.target.value)} 
+                    <textarea
+                      className={styles.textArea}
+                      value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))}
+                      onChange={(e) => updateField("_imagesText", e.target.value)}
                       placeholder="Paste image URLs here, one per line"
-                      rows={3} 
+                      rows={3}
                     />
                   </div>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Banner Gradient</label><input className={styles.textInput} value={data.bannerGradient || ""} onChange={(e) => updateField("bannerGradient", e.target.value)} /></div>
                 </div>
-                
-                <div className={styles.fieldGroup}>
-                  <label className={styles.fieldLabel} style={{ marginTop: '16px', borderBottom: '1px solid #e5e7eb', paddingBottom: '8px' }}>Itineraries</label>
-                  {(data.itineraries || []).map((itin, idx) => (
-                    <div key={idx} style={{ padding: '16px', border: '1px solid #e5e7eb', borderRadius: '8px', marginBottom: '12px', background: '#f9fafb' }}>
-                      <div className={styles.fieldRow}>
-                        <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Title</label><input className={styles.textInput} value={itin.title} onChange={(e) => {
-                          const updated = [...(data.itineraries || [])];
-                          updated[idx] = { ...updated[idx], title: e.target.value };
-                          updateField("itineraries", updated);
-                        }} /></div>
-                        <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Days</label><input className={styles.textInput} value={itin.days} onChange={(e) => {
-                          const updated = [...(data.itineraries || [])];
-                          updated[idx] = { ...updated[idx], days: e.target.value };
-                          updateField("itineraries", updated);
-                        }} /></div>
-                      </div>
-                      <div className={styles.fieldRow}>
-                        <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Budget</label><input className={styles.textInput} value={itin.budget} onChange={(e) => {
-                          const updated = [...(data.itineraries || [])];
-                          updated[idx] = { ...updated[idx], budget: e.target.value };
-                          updateField("itineraries", updated);
-                        }} /></div>
-                        <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Image Gradient</label><input className={styles.textInput} value={itin.imageGradient} onChange={(e) => {
-                          const updated = [...(data.itineraries || [])];
-                          updated[idx] = { ...updated[idx], imageGradient: e.target.value };
-                          updateField("itineraries", updated);
-                        }} /></div>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                        <button className={styles.deleteBtn} onClick={() => {
-                          updateField("itineraries", (data.itineraries || []).filter((_, i) => i !== idx));
-                        }}><Trash2 size={14} /> Remove Itinerary</button>
-                      </div>
-                    </div>
-                  ))}
-                  <button className={styles.addSmallBtn} onClick={() => {
-                    updateField("itineraries", [...(data.itineraries || []), {
-                      id: "new-" + Date.now(), title: "New Itinerary", days: "5 Days", pickup: "Airport", transfers: "Included", budget: "₹20,000", rating: 5, imageGradient: "linear-gradient(135deg, #eee, #ccc)"
-                    }]);
-                  }}><Plus size={14} /> Add Itinerary</button>
-                </div>
+
+                <NestedItineraryEditor itineraries={data.itineraries || []} onChange={(val) => updateField("itineraries", val)} />
               </>
             )}
             {section === "reviews" && (
@@ -853,12 +894,12 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel}>Image URLs (One per line)</label>
-                  <textarea 
-                    className={styles.textArea} 
-                    value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))} 
-                    onChange={(e) => updateField("_imagesText", e.target.value)} 
+                  <textarea
+                    className={styles.textArea}
+                    value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))}
+                    onChange={(e) => updateField("_imagesText", e.target.value)}
                     placeholder="Paste image URLs here, one per line"
-                    rows={3} 
+                    rows={3}
                   />
                 </div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Content</label><textarea className={styles.textArea} rows={6} value={data.content} onChange={(e) => updateField("content", e.target.value)} /></div>
@@ -893,12 +934,12 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel}>Image URLs (One per line)</label>
-                  <textarea 
-                    className={styles.textArea} 
-                    value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))} 
-                    onChange={(e) => updateField("_imagesText", e.target.value)} 
+                  <textarea
+                    className={styles.textArea}
+                    value={data._imagesText !== undefined ? data._imagesText : (data.images ? data.images.join("\n") : (data.image || ""))}
+                    onChange={(e) => updateField("_imagesText", e.target.value)}
                     placeholder="Paste image URLs here, one per line"
-                    rows={3} 
+                    rows={3}
                   />
                 </div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={3} value={data.description} onChange={(e) => updateField("description", e.target.value)} /></div>
@@ -1014,6 +1055,7 @@ export default function AdminDashboard() {
     switch (activeSection) {
       case "hero": return renderHeroPanel();
       case "popular-destinations": return renderPopularPanel();
+      case "trip-categories": return renderTripCategoriesPanel();
       case "flyer": return renderFlyerPanel();
       case "explore-destinations": return renderExplorePanel();
       case "reviews": return renderReviewsPanel();

@@ -19,6 +19,7 @@ import styles from './AdminSidebar.module.css';
 const NAV_SECTIONS = [
   { id: 'hero', label: 'Hero Section', icon: LayoutDashboard, href: '/admin?section=hero' },
   { id: 'popular-destinations', label: 'Popular Destinations', icon: MapPin, href: '/admin?section=popular-destinations' },
+  { id: 'trip-categories', label: 'Trip Categories', icon: Route, href: '/admin?section=trip-categories' },
   { id: 'flyer', label: 'Flyer / Banner', icon: Megaphone, href: '/admin?section=flyer' },
   { id: 'explore-destinations', label: 'Explore Destinations', icon: Compass, href: '/admin?section=explore-destinations' },
   { id: 'itineraries', label: 'Itineraries', icon: Route, href: '/admin?section=itineraries' },
