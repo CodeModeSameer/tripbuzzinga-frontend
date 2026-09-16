@@ -109,6 +109,30 @@
   gap: 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
+.publishBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background: #10b981;
+  border: 1px solid #059669;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.publishBtn:hover {
+  background: #059669;
+}
+
+.publishBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 
 .viewSiteBtn {
   display: flex;

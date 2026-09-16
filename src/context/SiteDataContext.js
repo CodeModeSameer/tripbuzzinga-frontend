@@ -503,6 +503,36 @@ const initialFaqData = [
   },
 ];
 
+const initialHeaderCategories = [
+  { 
+    id: 101, 
+    label: "Group Trips", 
+    slug: "group-trips",
+    tagline: "Travel Together",
+    desc: "Join an exciting group trip and explore the best destinations with amazing people. Make new friends and create unforgettable memories.",
+    images: ["https://images.unsplash.com/photo-1529156069898-49953eb1b5b4?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
+  },
+  { 
+    id: 102, 
+    label: "Customized Trips", 
+    slug: "customized-trips",
+    tagline: "Tailor-made Journeys",
+    desc: "Design your own itinerary and travel exactly the way you want to. We craft personalized experiences based on your preferences.",
+    images: ["https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
+  },
+  { 
+    id: 103, 
+    label: "Corporate Trips", 
+    slug: "corporate-trips",
+    tagline: "Team Building Escapes",
+    desc: "Plan the perfect corporate retreat to foster teamwork and productivity. We handle everything from flights to team-building activities.",
+    images: ["https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"],
+    itineraries: []
+  },
+];
+
 const initialTripCategories = [
   { 
     id: 1, 
@@ -510,7 +540,6 @@ const initialTripCategories = [
     slug: "honeymoon",
     tagline: "Romantic Getaways",
     desc: "Experience the most romantic and unforgettable honeymoon destinations tailored just for you and your partner.",
-    bannerGradient: "linear-gradient(160deg, #FF9A9E 0%, #FECFEF 100%)",
     images: ["https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&q=80&w=200"],
     itineraries: []
   },
@@ -745,7 +774,11 @@ export function SiteDataProvider({ children }) {
   const [reviews, setReviews] = useStickyState(initialReviewsData, 'tripbuzzinga_reviews');
   const [faq, setFaq] = useStickyState(initialFaqData, 'tripbuzzinga_faq');
   const [blogs, setBlogs] = useStickyState(initialBlogsData, 'tripbuzzinga_blogs');
+  const [headerCategories, setHeaderCategories] = useStickyState(initialHeaderCategories, 'tripbuzzinga_headerCategories');
   const [tripCategories, setTripCategories] = useStickyState(initialTripCategories, 'tripbuzzinga_categories');
+
+  // (Legacy migration removed as header categories are now independent)
+
   const [itineraries, setItineraries] = useStickyState(initialItinerariesData, 'tripbuzzinga_itineraries');
   const [gallery, setGallery] = useStickyState(initialGalleryData, 'tripbuzzinga_gallery');
 
@@ -769,6 +802,7 @@ export function SiteDataProvider({ children }) {
     reviews, setReviews,
     faq, setFaq,
     blogs, setBlogs,
+    headerCategories, setHeaderCategories,
     tripCategories, setTripCategories,
     itineraries, setItineraries,
     gallery, setGallery,

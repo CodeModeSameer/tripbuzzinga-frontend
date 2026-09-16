@@ -7,7 +7,8 @@ import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./Flyer.module.css";
 
 export default function Flyer() {
-  const { flyer: flyers } = useSiteData(); // Now it's an array
+  const { flyer: rawFlyers } = useSiteData(); // Now it's an array
+  const flyers = Array.isArray(rawFlyers) ? rawFlyers.slice(0, 3) : [];
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef(null);
 

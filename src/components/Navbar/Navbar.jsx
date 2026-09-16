@@ -5,16 +5,18 @@ import Image from "next/image";
 import { ChevronDown, Search, User, PhoneCall } from "lucide-react";
 import styles from "./Navbar.module.css";
 
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Group Trips", href: "#group" },
-  { label: "Customized Trips", href: "#custom" },
-  { label: "Corporate Trips", href: "#corporate" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "Contact Us", href: "#contact" },
-];
+import { useSiteData } from "@/context/SiteDataContext";
 
 export default function Navbar() {
+  const { headerCategories } = useSiteData();
+  
+  const NAV_LINKS = [
+    { label: "Home", href: "/" },
+    ...(headerCategories || []).map(cat => ({ label: cat.label, href: `/categories/${cat.slug}` })),
+    { label: "Blogs", href: "/blogs" },
+    { label: "Contact Us", href: "#contact" },
+  ];
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef(null);

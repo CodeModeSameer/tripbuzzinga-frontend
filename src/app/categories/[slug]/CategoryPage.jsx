@@ -15,8 +15,10 @@ import GlobalBottomSections from "@/components/GlobalBottomSections/GlobalBottom
 import Footer from "@/components/Footer/Footer";
 
 export default function CategoryPage({ slug }) {
-  const { tripCategories } = useSiteData();
+  const { tripCategories, headerCategories } = useSiteData();
   const category = tripCategories.find(
+    (c) => c.slug?.toLowerCase() === slug.toLowerCase()
+  ) || (headerCategories || []).find(
     (c) => c.slug?.toLowerCase() === slug.toLowerCase()
   );
 

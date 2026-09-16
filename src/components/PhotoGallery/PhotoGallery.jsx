@@ -65,8 +65,8 @@ export default function PhotoGallery() {
             }}
             className={styles.swiperContainer}
           >
-            {gallery.map((item) => (
-              <SwiperSlide key={item.id} className={styles.slide}>
+            {gallery.map((item, i) => (
+              <SwiperSlide key={`${item.id}-${i}`} className={styles.slide}>
                 <div
                   className={styles.slideInner}
                   onClick={() => setLightboxImage(item)}
