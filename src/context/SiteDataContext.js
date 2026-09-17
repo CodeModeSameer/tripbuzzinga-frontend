@@ -708,6 +708,7 @@ function useStickyState(defaultValue, key) {
     const stickyValue = window.localStorage.getItem(key);
     if (stickyValue !== null) {
       try {
+        // eslint-disable-next-line
         setValue(JSON.parse(stickyValue));
       } catch (e) {
         console.error(`Error parsing localStorage for ${key}`, e);

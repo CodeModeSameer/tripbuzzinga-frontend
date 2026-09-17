@@ -71,7 +71,9 @@ export default function Footer() {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
+      let mm = gsap.matchMedia();
       ctx = gsap.context(() => {
+        mm.add("(min-width: 768px)", () => {
         const validCols = columnRefs.current.filter(Boolean);
         if (validCols.length > 0) {
           gsap.fromTo(
@@ -90,6 +92,7 @@ export default function Footer() {
             }
           );
         }
+        });
       }, footerRef);
     };
     initGSAP();
@@ -112,7 +115,7 @@ export default function Footer() {
           </div>
           <span className={styles.footerLogoTagline}>Buzz your Vacation</span>
           <p className={styles.footerLogoDesc}>
-            Your trusted travel companion for discovering the world's most
+            Your trusted travel companion for discovering the world&apos;s most
             incredible destinations. Plan, explore, and create memories that
             last a lifetime.
           </p>

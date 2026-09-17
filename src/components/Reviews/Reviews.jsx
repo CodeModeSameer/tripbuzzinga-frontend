@@ -68,15 +68,9 @@ export default function Reviews() {
               
               <div className={styles.cardHeader}>
                 <div className={styles.headerLeft}>
-                  {review.avatarImage ? (
-                    <div className={styles.avatarImageWrapper}>
-                      <Image src={review.avatarImage} alt={review.name} fill style={{ objectFit: 'cover' }} />
-                    </div>
-                  ) : (
-                    <div className={styles.avatarInitial} style={{ backgroundColor: review.avatarBg }}>
-                      {review.avatarInitial}
-                    </div>
-                  )}
+                  <div className={styles.avatarInitial} style={{ backgroundColor: review.avatarBg || '#0ea5e9' }}>
+                    {review.name ? review.name.charAt(0).toUpperCase() : 'U'}
+                  </div>
                   <div className={styles.reviewerInfo}>
                     <h4 className={styles.reviewerName}>{review.name}</h4>
                     <div className={styles.ratingRow}>

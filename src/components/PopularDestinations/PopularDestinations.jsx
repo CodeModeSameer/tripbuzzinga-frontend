@@ -21,7 +21,9 @@ export default function PopularDestinations() {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
+      let mm = gsap.matchMedia();
       ctx = gsap.context(() => {
+        mm.add("(min-width: 768px)", () => {
         if (headerRef.current) {
           gsap.fromTo(
             headerRef.current,
@@ -39,6 +41,7 @@ export default function PopularDestinations() {
             }
           );
         }
+        });
       }, sectionRef);
     };
     initGSAP();

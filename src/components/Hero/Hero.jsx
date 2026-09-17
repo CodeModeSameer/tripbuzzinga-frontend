@@ -17,7 +17,7 @@ export default function Hero() {
       setDestIndex((prev) => (prev + 1) % DESTINATIONS.length);
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  }, [DESTINATIONS.length]);
 
   return (
     <section className={styles.hero} id="home">
@@ -40,10 +40,10 @@ export default function Hero() {
           <h1 className={styles.headline}>
             Book Your{" "}
             <span className={styles.inlineImageWrapper}>
-              <Image 
-                src={hero.backgroundImage} 
-                alt="Travel" 
-                fill 
+              <Image
+                src={hero.backgroundImage}
+                alt="Travel"
+                fill
                 className={styles.inlineImage}
               />
             </span>
@@ -63,33 +63,33 @@ export default function Hero() {
 
           <div className={styles.subtextContainer}>
             <p className={styles.greenSubtext}>
-              <span className={styles.whiteWord}>Wander</span> | Travel | Connect | Repeat
+              <span className={styles.whiteWord}>Buzzingers</span> | Explore | Experience | Repeat
             </p>
             <p className={styles.whiteSubtext}>
-              Where Adventure meets Community<br />
-              #wravelerforlife
+              Travel Together, Create Memories Forever<br />
+              #buzzingers
             </p>
           </div>
 
           <div className={styles.searchWrapper}>
             <div className={styles.searchBar}>
-              <input 
-                type="text" 
-                placeholder="Type Location... (mi" 
+              <input
+                type="text"
+                placeholder="Type Location... (mi"
                 className={styles.searchInput}
               />
               <button className={styles.searchBtn}>Search</button>
             </div>
             {/* Hand drawn arrow pointing to search */}
-            <svg 
-              className={styles.drawnArrow} 
-              width="100" 
-              height="100" 
-              viewBox="0 0 100 100" 
-              fill="none" 
+            <svg
+              className={styles.drawnArrow}
+              width="100"
+              height="100"
+              viewBox="0 0 100 100"
+              fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M70 15 C85 20, 95 40, 80 60 C65 80, 20 85, 10 90 M10 90 L15 75 M10 90 L25 95" stroke="#93C116" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M70 15 C85 20, 95 40, 80 60 C65 80, 20 85, 10 90 M10 90 L15 75 M10 90 L25 95" stroke="#93C116" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
         </div>
@@ -102,9 +102,7 @@ export default function Hero() {
               {[...REVIEWS, ...REVIEWS].map((review, idx) => (
                 <div key={idx} className={styles.reviewCard}>
                   <div className={styles.reviewHeader}>
-                    <div className={styles.avatar}>
-                      <Image src={(review.images?.[0] || review.image)} alt={review.name} fill style={{ objectFit: 'cover' }} />
-                    </div>
+                    <div className={styles.reviewName}>{review.name}</div>
                     <div className={styles.stars}>
                       <Star fill="#f59e0b" color="#f59e0b" size={14} />
                       <Star fill="#f59e0b" color="#f59e0b" size={14} />

@@ -33,7 +33,9 @@ export default function DestinationsShowcase() {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
+      let mm = gsap.matchMedia();
       ctx = gsap.context(() => {
+        mm.add("(min-width: 768px)", () => {
         if (headerRef.current) {
           gsap.fromTo(
             headerRef.current,
@@ -50,6 +52,7 @@ export default function DestinationsShowcase() {
             }
           );
         }
+        });
       }, sectionRef);
     };
     initGSAP();
@@ -76,13 +79,13 @@ export default function DestinationsShowcase() {
       if (imageEl) {
         gsap.fromTo(
           imageEl,
-          { autoAlpha: 0, x: isReversed ? 60 : -60 },
+          { autoAlpha: 0, x: isReversed ? 40 : -40 },
           {
             autoAlpha: 1,
             x: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            delay: i * 0.12,
+            duration: 0.4,
+            ease: "power2.out",
+            delay: i * 0.05,
           }
         );
       }
@@ -90,13 +93,13 @@ export default function DestinationsShowcase() {
       if (textEl) {
         gsap.fromTo(
           textEl,
-          { autoAlpha: 0, x: isReversed ? -60 : 60 },
+          { autoAlpha: 0, x: isReversed ? -40 : 40 },
           {
             autoAlpha: 1,
             x: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            delay: i * 0.12 + 0.1,
+            duration: 0.4,
+            ease: "power2.out",
+            delay: i * 0.05 + 0.05,
           }
         );
       }
@@ -116,10 +119,10 @@ export default function DestinationsShowcase() {
       if (currentItems.length > 0) {
         await gsap.to(currentItems, {
           autoAlpha: 0,
-          y: 30,
-          duration: 0.3,
-          stagger: 0.05,
-          ease: "power2.in",
+          y: 15,
+          duration: 0.2,
+          stagger: 0.03,
+          ease: "power2.inOut",
         });
       }
 
@@ -137,7 +140,7 @@ export default function DestinationsShowcase() {
     const timer = setTimeout(async () => {
       await animateItemsIn();
       setIsAnimating(false);
-    }, 50);
+    }, 10);
 
     return () => clearTimeout(timer);
   }, [activeTab, isAnimating, animateItemsIn]);
@@ -150,7 +153,9 @@ export default function DestinationsShowcase() {
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
+      let mm = gsap.matchMedia();
       ctx = gsap.context(() => {
+        mm.add("(min-width: 768px)", () => {
         const validItems = itemRefs.current.filter(Boolean);
         validItems.forEach((item, i) => {
           const isReversed = i % 2 !== 0;
@@ -186,12 +191,13 @@ export default function DestinationsShowcase() {
             );
           }
         });
+        });
       }, sectionRef);
     };
     initGSAP();
     return () => ctx?.revert();
     // Only run on first mount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, []);
 
   return (

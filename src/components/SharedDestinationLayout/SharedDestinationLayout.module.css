@@ -290,7 +290,7 @@
   }
 
   .itinImageWrap {
-    max-width: 260px;
+    display: none;
   }
 
   .itinCard {

@@ -656,3 +656,7 @@
     font-size: var(--fs-xs);
   }
 }
+
+.itinImage {
+  object-fit: cover;
+}

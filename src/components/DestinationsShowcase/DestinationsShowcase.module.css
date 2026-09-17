@@ -238,6 +238,11 @@
     gap: var(--space-xl);
   }
 
+  .imageWrap {
+    width: 100%;
+    flex: none;
+  }
+
   .textContent {
     text-align: center;
   }

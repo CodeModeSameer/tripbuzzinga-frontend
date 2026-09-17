@@ -219,17 +219,16 @@
 
 .reviewHeader {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   margin-bottom: 12px;
 }
 
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
+.reviewName {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: white;
 }
 
 .stars {

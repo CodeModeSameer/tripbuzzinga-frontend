@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronDown, Search, User, PhoneCall } from "lucide-react";
 import styles from "./Navbar.module.css";
 
@@ -42,7 +43,7 @@ export default function Navbar() {
     >
       <div className={styles.navInner}>
         {/* Logo */}
-        <a href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           <Image
             src="/logo.svg"
             alt="Tripbuzzinga Logo"
@@ -50,7 +51,7 @@ export default function Navbar() {
             height={50}
             priority
           />
-        </a>
+        </Link>
 
         {/* Desktop Links */}
         <div className={styles.navLinks}>

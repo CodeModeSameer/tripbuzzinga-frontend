@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./Flyer.module.css";
 
 export default function Flyer() {
   const { flyer: rawFlyers } = useSiteData(); // Now it's an array
-  const flyers = Array.isArray(rawFlyers) ? rawFlyers.slice(0, 3) : [];
+  const flyers = useMemo(() => Array.isArray(rawFlyers) ? rawFlyers.slice(0, 3) : [], [rawFlyers]);
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef(null);
 
