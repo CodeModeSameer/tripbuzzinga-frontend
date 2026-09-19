@@ -8,7 +8,7 @@ import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
-import { ImageIcon, ArrowRight, Globe, MapPin } from "lucide-react";
+import { ArrowRight, Globe, MapPin } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./DestinationsShowcase.module.css";
 
