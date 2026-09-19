@@ -809,8 +809,75 @@ export function SiteDataProvider({ children }) {
     gallery, setGallery,
   };
 
+  // Fetch published data from Supabase on mount
+  useEffect(() => {
+    async function fetchPublishedData() {
+      try {
+        const res = await fetch('/api/site-data');
+        if (res.ok) {
+          const { data } = await res.json();
+          if (data && Object.keys(data).length > 0) {
+            // Overwrite local state with published data if it exists
+            // (In a more complex app we'd compare timestamps to keep local drafts)
+            if (data.hero) setHero(data.hero);
+            if (data.popularDestinations) setPopularDestinations(data.popularDestinations);
+            if (data.flyer) setFlyer(data.flyer);
+            if (data.exploreInternational) setExploreInternational(data.exploreInternational);
+            if (data.exploreDomestic) setExploreDomestic(data.exploreDomestic);
+            if (data.reviews) setReviews(data.reviews);
+            if (data.faq) setFaq(data.faq);
+            if (data.blogs) setBlogs(data.blogs);
+            if (data.headerCategories) setHeaderCategories(data.headerCategories);
+            if (data.tripCategories) setTripCategories(data.tripCategories);
+            if (data.itineraries) setItineraries(data.itineraries);
+            if (data.gallery) setGallery(data.gallery);
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching published site data:', err);
+      }
+    }
+    // Only fetch if we are not the admin (simple heuristic: no local draft logic here, 
+    // we fetch it, but if they save, it overwrites local storage).
+    fetchPublishedData();
+  }, []);
+
+  const publishSiteData = async () => {
+    try {
+      const payload = {
+        hero,
+        popularDestinations,
+        flyer,
+        exploreInternational,
+        exploreDomestic,
+        reviews,
+        faq,
+        blogs,
+        headerCategories,
+        tripCategories,
+        itineraries,
+        gallery,
+      };
+      const res = await fetch('/api/site-data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Failed to publish');
+      return true;
+    } catch (err) {
+      console.error('Publish error:', err);
+      return false;
+    }
+  };
+
+  const contextValue = {
+    ...value,
+    publishSiteData,
+  };
+
   return (
-    <SiteDataContext.Provider value={value}>
+    <SiteDataContext.Provider value={contextValue}>
       {children}
     </SiteDataContext.Provider>
   );

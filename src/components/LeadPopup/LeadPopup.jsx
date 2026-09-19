@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { X, CheckCircle } from "lucide-react";
 import styles from "./LeadPopup.module.css";
 
 export default function LeadPopup() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -42,11 +44,24 @@ export default function LeadPopup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log("Lead captured:", formData);
-    setIsVisible(false);
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setIsSuccess(true);
+        setTimeout(() => setIsVisible(false), 2000);
+      }
+    } catch (err) {
+      console.error('Failed to submit lead:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isVisible) return null;
@@ -144,9 +159,15 @@ export default function LeadPopup() {
           </div>
           
           <div className={styles.submitWrapper}>
-            <button type="submit" className={styles.submitBtn}>
-              Submit Details
-            </button>
+            {isSuccess ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#22c55e', fontWeight: 600 }}>
+                <CheckCircle size={20} /> Thank you! We&apos;ll be in touch soon.
+              </div>
+            ) : (
+              <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Submit Details"}
+              </button>
+            )}
           </div>
         </form>
       </div>
