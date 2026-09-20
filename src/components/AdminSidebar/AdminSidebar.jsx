@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSiteData } from '@/context/SiteDataContext';
 import { 
   LayoutDashboard, 
   MapPin, 
@@ -34,21 +35,16 @@ const NAV_SECTIONS = [
 
 export default function AdminSidebar({ activeSection, onSectionChange }) {
   const [isPublishing, setIsPublishing] = useState(false);
+  const { publishSiteData } = useSiteData();
 
   const handlePublish = async () => {
-    const hookUrl = process.env.NEXT_PUBLIC_VERCEL_DEPLOY_HOOK_URL;
-    if (!hookUrl) {
-      alert("Deploy hook URL is not configured. Please set NEXT_PUBLIC_VERCEL_DEPLOY_HOOK_URL in your environment variables.");
-      return;
-    }
-    
     setIsPublishing(true);
     try {
-      const res = await fetch(hookUrl, { method: "POST" });
-      if (res.ok) {
-        alert("Publish successful! Your changes are now deploying to Vercel.");
+      const success = await publishSiteData();
+      if (success) {
+        alert("Publish successful! Your changes are now live on the website.");
       } else {
-        alert("Failed to trigger publish. Please check the hook URL or Vercel settings.");
+        alert("Failed to publish. Please check your connection or try again.");
       }
     } catch (err) {
       console.error(err);
