@@ -177,7 +177,7 @@ export default function PopularDestinations() {
                       </span>
                     </div>
                     <span className={styles.viewLink}>
-                      VIEW ITINERARY →{" "}
+                      VIEW ITINERARY{" "}
                       <span className={styles.viewArrow}>→</span>
                     </span>
                   </div>
