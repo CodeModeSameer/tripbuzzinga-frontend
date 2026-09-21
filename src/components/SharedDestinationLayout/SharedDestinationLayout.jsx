@@ -109,14 +109,12 @@ export default function SharedDestinationLayout({ destination, basePath }) {
             <h1
               className={styles.bannerTitle}
               ref={bannerTitleRef}
-              style={{ visibility: "hidden" }}
             >
               {destination.name}
             </h1>
             <p
               className={styles.bannerTagline}
               ref={bannerTaglineRef}
-              style={{ visibility: "hidden" }}
             >
               {destination.tagline}
             </p>
@@ -145,7 +143,6 @@ export default function SharedDestinationLayout({ destination, basePath }) {
                   className={`${styles.itinRow} ${isEven ? "" : styles.itinRowReversed}`}
                   key={itin.id}
                   ref={(el) => (cardRefs.current[i] = el)}
-                  style={{ visibility: "hidden" }}
                 >
                   {/* Info Card */}
                   <div className={styles.itinCard}>

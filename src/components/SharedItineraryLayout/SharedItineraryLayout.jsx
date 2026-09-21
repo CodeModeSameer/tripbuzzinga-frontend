@@ -117,7 +117,7 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
           </div>
           <div className={styles.bannerOverlay} style={{ zIndex: 1 }} />
 
-          <div className={styles.bannerContent} ref={titleRef} style={{ visibility: "hidden" }}>
+          <div className={styles.bannerContent} ref={titleRef}>
             <span className={styles.bannerDestLabel}>{itinerary.destinationName}</span>
             <h1 className={styles.bannerTitle}>{itinerary.title}</h1>
             <div className={styles.bannerMeta}>
@@ -146,7 +146,7 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
         {/* ===== CONTENT ===== */}
         <div className={styles.content}>
           {/* Overview Card */}
-          <div className={styles.overviewCard} ref={overviewRef} style={{ visibility: "hidden" }}>
+          <div className={styles.overviewCard} ref={overviewRef}>
             <div className={styles.overviewGrid}>
               <div className={styles.overviewText}>
                 <h2 className={styles.sectionTitle}>Overview</h2>
@@ -170,12 +170,11 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
               <Clock size={22} /> Day-by-Day Itinerary
             </h2>
             <div className={styles.timeline}>
-              {itinerary.dayPlan.map((dp, i) => (
+              {(itinerary.dayPlan || []).map((dp, i) => (
                 <div
                   key={i}
                   className={styles.dayCard}
                   ref={(el) => (dayRefs.current[i] = el)}
-                  style={{ visibility: "hidden" }}
                 >
                   <div className={styles.dayBadge}>Day {dp.day}</div>
                   <div className={styles.dayContent}>
@@ -191,7 +190,6 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
           <div
             className={styles.inclExclGrid}
             ref={(el) => (sectionRefs.current[0] = el)}
-            style={{ visibility: "hidden" }}
           >
             <div className={styles.inclCard}>
               <h3 className={styles.inclTitle}>
@@ -226,7 +224,6 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
           <div
             className={styles.hotelsSection}
             ref={(el) => (sectionRefs.current[1] = el)}
-            style={{ visibility: "hidden" }}
           >
             <h2 className={styles.sectionTitle}>
               <Building2 size={22} /> Hotel Details
@@ -254,7 +251,6 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
           <div
             className={styles.termsSection}
             ref={(el) => (sectionRefs.current[2] = el)}
-            style={{ visibility: "hidden" }}
           >
             <h2 className={styles.sectionTitle}>
               <FileText size={22} /> Terms &amp; Conditions
@@ -270,7 +266,6 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
           <div
             className={styles.ctaSection}
             ref={(el) => (sectionRefs.current[3] = el)}
-            style={{ visibility: "hidden" }}
           >
             <div className={styles.ctaCard}>
               <div className={styles.ctaLeft}>

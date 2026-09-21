@@ -1,6 +1,8 @@
 import { supabase } from '@/lib/supabase';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // GET: Fetch published site data
 export async function GET() {
   const { data, error } = await supabase
