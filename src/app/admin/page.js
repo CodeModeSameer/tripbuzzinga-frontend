@@ -270,7 +270,6 @@ export default function AdminDashboard() {
           data: {
             id: Date.now(),
             type: "international",
-            country: "",
             city: "",
             flag: "🏳️",
             duration: "5D / 4N",
@@ -307,7 +306,7 @@ export default function AdminDashboard() {
             </div>
             <div className={styles.itemCardMeta}>
               <span className={styles.tripTag} style={{ textTransform: 'capitalize' }}>{dest.type}</span>
-              <span>{dest.flag} {dest.country} · {dest.city}</span>
+              <span>{dest.flag} {dest.city}</span>
               <span>{dest.duration}</span>
               <span className={styles.priceBadge}>{dest.price}</span>
             </div>
@@ -1134,7 +1133,6 @@ export default function AdminDashboard() {
                       <option value="domestic">Domestic</option>
                     </select>
                   </div>
-                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Country</label><input className={styles.textInput} value={data.country} onChange={(e) => updateField("country", e.target.value)} /></div>
                 </div>
                 <div className={styles.fieldRow}>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>City</label><input className={styles.textInput} value={data.city} onChange={(e) => updateField("city", e.target.value)} /></div>

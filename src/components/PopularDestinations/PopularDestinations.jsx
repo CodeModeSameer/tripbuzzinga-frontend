@@ -132,8 +132,8 @@ export default function PopularDestinations() {
               {/* Full background image */}
               <div className={styles.cardImageBg}>
                 <Image
-                  src={(dest.images?.[0] || dest.image)}
-                  alt={`${dest.city}, ${dest.country}`}
+                  src={dest.images?.[0] || dest.image}
+                  alt={dest.city}
                   fill
                   sizes="(max-width: 768px) 80vw, 360px"
                   style={{ objectFit: "cover" }}
@@ -148,7 +148,7 @@ export default function PopularDestinations() {
                 <div className={styles.cardBadges}>
                   <div className={styles.locationBadge}>
                     <span className={styles.flag}>{dest.flag}</span>
-                    {dest.country} · {dest.city}
+                    {dest.city}
                   </div>
                   <div className={styles.durationBadge}>{dest.duration}</div>
                 </div>
