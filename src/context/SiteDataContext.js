@@ -813,7 +813,7 @@ export function SiteDataProvider({ children }) {
   useEffect(() => {
     async function fetchPublishedData() {
       try {
-        const res = await fetch('/api/site-data');
+        const res = await fetch(`/api/site-data?t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const { data } = await res.json();
           if (data && Object.keys(data).length > 0) {

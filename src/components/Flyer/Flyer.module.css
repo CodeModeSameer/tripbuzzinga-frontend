@@ -147,7 +147,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #d1d5db;
+  background-color: #bfdbfe;
   transition: background-color 0.3s ease, width 0.3s ease;
 }
 
@@ -158,32 +158,58 @@
 }
 
 @media (max-width: 768px) {
+  .flyerSection {
+    padding: 20px 16px;
+  }
+
   .flyerWrapper {
-    height: 350px;
+    height: 180px;
+    aspect-ratio: auto;
+    border-radius: 8px;
   }
   
   .flyerOverlay {
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
-    background: rgba(13, 71, 161, 0.7);
+    align-items: flex-start;
+    padding: 16px;
+    background: linear-gradient(90deg, rgba(13, 71, 161, 0.85) 0%, rgba(25, 118, 210, 0.6) 80%, rgba(0, 0, 0, 0.2) 100%);
   }
-  
-  .flyerContent {
-    align-items: center;
-  }
-  
+
   .flyerTitle {
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
-  
+
   .flyerSubtitle {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
   }
-  
+
+  .earlyBirdBadge {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    margin-bottom: 4px;
+  }
+
+  .discountBadge {
+    padding: 4px 8px;
+    gap: 4px;
+  }
+
+  .discountAmount {
+    font-size: 1rem;
+  }
+
+  .discountText {
+    font-size: 0.6rem;
+  }
+
   .viewTripsBtn {
-    align-self: center;
-    margin-top: 24px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    margin-top: 12px;
     margin-bottom: 0;
+    align-self: flex-start;
   }
 }

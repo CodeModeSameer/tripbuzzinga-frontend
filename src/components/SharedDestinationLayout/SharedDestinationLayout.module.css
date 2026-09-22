@@ -285,12 +285,18 @@
 
   .itinRow,
   .itinRowReversed {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: var(--space-lg);
   }
 
   .itinImageWrap {
-    display: none;
+    display: block;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .itinImage {
+    aspect-ratio: 16 / 9;
   }
 
   .itinCard {

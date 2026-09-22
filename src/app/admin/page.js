@@ -1646,37 +1646,6 @@ export default function AdminDashboard() {
       <AdminSidebar activeSection={activeSection} onSectionChange={setActiveSection} />
       <main className={styles.mainContent}>
         
-        {/* Top actions bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', padding: '10px 20px', background: '#fff', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
-          <div>
-            <h2 style={{ margin: 0, fontSize: '1.25rem', color: '#111827' }}>Dashboard Controls</h2>
-            <p style={{ margin: 0, fontSize: '0.875rem', color: '#6b7280' }}>Remember to publish your changes so visitors can see them.</p>
-          </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <button 
-              onClick={async () => {
-                setSavedMsg("Publishing to live site...");
-                const success = await publishSiteData();
-                if (success) {
-                  setSavedMsg("✅ Successfully published to live site!");
-                  setTimeout(() => setSavedMsg(""), 3000);
-                } else {
-                  setSavedMsg("❌ Failed to publish. Check console.");
-                  setTimeout(() => setSavedMsg(""), 3000);
-                }
-              }}
-              style={{ background: '#10b981', color: 'white', padding: '8px 16px', borderRadius: '6px', fontWeight: 600, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
-            >
-              <Upload size={16} /> Publish to Live Site
-            </button>
-            <button 
-              onClick={handleLogout}
-              style={{ background: '#ef4444', color: 'white', padding: '8px 16px', borderRadius: '6px', fontWeight: 600, border: 'none', cursor: 'pointer' }}
-            >
-              Logout
-            </button>
-          </div>
-        </div>
 
         {savedMsg && <div className={styles.toast}>{savedMsg}</div>}
         {renderSection()}

@@ -103,6 +103,14 @@ export default function Navbar() {
         <div
           className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ""}`}
         >
+          {/* Mobile Search Bar */}
+          <div className={styles.mobileMenuSearch}>
+            <input type="text" placeholder="Type Location..." className={styles.mobileMenuSearchInput} />
+            <button className={styles.mobileMenuSearchBtn}>
+              <Search size={18} />
+            </button>
+          </div>
+
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}

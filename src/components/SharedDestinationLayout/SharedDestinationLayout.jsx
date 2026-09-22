@@ -46,6 +46,7 @@ export default function SharedDestinationLayout({ destination, basePath }) {
 
       const mm = gsap.matchMedia();
       ctx = gsap.context(() => {
+        // Desktop animation
         mm.add("(min-width: 768px)", () => {
           if (bannerTitleRef.current) {
             gsap.fromTo(bannerTitleRef.current,
@@ -66,6 +67,24 @@ export default function SharedDestinationLayout({ destination, basePath }) {
                 scrollTrigger: { trigger: card, start: "top 85%" } }
             );
           });
+        });
+
+        // Mobile animation
+        mm.add("(max-width: 767px)", () => {
+          if (bannerTitleRef.current) {
+            gsap.fromTo(bannerTitleRef.current,
+              { autoAlpha: 0, y: 30 },
+              { autoAlpha: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
+            );
+          }
+          if (bannerTaglineRef.current) {
+            gsap.fromTo(bannerTaglineRef.current,
+              { autoAlpha: 0, y: 15 },
+              { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 0.5 }
+            );
+          }
+          // Note: Deliberately skipping cardRefs animation on mobile so they render immediately 
+          // without ScrollTrigger hiding them (which can cause issues on some mobile browsers).
         });
       });
     };
@@ -134,11 +153,17 @@ export default function SharedDestinationLayout({ destination, basePath }) {
         {/* Itineraries */}
         <section className={styles.itineraries}>
           <div className={styles.itinerariesContainer}>
-            {itineraries.map((itin, i) => {
-              const isEven = i % 2 === 0;
-              const images = (itin.images?.length > 0 ? itin.images : [itin.image]).filter(Boolean);
+            {itineraries.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "40px", background: "#fff", borderRadius: "12px", border: "1px dashed #ccc" }}>
+                <h3 style={{ color: "#666", marginBottom: "8px" }}>No itineraries found</h3>
+                <p style={{ color: "#999", fontSize: "0.9rem" }}>If you just added an itinerary, please make sure to click "Publish to Live Site" in the admin dashboard and refresh this page.</p>
+              </div>
+            ) : (
+              itineraries.map((itin, i) => {
+                const isEven = i % 2 === 0;
+                const images = (itin.images?.length > 0 ? itin.images : [itin.image]).filter(Boolean);
 
-              return (
+                return (
                 <div
                   className={`${styles.itinRow} ${isEven ? "" : styles.itinRowReversed}`}
                   key={itin.id}
@@ -194,7 +219,8 @@ export default function SharedDestinationLayout({ destination, basePath }) {
                   </div>
                 </div>
               );
-            })}
+            })
+            )}
           </div>
         </section>
       </div>

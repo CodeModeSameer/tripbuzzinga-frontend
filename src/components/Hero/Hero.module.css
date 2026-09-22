@@ -45,7 +45,7 @@
 }
 
 .headline {
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 800;
   color: white;
   line-height: 1.1;
@@ -106,7 +106,7 @@
 
 .greenSubtext {
   color: #a3e635;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 8px;
 }
@@ -117,7 +117,7 @@
 
 .whiteSubtext {
   color: #e5e7eb;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   line-height: 1.5;
 }
 
@@ -296,7 +296,7 @@
   }
   
   .headline {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
   
   .inlineImageWrapper {
@@ -312,5 +312,72 @@
   
   .statDivider {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2.2rem;
+  }
+  
+  .animatedDestContainer {
+    min-width: 160px;
+  }
+  
+  .greenSubtext {
+    font-size: 0.95rem;
+  }
+  
+  .whiteSubtext {
+    font-size: 0.85rem;
+  }
+  
+  .inlineImageWrapper {
+    width: 70px;
+    height: 32px;
+  }
+
+  /* Restore search wrapper on mobile but scale it down slightly if needed */
+  .searchWrapper {
+    display: block;
+    margin-top: 24px;
+  }
+  
+  .searchInput {
+    width: 200px; /* slightly smaller on mobile */
+  }
+
+  .statsSection {
+    flex-wrap: nowrap;
+    gap: 8px;
+    justify-content: space-between;
+    padding: 20px 12px;
+  }
+  
+  .statBlock {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+  
+  .statText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .statText h4 {
+    font-size: 1.1rem;
+  }
+  
+  .statText p {
+    font-size: 0.7rem;
+    line-height: 1.2;
+  }
+  
+  .statIcon svg {
+    width: 24px;
+    height: 24px;
   }
 }

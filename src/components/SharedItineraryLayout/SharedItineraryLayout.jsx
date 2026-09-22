@@ -196,7 +196,7 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
                 <CheckCircle2 size={20} className={styles.inclIcon} /> Inclusions
               </h3>
               <ul className={styles.inclList}>
-                {itinerary.inclusions.map((item, i) => (
+                {(itinerary.inclusions || []).map((item, i) => (
                   <li key={i} className={styles.inclItem}>
                     <CheckCircle2 size={14} className={styles.inclCheckIcon} />
                     {item}
@@ -210,7 +210,7 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
                 <XCircle size={20} className={styles.exclIcon} /> Exclusions
               </h3>
               <ul className={styles.exclList}>
-                {itinerary.exclusions.map((item, i) => (
+                {(itinerary.exclusions || []).map((item, i) => (
                   <li key={i} className={styles.exclItem}>
                     <XCircle size={14} className={styles.exclXIcon} />
                     {item}
@@ -229,7 +229,7 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
               <Building2 size={22} /> Hotel Details
             </h2>
             <div className={styles.hotelGrid}>
-              {itinerary.hotels.map((hotel, i) => (
+              {(itinerary.hotels || []).map((hotel, i) => (
                 <div key={i} className={styles.hotelCard}>
                   <div className={styles.hotelImagePlaceholder}>
                     <ImageIcon size={24} className={styles.hotelPlaceholderIcon} />
@@ -256,7 +256,7 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
               <FileText size={22} /> Terms &amp; Conditions
             </h2>
             <ul className={styles.termsList}>
-              {itinerary.terms.map((term, i) => (
+              {(itinerary.terms || []).map((term, i) => (
                 <li key={i} className={styles.termsItem}>{term}</li>
               ))}
             </ul>
