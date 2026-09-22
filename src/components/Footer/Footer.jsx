@@ -84,15 +84,15 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>Contact Us</h4>
             <div className={styles.contactItem}>
               <MapPin size={18} className={styles.contactIcon} />
-              <span>B-42, 2nd Floor, Tower- B, The Corenthum, Block A, Industrial Area, Sector 62, Noida, Uttar Pradesh 201301</span>
+              <span>270, Udyog Vihar II Rd, Phase II, Udyog Vihar III, Sector 20, Gurugram, Haryana 122016</span>
             </div>
             <div className={styles.contactItem}>
               <Phone size={18} className={styles.contactIcon} />
-              <span>+91-9797 972 175</span>
+              <span>+91 8251056139</span>
             </div>
             <div className={styles.contactItem}>
               <Mail size={18} className={styles.contactIcon} />
-              <span>contact@tripbuzzinga.com</span>
+              <span>planners@tripbuzzinga.com</span>
             </div>
           </div>
         </div>
