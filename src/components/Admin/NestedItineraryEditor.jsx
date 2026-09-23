@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import styles from "../../app/admin/admin.module.css";
-
+import RichTextEditor from "./RichTextEditor";
 export default function NestedItineraryEditor({ itineraries, onChange }) {
   const [expandedItin, setExpandedItin] = useState(null);
 
@@ -110,7 +110,7 @@ export default function NestedItineraryEditor({ itineraries, onChange }) {
                         <div className={styles.fieldGroup} style={{ flex: '0 0 80px' }}><label className={styles.fieldLabel}>Day</label><input className={styles.textInput} type="number" value={day.day} onChange={(e) => updateDayPlan(idx, dIdx, "day", parseInt(e.target.value) || dIdx + 1)} /></div>
                         <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Title</label><input className={styles.textInput} value={day.title} onChange={(e) => updateDayPlan(idx, dIdx, "title", e.target.value)} /></div>
                       </div>
-                      <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={2} value={day.desc} onChange={(e) => updateDayPlan(idx, dIdx, "desc", e.target.value)} /></div>
+                      <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><RichTextEditor value={day.desc} onChange={(val) => updateDayPlan(idx, dIdx, "desc", val)} /></div>
                       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <button className={styles.deleteBtn} onClick={() => removeDayPlan(idx, dIdx)}><Trash2 size={12} /> Remove Day</button>
                       </div>

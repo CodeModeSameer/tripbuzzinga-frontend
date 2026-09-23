@@ -55,7 +55,7 @@ export default function FAQ() {
                     className={styles.accordionBody} 
                     style={{ maxHeight: isOpen ? "200px" : "0", paddingBottom: isOpen ? "24px" : "0" }}
                   >
-                    <p className={styles.answerText}>{item.answer}</p>
+                    <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: item.answer }} />
                   </div>
                 </div>
               );

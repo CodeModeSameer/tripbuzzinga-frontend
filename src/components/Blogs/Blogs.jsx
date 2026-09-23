@@ -74,7 +74,7 @@ export default function Blogs() {
                     <span className={styles.readTime}>{featuredBlog.readingTime}</span>
                   </div>
                   <h3 className={styles.featuredTitle}>{featuredBlog.title}</h3>
-                  <p className={styles.featuredDesc}>{featuredBlog.description}</p>
+                  <div className={styles.featuredDesc} dangerouslySetInnerHTML={{ __html: featuredBlog.description }} />
                 </div>
               </Link>
             </div>

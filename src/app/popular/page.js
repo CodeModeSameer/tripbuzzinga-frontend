@@ -37,7 +37,7 @@ export default function AllDestinationsPage() {
                 </div>
                 <div className={styles.cardContent}>
                   <h3 className={styles.cardTitle}>{dest.name}</h3>
-                  <p className={styles.cardDesc}>{dest.desc.slice(0, 100)}...</p>
+                  <p className={styles.cardDesc}>{(dest.desc || '').replace(/<[^>]*>?/gm, '').slice(0, 100)}...</p>
                   
                   <div className={styles.cardFooter}>
                     <span className={styles.locationTag}>

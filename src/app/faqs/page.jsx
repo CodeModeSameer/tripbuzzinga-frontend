@@ -112,7 +112,7 @@ export default function FaqsPage() {
                         opacity: isOpen ? 1 : 0
                       }}
                     >
-                      <p className={styles.answer}>{item.answer}</p>
+                      <div className={styles.answer} dangerouslySetInnerHTML={{ __html: item.answer }} />
                     </div>
                   </div>
                 );

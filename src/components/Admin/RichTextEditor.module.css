@@ -1,0 +1,28 @@
+.editorWrapper {
+  background: var(--color-white, #fff);
+  border-radius: var(--radius-sm, 8px);
+  border: 1px solid var(--color-gray-200, #e0e0e0);
+  overflow: hidden;
+}
+
+.editorWrapper :global(.ql-toolbar) {
+  border: none !important;
+  border-bottom: 1px solid var(--color-gray-200, #e0e0e0) !important;
+  background: var(--color-gray-100, #f9fafb);
+  font-family: inherit;
+}
+
+.editorWrapper :global(.ql-container) {
+  border: none !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+}
+
+.editorWrapper :global(.ql-editor) {
+  min-height: 200px;
+  color: var(--color-gray-800, #333);
+}
+
+.editorWrapper :global(.ql-editor p) {
+  margin-bottom: 10px;
+}

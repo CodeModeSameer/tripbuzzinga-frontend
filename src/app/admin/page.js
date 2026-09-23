@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import AdminSidebar from "@/components/AdminSidebar/AdminSidebar";
 import NestedItineraryEditor from "@/components/Admin/NestedItineraryEditor";
+import RichTextEditor from "@/components/Admin/RichTextEditor";
 import { useSiteData } from "@/context/SiteDataContext";
 import {
   Plus, Trash2, Save, Edit3, X, GripVertical,
@@ -244,9 +245,9 @@ export default function AdminDashboard() {
                 }
               }}><Trash2 size={14} /></button>
             </div>
-            <textarea className={styles.textArea} rows={2} value={rev.text} onChange={(e) => {
+            <RichTextEditor value={rev.text} onChange={(val) => {
               const updated = [...hero.reviews];
-              updated[i] = { ...updated[i], text: e.target.value };
+              updated[i] = { ...updated[i], text: val };
               setHero({ ...hero, reviews: updated });
             }} />
           </div>
@@ -1221,7 +1222,7 @@ export default function AdminDashboard() {
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Slug</label><input className={styles.textInput} value={data.slug} onChange={(e) => updateField("slug", e.target.value)} /></div>
                 </div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Tagline</label><input className={styles.textInput} value={data.tagline} onChange={(e) => updateField("tagline", e.target.value)} /></div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={3} value={data.desc} onChange={(e) => updateField("desc", e.target.value)} /></div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><RichTextEditor value={data.desc} onChange={(val) => updateField("desc", val)} /></div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel}>Images</label>
                   {(() => {
@@ -1271,7 +1272,7 @@ export default function AdminDashboard() {
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Name</label><input className={styles.textInput} value={data.name} onChange={(e) => updateField("name", e.target.value)} /></div>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Tagline</label><input className={styles.textInput} value={data.tagline || ""} onChange={(e) => updateField("tagline", e.target.value)} /></div>
                 </div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={3} value={data.desc} onChange={(e) => updateField("desc", e.target.value)} /></div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><RichTextEditor value={data.desc} onChange={(val) => updateField("desc", val)} /></div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel}>Images</label>
                   {(() => {
@@ -1322,7 +1323,7 @@ export default function AdminDashboard() {
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Name</label><input className={styles.textInput} value={data.name} onChange={(e) => updateField("name", e.target.value)} /></div>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Rating</label><input className={styles.textInput} type="number" min={1} max={5} value={data.rating} onChange={(e) => updateField("rating", parseInt(e.target.value) || 5)} /></div>
                 </div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Review Text</label><textarea className={styles.textArea} rows={4} value={data.text} onChange={(e) => updateField("text", e.target.value)} /></div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Review Text</label><RichTextEditor value={data.text} onChange={(val) => updateField("text", val)} /></div>
                 <div className={styles.fieldRow}>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Trip Name</label><input className={styles.textInput} value={data.tripName} onChange={(e) => updateField("tripName", e.target.value)} /></div>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Review Link (URL)</label><input className={styles.textInput} value={data.reviewLink || ""} placeholder="https://..." onChange={(e) => updateField("reviewLink", e.target.value)} /></div>
@@ -1332,7 +1333,7 @@ export default function AdminDashboard() {
             {section === "faq" && (
               <>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Question</label><input className={styles.textInput} value={data.question} onChange={(e) => updateField("question", e.target.value)} /></div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Answer</label><textarea className={styles.textArea} rows={4} value={data.answer} onChange={(e) => updateField("answer", e.target.value)} /></div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Answer</label><RichTextEditor value={data.answer} onChange={(val) => updateField("answer", val)} /></div>
               </>
             )}
             {section === "gallery" && (
@@ -1389,7 +1390,7 @@ export default function AdminDashboard() {
                     );
                   })()}
                 </div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Content</label><textarea className={styles.textArea} rows={6} value={data.content} onChange={(e) => updateField("content", e.target.value)} /></div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Content</label><RichTextEditor value={data.content} onChange={(val) => updateField("content", val)} /></div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                     <input type="checkbox" checked={data.isFeatured} onChange={(e) => updateField("isFeatured", e.target.checked)} style={{ width: '16px', height: '16px' }} />
@@ -1459,7 +1460,7 @@ export default function AdminDashboard() {
                     );
                   })()}
                 </div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><textarea className={styles.textArea} rows={3} value={data.description} onChange={(e) => updateField("description", e.target.value)} /></div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><RichTextEditor value={data.description} onChange={(val) => updateField("description", val)} /></div>
 
                 {/* Locations multi-select */}
                 <div className={styles.fieldGroup}>
@@ -1538,9 +1539,9 @@ export default function AdminDashboard() {
                       </div>
                       <div className={styles.fieldGroup}>
                         <label className={styles.fieldLabel}>Description</label>
-                        <textarea className={styles.textArea} rows={3} placeholder="Describe the day's activities..." value={day.description || ""} onChange={(e) => {
+                        <RichTextEditor placeholder="Describe the day's activities..." value={day.description || ""} onChange={(val) => {
                           const updated = [...(data.detailedDays || [])];
-                          updated[idx] = { ...updated[idx], description: e.target.value };
+                          updated[idx] = { ...updated[idx], description: val };
                           updateField("detailedDays", updated);
                         }} />
                       </div>
