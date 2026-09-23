@@ -1,20 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { MapPin, Phone, Mail, ChevronDown } from "lucide-react";
-import { 
-  FaFacebookF, FaXTwitter, FaInstagram, FaLinkedinIn, 
-  FaYoutube, FaPinterestP, FaSpotify 
+import {
+  FaFacebookF, FaXTwitter, FaInstagram, FaLinkedinIn,
+  FaYoutube, FaPinterestP, FaSpotify
 } from "react-icons/fa6";
 import { FaTripadvisor } from "react-icons/fa";
 import styles from "./Footer.module.css";
 
 const FOOTER_PAGES = [
-  { label: "About Us", href: "#" },
-  { label: "Contact Us", href: "#" },
-  { label: "Payment Policy", href: "#" },
-  { label: "Terms & Condition", href: "#" },
-  { label: "Privacy Policy", href: "#" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Contact Us", href: "/contact-us" },
+  { label: "Payment Policy", href: "/payment-policy" },
+  { label: "Terms & Condition", href: "/terms-and-conditions" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
 ];
 
 const SOCIAL_ICONS = [
@@ -77,7 +78,7 @@ export default function Footer() {
       <div className={styles.footerWave} />
 
       <div className={styles.footerContent}>
-        
+
         {/* Contact Us (Mobile First Priority) */}
         <div className={styles.contactWrapper} ref={(el) => (columnRefs.current[1] = el)}>
           <div className={styles.contactBox}>
@@ -121,7 +122,7 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>Company</h4>
             <div className={styles.flatLinksContent}>
               {FOOTER_PAGES.map((link) => (
-                <a key={link.label} href={link.href} className={styles.footerLink}>{link.label}</a>
+                <Link key={link.label} href={link.href} className={styles.footerLink}>{link.label}</Link>
               ))}
             </div>
           </div>
@@ -133,7 +134,7 @@ export default function Footer() {
           ref={(el) => (columnRefs.current[0] = el)}
         >
           <div className={styles.footerLogoTitle}>
-            Trip <span className={styles.footerLogoTitleHighlight}>Buzzinga</span>
+            Trip<span className={styles.footerLogoTitleHighlight}>Buzzinga</span>
           </div>
           <span className={styles.footerLogoTagline}>Buzz your Vacation</span>
           <p className={styles.footerLogoDesc}>
