@@ -166,7 +166,7 @@ export default function ContactUsPage() {
             
             <div className={styles.mapSection}>
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d3506.119253457121!2d77.08632481508215!3d28.50604818247071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d194411130e55%3A0xc47e3a985d2eb34!2sUdyog%20Vihar%20Phase%20II%2C%20Udyog%20Vihar%20III%2C%20Sector%2020%2C%20Gurugram%2C%20Haryana%20122016!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                src="https://maps.google.com/maps?q=Plot+No.+270,+Phase+2,+Udyog+Vihar,+Sector+20,+Gurugram,+Haryana+122016&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                 className={styles.mapIframe}
                 allowFullScreen="" 
                 loading="lazy" 
