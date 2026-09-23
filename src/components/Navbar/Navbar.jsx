@@ -15,7 +15,7 @@ export default function Navbar() {
     { label: "Home", href: "/" },
     ...(headerCategories || []).map(cat => ({ label: cat.label, href: `/categories/${cat.slug}` })),
     { label: "Blogs", href: "/blogs" },
-    { label: "Contact Us", href: "#contact" },
+    { label: "Contact Us", href: "/contact-us" },
   ];
 
   const [menuOpen, setMenuOpen] = useState(false);
