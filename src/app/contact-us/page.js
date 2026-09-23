@@ -4,7 +4,8 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import GlobalBottomSections from "@/components/GlobalBottomSections/GlobalBottomSections";
 import styles from "./Contact.module.css";
-import { MapPin, Phone, Mail, Instagram, Facebook, Twitter, Linkedin, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Send } from "lucide-react";
+import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
 
 export default function ContactUsPage() {
@@ -54,10 +55,10 @@ export default function ContactUsPage() {
               <p className={styles.infoText}>planners@tripbuzzinga.com</p>
               
               <div className={styles.socialIcons}>
-                <a href="#" className={styles.socialIcon}><Instagram size={20} /></a>
-                <a href="#" className={styles.socialIcon}><Facebook size={20} /></a>
-                <a href="#" className={styles.socialIcon}><Twitter size={20} /></a>
-                <a href="#" className={styles.socialIcon}><Linkedin size={20} /></a>
+                <a href="#" className={styles.socialIcon}><FaInstagram size={20} /></a>
+                <a href="#" className={styles.socialIcon}><FaFacebook size={20} /></a>
+                <a href="#" className={styles.socialIcon}><FaTwitter size={20} /></a>
+                <a href="#" className={styles.socialIcon}><FaLinkedin size={20} /></a>
               </div>
             </div>
             
