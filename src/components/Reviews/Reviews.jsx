@@ -94,9 +94,10 @@ export default function Reviews() {
               </div>
 
               <div className={styles.cardBody}>
-                <p className={`${styles.reviewText} ${!expandedReviews[review.id] ? styles.reviewTextCollapsed : ""}`}>
-                  {review.text}
-                </p>
+                <div 
+                  className={`${styles.reviewText} ${!expandedReviews[review.id] ? styles.reviewTextCollapsed : ""}`}
+                  dangerouslySetInnerHTML={{ __html: (review.text || '').replace(/&nbsp;/g, ' ') }}
+                />
                 <button 
                   className={styles.readMoreBtn} 
                   onClick={() => toggleExpand(review.id)}
