@@ -101,6 +101,14 @@ export default function NestedItineraryEditor({ itineraries, onChange }) {
                     rows={3}
                   />
                 </div>
+
+                <div className={styles.fieldGroup} style={{ marginTop: '16px' }}>
+                  <label className={styles.fieldLabel}>Overview</label>
+                  <RichTextEditor 
+                    value={itin.overview || itin.description || ""} 
+                    onChange={(val) => updateItin(idx, "overview", val)} 
+                  />
+                </div>
                 
                 <div className={styles.fieldGroup} style={{ marginTop: '16px' }}>
                   <label className={styles.fieldLabel} style={{ borderBottom: '1px solid #e5e7eb', paddingBottom: '4px' }}>Day-wise Plan</label>

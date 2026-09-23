@@ -1460,7 +1460,7 @@ export default function AdminDashboard() {
                     );
                   })()}
                 </div>
-                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><RichTextEditor value={data.description} onChange={(val) => updateField("description", val)} /></div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Overview</label><RichTextEditor value={data.overview || data.description} onChange={(val) => updateField("overview", val)} /></div>
 
                 {/* Locations multi-select */}
                 <div className={styles.fieldGroup}>
