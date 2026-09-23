@@ -427,7 +427,10 @@ export default function AdminDashboard() {
                   <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setList(list.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
                 </div>
               </div>
-              <p className={styles.itemCardDesc}>{dest.desc}</p>
+              <div 
+                className={styles.itemCardDesc} 
+                dangerouslySetInnerHTML={{ __html: (dest.desc || '').replace(/&nbsp;/g, ' ') }} 
+              />
             </div>
           ))}
         </div>
@@ -483,7 +486,10 @@ export default function AdminDashboard() {
                   <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setHeaderCategories(headerCategories.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
                 </div>
               </div>
-              <p className={styles.itemCardDesc}>{cat.desc}</p>
+              <div 
+                className={styles.itemCardDesc} 
+                dangerouslySetInnerHTML={{ __html: (cat.desc || '').replace(/&nbsp;/g, ' ') }} 
+              />
             </div>
           ))}
         </div>
