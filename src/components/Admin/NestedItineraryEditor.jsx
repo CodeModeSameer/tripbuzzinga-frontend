@@ -109,6 +109,47 @@ export default function NestedItineraryEditor({ itineraries, onChange }) {
                     onChange={(val) => updateItin(idx, "overview", val)} 
                   />
                 </div>
+
+                <div className={styles.fieldRow}>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.fieldLabel}>Inclusions (One per line)</label>
+                    <textarea
+                      className={styles.textArea}
+                      value={itin._inclusionsText !== undefined ? itin._inclusionsText : (itin.inclusions || []).join("\n")}
+                      onChange={(e) => {
+                        const text = e.target.value;
+                        const updated = [...itineraries];
+                        updated[idx] = {
+                          ...updated[idx],
+                          _inclusionsText: text,
+                          inclusions: text.split('\n').map(item => item.trim()).filter(Boolean)
+                        };
+                        onChange(updated);
+                      }}
+                      placeholder="e.g. Airport transfers&#10;Breakfast"
+                      rows={4}
+                    />
+                  </div>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.fieldLabel}>Exclusions (One per line)</label>
+                    <textarea
+                      className={styles.textArea}
+                      value={itin._exclusionsText !== undefined ? itin._exclusionsText : (itin.exclusions || []).join("\n")}
+                      onChange={(e) => {
+                        const text = e.target.value;
+                        const updated = [...itineraries];
+                        updated[idx] = {
+                          ...updated[idx],
+                          _exclusionsText: text,
+                          exclusions: text.split('\n').map(item => item.trim()).filter(Boolean)
+                        };
+                        onChange(updated);
+                      }}
+                      placeholder="e.g. Flights&#10;Personal expenses"
+                      rows={4}
+                    />
+                  </div>
+                </div>
                 
                 <div className={styles.fieldGroup} style={{ marginTop: '16px' }}>
                   <label className={styles.fieldLabel} style={{ borderBottom: '1px solid #e5e7eb', paddingBottom: '4px' }}>Day-wise Plan</label>
