@@ -34,11 +34,11 @@
   font-family: var(--font-heading);
   font-size: var(--fs-xl);
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--color-brand-green);
 }
 
 .footerLogoTitleHighlight {
-  color: var(--color-primary-light);
+  color: var(--color-brand-blue);
 }
 
 .footerLogoTagline {
@@ -244,9 +244,6 @@
   }
 
   /* Logo for mobile */
-  .footerLogoTitle {
-    color: #111827;
-  }
   
   .footerLogoDesc {
     color: #4b5563;
