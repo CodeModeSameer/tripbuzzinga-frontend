@@ -1,0 +1,124 @@
+.aboutHero {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  padding: 120px 20px 80px;
+  text-align: center;
+  color: var(--color-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.aboutHeroTitle {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.aboutHeroSubtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.aboutContainer {
+  max-width: 1000px;
+  margin: -40px auto 80px;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  padding: 60px;
+  position: relative;
+  z-index: 3;
+}
+
+@media (max-width: 768px) {
+  .aboutContainer {
+    margin: -20px 20px 60px;
+    padding: 30px 20px;
+  }
+  .aboutHeroTitle {
+    font-size: 2.2rem;
+  }
+}
+
+.introSection {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--color-gray-800);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.quoteSection {
+  background: var(--color-paper);
+  border-left: 4px solid var(--color-accent-gold);
+  padding: 40px;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.quoteText {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--color-primary-dark);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.quoteIcon {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: var(--color-accent-gold);
+  opacity: 0.2;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.featureCard {
+  background: var(--color-gray-100);
+  padding: 30px;
+  border-radius: var(--radius-md);
+  transition: transform 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+}
+
+.featureIconWrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--color-white);
+}
+
+.featureTitle {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 15px;
+}
+
+.featureDesc {
+  color: var(--color-gray-600);
+  line-height: 1.7;
+  font-size: 1rem;
+}
