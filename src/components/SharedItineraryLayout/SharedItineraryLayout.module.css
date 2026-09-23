@@ -303,6 +303,7 @@
 
 .dayContent {
   flex: 1;
+  min-width: 0;
   background: var(--color-white);
   border-radius: 12px;
   padding: var(--space-lg);
@@ -328,6 +329,8 @@
   font-size: var(--fs-sm);
   color: var(--color-gray-600);
   line-height: 1.7;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 
