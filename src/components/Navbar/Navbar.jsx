@@ -45,7 +45,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className={styles.logo}>
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="Tripbuzzinga Logo"
             width={200}
             height={50}
