@@ -31,7 +31,7 @@ export default function SharedDestinationLayout({ destination, basePath }) {
 
   const bannerBg = useMemo(() => {
     const img = destination?.images?.[0] || destination?.image;
-    if (img) return `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${img})`;
+    if (img) return `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${img}')`;
     return destination?.bannerGradient || "var(--gradient-hero)";
   }, [destination]);
 
@@ -129,7 +129,7 @@ export default function SharedDestinationLayout({ destination, basePath }) {
               className={styles.bannerTitle}
               ref={bannerTitleRef}
             >
-              {destination.name}
+              {destination.name || destination.label}
             </h1>
             <p
               className={styles.bannerTagline}
