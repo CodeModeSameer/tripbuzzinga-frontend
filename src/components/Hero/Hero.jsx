@@ -19,12 +19,15 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [DESTINATIONS.length]);
 
+  const fallbackBg = "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop";
+  const bgImage = hero?.backgroundImage || fallbackBg;
+
   return (
     <section className={styles.hero} id="home">
       {/* Background Image with Overlay */}
       <div className={styles.heroBg}>
         <Image
-          src={hero.backgroundImage}
+          src={bgImage}
           alt="Mountains Background"
           fill
           priority
@@ -41,7 +44,7 @@ export default function Hero() {
             Book Your{" "}
             <span className={styles.inlineImageWrapper}>
               <Image
-                src={hero.backgroundImage}
+                src={bgImage}
                 alt="Travel"
                 fill
                 className={styles.inlineImage}
