@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, useEffect } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
    INITIAL DATA — single source of truth for the entire site
@@ -42,22 +42,28 @@ const initialGalleryData = [];
 
 const SiteDataContext = createContext(null);
 
-// Custom hook to sync state with localStorage across tabs
-function useStickyState(defaultValue, key) {
-  const [value, setValue] = useState(defaultValue);
+/**
+ * Helper: read localStorage synchronously (safe for SSR — returns null on server).
+ */
+function readLocalStorage(key) {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(key);
+    return raw !== null ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
 
-  // Load from localStorage on mount
-  useEffect(() => {
-    const stickyValue = window.localStorage.getItem(key);
-    if (stickyValue !== null) {
-      try {
-        // eslint-disable-next-line
-        setValue(JSON.parse(stickyValue));
-      } catch (e) {
-        console.error(`Error parsing localStorage for ${key}`, e);
-      }
-    }
-  }, [key]);
+/**
+ * Custom hook that reads localStorage **synchronously on first render**
+ * so the very first paint already contains real data (no flash).
+ */
+function useStickyState(defaultValue, key) {
+  const [value, setValue] = useState(() => {
+    const stored = readLocalStorage(key);
+    return stored !== null ? stored : defaultValue;
+  });
 
   // Save to localStorage when state changes
   const setStickyValue = useCallback((newValue) => {
@@ -126,6 +132,12 @@ export function SiteDataProvider({ children }) {
   const [itineraries, setItineraries] = useStickyState(initialItinerariesData, 'tripbuzzinga_itineraries');
   const [gallery, setGallery] = useStickyState(initialGalleryData, 'tripbuzzinga_gallery');
 
+  // Track whether the Supabase fetch has completed
+  const [isReady, setIsReady] = useState(() => {
+    // If localStorage already has data, we can show immediately
+    return readLocalStorage('tripbuzzinga_hero') !== null;
+  });
+
   // Auto-migrate old `image` fields to `images` arrays on mount
   useEffect(() => {
     const needsMigration = (arr) => Array.isArray(arr) && arr.some(item => item.image && !item.images);
@@ -150,6 +162,7 @@ export function SiteDataProvider({ children }) {
     tripCategories, setTripCategories,
     itineraries, setItineraries,
     gallery, setGallery,
+    isReady,
   };
 
   // Fetch published data from Supabase on mount
@@ -161,7 +174,6 @@ export function SiteDataProvider({ children }) {
           const { data } = await res.json();
           if (data && Object.keys(data).length > 0) {
             // Overwrite local state with published data if it exists
-            // (In a more complex app we'd compare timestamps to keep local drafts)
             if (data.hero) setHero(data.hero);
             if (data.popularDestinations) setPopularDestinations(data.popularDestinations);
             if (data.flyer) setFlyer(data.flyer);
@@ -178,10 +190,10 @@ export function SiteDataProvider({ children }) {
         }
       } catch (err) {
         console.error('Error fetching published site data:', err);
+      } finally {
+        setIsReady(true);
       }
     }
-    // Only fetch if we are not the admin (simple heuristic: no local draft logic here, 
-    // we fetch it, but if they save, it overwrites local storage).
     fetchPublishedData();
   }, []);
 
