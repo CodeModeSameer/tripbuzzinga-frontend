@@ -32,7 +32,7 @@ export default function Blogs() {
               >
                 <div className={styles.regularImageWrapper}>
                   <Image 
-                    src={(blog.images?.[0] || blog.image)} 
+                    src={(blog.images?.[0] || blog.image || "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop")} 
                     alt={blog.title} 
                     fill 
                     className={styles.blogImage} 
@@ -56,7 +56,7 @@ export default function Blogs() {
               <Link href={`/blogs/${featuredBlog.id}`} className={styles.featuredCard}>
                 <div className={styles.featuredImageWrapper}>
                   <Image 
-                    src={(featuredBlog.images?.[0] || featuredBlog.image)} 
+                    src={(featuredBlog.images?.[0] || featuredBlog.image || "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop")} 
                     alt={featuredBlog.title} 
                     fill 
                     className={styles.blogImage} 
