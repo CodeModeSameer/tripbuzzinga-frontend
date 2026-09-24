@@ -110,19 +110,21 @@ function migrateArray(arr) {
 }
 
 export function SiteDataProvider({ children }) {
-  const [hero, setHero] = useStickyState(initialHeroData, 'tripbuzzinga_hero_v2');
-  const [popularDestinations, setPopularDestinations] = useStickyState(initialPopularData, 'tripbuzzinga_popular_v2');
-  const [flyer, setFlyer] = useStickyState(initialFlyerData, 'tripbuzzinga_flyers_list_v2');
-  const [exploreInternational, setExploreInternational] = useStickyState(initialExploreIntl, 'tripbuzzinga_exploreIntl_v2');
-  const [exploreDomestic, setExploreDomestic] = useStickyState(initialExploreDom, 'tripbuzzinga_exploreDom_v2');
-  const [reviews, setReviews] = useStickyState(initialReviewsData, 'tripbuzzinga_reviews_v2');
-  const [faq, setFaq] = useStickyState(initialFaqData, 'tripbuzzinga_faq_v2');
-  const [blogs, setBlogs] = useStickyState(initialBlogsData, 'tripbuzzinga_blogs_v2');
-  const [headerCategories, setHeaderCategories] = useStickyState(initialHeaderCategories, 'tripbuzzinga_headerCategories_v2');
-  const [tripCategories, setTripCategories] = useStickyState(initialTripCategories, 'tripbuzzinga_categories_v2');
+  const [hero, setHero] = useStickyState(initialHeroData, 'tripbuzzinga_hero');
+  const [popularDestinations, setPopularDestinations] = useStickyState(initialPopularData, 'tripbuzzinga_popular');
+  const [flyer, setFlyer] = useStickyState(initialFlyerData, 'tripbuzzinga_flyers_list');
+  const [exploreInternational, setExploreInternational] = useStickyState(initialExploreIntl, 'tripbuzzinga_exploreIntl');
+  const [exploreDomestic, setExploreDomestic] = useStickyState(initialExploreDom, 'tripbuzzinga_exploreDom');
+  const [reviews, setReviews] = useStickyState(initialReviewsData, 'tripbuzzinga_reviews');
+  const [faq, setFaq] = useStickyState(initialFaqData, 'tripbuzzinga_faq');
+  const [blogs, setBlogs] = useStickyState(initialBlogsData, 'tripbuzzinga_blogs');
+  const [headerCategories, setHeaderCategories] = useStickyState(initialHeaderCategories, 'tripbuzzinga_headerCategories');
+  const [tripCategories, setTripCategories] = useStickyState(initialTripCategories, 'tripbuzzinga_categories');
 
-  const [itineraries, setItineraries] = useStickyState(initialItinerariesData, 'tripbuzzinga_itineraries_v2');
-  const [gallery, setGallery] = useStickyState(initialGalleryData, 'tripbuzzinga_gallery_v2');
+  // (Legacy migration removed as header categories are now independent)
+
+  const [itineraries, setItineraries] = useStickyState(initialItinerariesData, 'tripbuzzinga_itineraries');
+  const [gallery, setGallery] = useStickyState(initialGalleryData, 'tripbuzzinga_gallery');
 
   // Auto-migrate old `image` fields to `images` arrays on mount
   useEffect(() => {

@@ -8,8 +8,8 @@ import styles from "./Hero.module.css";
 
 export default function Hero() {
   const { hero } = useSiteData();
-  const DESTINATIONS = hero.destinations;
-  const REVIEWS = hero.reviews;
+  const DESTINATIONS = hero?.destinations || ["Bali", "Kashmir", "Vietnam", "Japan"];
+  const REVIEWS = hero?.reviews || [];
   const [destIndex, setDestIndex] = useState(0);
 
   useEffect(() => {
@@ -121,7 +121,7 @@ export default function Hero() {
 
       {/* Bottom Stats Section */}
       <div className={styles.statsSection}>
-        {hero.stats.map((stat, idx) => {
+        {(hero?.stats || []).map((stat, idx) => {
           const icons = [MessageSquare, Users, Map, Briefcase];
           const Icon = icons[idx] || Briefcase;
           return (
