@@ -19,9 +19,10 @@ export default function TripCategories() {
               <Link href={`/categories/${cat.slug}`} key={cat.id} className={styles.categoryItem}>
                   <div className={styles.imageWrapper}>
                     <Image 
-                      src={(cat.images?.[0] || cat.image)}
+                      src={(cat.images?.[0] || cat.image || "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop")}
                       alt={cat.label}
                       fill
+                      sizes="150px"
                       style={{ objectFit: "cover" }}
                     />
                   </div>
