@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, useEffect, useRef } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, useRef, useMemo } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
    INITIAL DATA — single source of truth for the entire site
@@ -149,17 +149,56 @@ export function SiteDataProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const attachItineraries = useCallback((dest) => {
+    if (!dest) return dest;
+    const destName = String(dest.city || dest.title || dest.label || dest.name || "").toLowerCase().trim();
+    const destSlug = String(dest.slug || "").toLowerCase().trim();
+    
+    const matched = (itineraries || []).filter(itin => {
+      const hasLocation = (itin.locations || []).some(loc => {
+        const l = loc.toLowerCase().trim();
+        return l === destName || l === destSlug;
+      });
+      const hasCategory = (itin.categories || []).some(cat => {
+        const c = cat.toLowerCase().trim();
+        return c === destName || c === destSlug || c === String(dest.label || "").toLowerCase().trim();
+      });
+      return hasLocation || hasCategory;
+    });
+    
+    const legacy = dest.itineraries || [];
+    const combined = [...matched];
+    legacy.forEach(leg => {
+      if (!combined.some(c => c.id === leg.id)) combined.push(leg);
+    });
+    
+    return { ...dest, itineraries: combined };
+  }, [itineraries]);
+
+  const attachToArray = useCallback((arr) => {
+    if (!Array.isArray(arr)) return arr;
+    return arr.map(dest => attachItineraries(dest));
+  }, [attachItineraries]);
+
   const value = {
     hero, setHero,
-    popularDestinations, setPopularDestinations,
+    popularDestinations: useMemo(() => attachToArray(popularDestinations), [popularDestinations, attachToArray]), 
+    rawPopularDestinations: popularDestinations,
+    setPopularDestinations,
     flyer, setFlyer,
-    exploreInternational, setExploreInternational,
-    exploreDomestic, setExploreDomestic,
+    exploreInternational: useMemo(() => attachToArray(exploreInternational), [exploreInternational, attachToArray]), 
+    rawExploreInternational: exploreInternational,
+    setExploreInternational,
+    exploreDomestic: useMemo(() => attachToArray(exploreDomestic), [exploreDomestic, attachToArray]), 
+    rawExploreDomestic: exploreDomestic,
+    setExploreDomestic,
     reviews, setReviews,
     faq, setFaq,
     blogs, setBlogs,
     headerCategories, setHeaderCategories,
-    tripCategories, setTripCategories,
+    tripCategories: useMemo(() => attachToArray(tripCategories), [tripCategories, attachToArray]), 
+    rawTripCategories: tripCategories,
+    setTripCategories,
     itineraries, setItineraries,
     gallery, setGallery,
     isReady,

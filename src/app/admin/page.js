@@ -58,12 +58,12 @@ export default function AdminDashboard() {
 
   const {
     hero, setHero,
-    popularDestinations: popular, setPopularDestinations: setPopular,
+    rawPopularDestinations: popular, setPopularDestinations: setPopular,
     flyer, setFlyer,
-    exploreInternational: exploreIntl, setExploreInternational: setExploreIntl,
-    exploreDomestic: exploreDom, setExploreDomestic: setExploreDom,
+    rawExploreInternational: exploreIntl, setExploreInternational: setExploreIntl,
+    rawExploreDomestic: exploreDom, setExploreDomestic: setExploreDom,
     headerCategories, setHeaderCategories,
-    tripCategories, setTripCategories,
+    rawTripCategories: tripCategories, setTripCategories,
     reviews, setReviews,
     faq, setFaq,
     blogs, setBlogs,
