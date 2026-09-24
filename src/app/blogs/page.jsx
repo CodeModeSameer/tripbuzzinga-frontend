@@ -51,7 +51,7 @@ export default function BlogsListing() {
               <Link href={`/blogs/${blog.id}`} key={blog.id} className={styles.card}>
                 <div className={styles.imageWrapper}>
                   <Image 
-                    src={blog.image} 
+                    src={(blog.images?.[0] || blog.image)} 
                     alt={blog.title} 
                     fill 
                     className={styles.image} 
