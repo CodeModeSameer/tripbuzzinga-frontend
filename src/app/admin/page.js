@@ -35,6 +35,16 @@ const FLAG_OPTIONS = [
   { name: "Other", flag: "🏳️" },
 ];
 
+const stripHtml = (html) => {
+  if (!html) return "";
+  let text = String(html)
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
+  return text.replace(/<[^>]*>?/gm, '').trim();
+};
+
 const ADMIN_USERNAME = "admin";
 const ADMIN_PASSWORD = "tripbuzzinga@2025";
 
@@ -365,7 +375,7 @@ export default function AdminDashboard() {
                 <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this banner?")) { setFlyer(flyer.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
               </div>
             </div>
-            <p className={styles.itemCardDesc}>{item.subtitle}</p>
+            <p className={styles.itemCardDesc}>{stripHtml(item.subtitle)}</p>
             {item.discountAmount && <span className={styles.tripTag}>{item.discountAmount}</span>}
           </div>
         ))}
@@ -427,10 +437,7 @@ export default function AdminDashboard() {
                   <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setList(list.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
                 </div>
               </div>
-              <div 
-                className={styles.itemCardDesc} 
-                dangerouslySetInnerHTML={{ __html: (dest.desc || '').replace(/&nbsp;/g, ' ') }} 
-              />
+              <p className={styles.itemCardDesc}>{stripHtml(dest.desc)}</p>
             </div>
           ))}
         </div>
@@ -486,10 +493,7 @@ export default function AdminDashboard() {
                   <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setHeaderCategories(headerCategories.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
                 </div>
               </div>
-              <div 
-                className={styles.itemCardDesc} 
-                dangerouslySetInnerHTML={{ __html: (cat.desc || '').replace(/&nbsp;/g, ' ') }} 
-              />
+              <p className={styles.itemCardDesc}>{stripHtml(cat.desc)}</p>
             </div>
           ))}
         </div>
@@ -600,7 +604,7 @@ export default function AdminDashboard() {
                 <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setReviews(reviews.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
               </div>
             </div>
-            <p className={styles.itemCardDesc}>{rev.text}</p>
+            <p className={styles.itemCardDesc}>{stripHtml(rev.text)}</p>
             <span className={styles.tripTag}>{rev.tripName}</span>
           </div>
         ))}
@@ -701,7 +705,7 @@ export default function AdminDashboard() {
                   <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setFaq(faq.filter(f => f.id !== item.id)); showSaved(); } }}><Trash2 size={14} /></button>
                 </div>
               </div>
-              <p className={styles.itemCardDesc}>{item.answer}</p>
+              <p className={styles.itemCardDesc}>{stripHtml(item.answer)}</p>
             </div>
           ))}
         </div>
@@ -802,7 +806,7 @@ export default function AdminDashboard() {
                   <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setGallery(gallery.filter(g => g.id !== item.id)); showSaved(); } }}><Trash2 size={14} /></button>
                 </div>
               </div>
-              <p className={styles.itemCardDesc}>{item.caption || "No caption"}</p>
+              <p className={styles.itemCardDesc}>{stripHtml(item.caption || "No caption")}</p>
             </div>
           ))}
         </div>
