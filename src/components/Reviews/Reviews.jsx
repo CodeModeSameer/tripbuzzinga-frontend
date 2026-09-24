@@ -106,19 +106,7 @@ export default function Reviews() {
                 </button>
               </div>
 
-              <div className={styles.cardFooter}>
-                <div className={styles.tripCard}>
-                  <div className={styles.tripImageWrapper}>
-                    <Image src={review.tripImage} alt="Trip" fill style={{ objectFit: 'cover' }} />
-                  </div>
-                  <div className={styles.tripDetails}>
-                    <p className={styles.tripName}>{review.tripName}</p>
-                    <button className={styles.tryBtn}>
-                      Try Yourself <ArrowRightIcon />
-                    </button>
-                  </div>
-                </div>
-              </div>
+
             </div>
           ))}
         </div>
