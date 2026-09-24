@@ -161,7 +161,6 @@ export function SiteDataProvider({ children }) {
           const { data } = await res.json();
           if (data && Object.keys(data).length > 0) {
             // Overwrite local state with published data if it exists
-            // (In a more complex app we'd compare timestamps to keep local drafts)
             if (data.hero) setHero(data.hero);
             if (data.popularDestinations) setPopularDestinations(data.popularDestinations);
             if (data.flyer) setFlyer(data.flyer);
@@ -174,6 +173,20 @@ export function SiteDataProvider({ children }) {
             if (data.tripCategories) setTripCategories(data.tripCategories);
             if (data.itineraries) setItineraries(data.itineraries);
             if (data.gallery) setGallery(data.gallery);
+          } else if (data && Object.keys(data).length === 0) {
+            // Supabase is explicitly empty, wipe local storage to match
+            setHero(initialHeroData);
+            setPopularDestinations([]);
+            setFlyer([]);
+            setExploreInternational([]);
+            setExploreDomestic([]);
+            setReviews([]);
+            setFaq([]);
+            setBlogs([]);
+            setHeaderCategories([]);
+            setTripCategories([]);
+            setItineraries([]);
+            setGallery([]);
           }
         }
       } catch (err) {
