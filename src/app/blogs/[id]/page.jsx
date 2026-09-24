@@ -77,7 +77,7 @@ export default function BlogPost({ params }) {
           <div className={styles.container}>
             <div className={styles.imageContainer}>
               <Image 
-                src={blog.image} 
+                src={(blog.images?.[0] || blog.image)} 
                 alt={blog.title} 
                 fill 
                 className={styles.image} 
@@ -91,11 +91,11 @@ export default function BlogPost({ params }) {
         {/* Article Content */}
         <div className={styles.container}>
           <article className={styles.article}>
-            {/* Split content by newlines to render simple paragraphs */}
             {blog.content ? (
-              blog.content.split('\n').map((paragraph, index) => (
-                paragraph.trim() ? <p key={index} className={styles.paragraph}>{paragraph}</p> : null
-              ))
+              <div 
+                className={styles.paragraph} 
+                dangerouslySetInnerHTML={{ __html: (blog.content || '').replace(/&nbsp;/g, ' ') }} 
+              />
             ) : (
               <p className={styles.paragraph}>No content provided for this blog post.</p>
             )}
