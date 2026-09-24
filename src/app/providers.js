@@ -1,15 +1,25 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { SiteDataProvider, useSiteData } from "@/context/SiteDataContext";
 
 /**
- * Gate: renders children only once data is ready.
- * Shows a minimal branded loader so the user never sees a flash of empty content.
+ * Gate: renders children only once data is ready AND component is mounted.
+ * This completely avoids hydration mismatches between server (empty data)
+ * and client (localStorage data).
  */
 function SiteDataGate({ children }) {
   const { isReady } = useSiteData();
+  const [mounted, setMounted] = useState(false);
 
-  if (!isReady) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // On the server, we render the spinner.
+  // On the very first client paint, we render the spinner (matching server).
+  // Immediately after, we render the real children if data is ready.
+  if (!mounted || !isReady) {
     return (
       <div
         style={{
