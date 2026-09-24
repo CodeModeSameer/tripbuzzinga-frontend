@@ -31,7 +31,6 @@ export default function Hero() {
           alt="Mountains Background"
           fill
           priority
-          sizes="100vw"
           style={{ objectFit: "cover", objectPosition: "center" }}
         />
         <div className={styles.overlay}></div>
@@ -48,7 +47,6 @@ export default function Hero() {
                 src={bgImage}
                 alt="Travel"
                 fill
-                sizes="120px"
                 className={styles.inlineImage}
               />
             </span>
