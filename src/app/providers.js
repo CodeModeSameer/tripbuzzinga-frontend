@@ -28,7 +28,7 @@ function SiteDataGate({ children }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0f172a",
+          background: "#ffffff",
           zIndex: 99999,
         }}
       >
@@ -37,7 +37,7 @@ function SiteDataGate({ children }) {
             style={{
               fontSize: "1.75rem",
               fontWeight: 800,
-              color: "#fbbf24",
+              color: "#0077B6",
               letterSpacing: "-0.5px",
               marginBottom: "16px",
             }}
@@ -48,8 +48,8 @@ function SiteDataGate({ children }) {
             style={{
               width: "40px",
               height: "40px",
-              border: "3px solid rgba(251,191,36,0.2)",
-              borderTopColor: "#fbbf24",
+              border: "3px solid rgba(0, 119, 182, 0.2)",
+              borderTopColor: "#9BC53D",
               borderRadius: "50%",
               animation: "spin 0.8s linear infinite",
               margin: "0 auto",
