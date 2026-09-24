@@ -113,7 +113,7 @@ body {
   font-size: var(--fs-base);
   line-height: 1.6;
   color: var(--color-gray-800);
-  background-color: #f9fafb;
+  background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
