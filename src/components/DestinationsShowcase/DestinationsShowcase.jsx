@@ -265,7 +265,7 @@ export default function DestinationsShowcase() {
                     effect="fade"
                     autoplay={{ delay: 2000, disableOnInteraction: false }}
                     pagination={{ clickable: true }}
-                    loop={true}
+                    loop={(dest.images || [dest.image]).filter(Boolean).length > 1}
                     className="destinationSwiper"
                     style={{ width: "100%", height: "100%" }}
                   >
