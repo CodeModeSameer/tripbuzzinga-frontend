@@ -2,13 +2,14 @@
 
 import { useSiteData } from "@/context/SiteDataContext";
 import SharedItineraryLayout from "@/components/SharedItineraryLayout/SharedItineraryLayout";
-
-import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function PopularItineraryPage({ slug, itineraryId }) {
-  const { popularDestinations } = useSiteData();
-  const destination = popularDestinations?.find(d => d.slug?.toLowerCase() === slug.toLowerCase());
+export default function DestinationItineraryPage({ slug, itineraryId }) {
+  const { exploreDomestic, exploreInternational } = useSiteData();
+  const allDestinations = [...(exploreDomestic || []), ...(exploreInternational || [])];
+  const destination = allDestinations.find(
+    (d) => d.slug?.toLowerCase() === slug.toLowerCase() || d.name?.toLowerCase() === slug.toLowerCase()
+  );
   const itinerary = destination?.itineraries?.find(i => String(i.id) === String(itineraryId));
 
   const [mounted, setMounted] = useState(false);
@@ -34,5 +35,5 @@ export default function PopularItineraryPage({ slug, itineraryId }) {
     );
   }
 
-  return <SharedItineraryLayout itinerary={itinerary} basePath={`/popular/${slug}`} />;
+  return <SharedItineraryLayout itinerary={itinerary} basePath={`/destinations/${slug}`} />;
 }

@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 export default function CategoryItineraryPage({ slug, itineraryId }) {
   const { headerCategories, tripCategories } = useSiteData();
   const allCategories = [...(headerCategories || []), ...(tripCategories || [])];
-  const category = allCategories.find(c => c.slug?.toLowerCase() === slug.toLowerCase());
-  const itinerary = category?.itineraries?.find(i => i.id === itineraryId);
+  const category = allCategories.find(c => c.slug?.toLowerCase() === slug.toLowerCase() || c.label?.toLowerCase().replace(/\s+/g, '-') === slug.toLowerCase());
+  const itinerary = category?.itineraries?.find(i => String(i.id) === String(itineraryId));
 
   const [mounted, setMounted] = useState(false);
 
