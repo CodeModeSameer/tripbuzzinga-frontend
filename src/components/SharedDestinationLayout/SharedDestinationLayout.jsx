@@ -190,7 +190,7 @@ export default function SharedDestinationLayout({ destination, basePath }) {
                       </div>
                     </div>
 
-                    <Link href={`${basePath}/${destination.slug}/${itin.id}`} className={styles.bookBtn}>View More</Link>
+                    <Link href={`${basePath}/${destination.slug || destination.name?.toLowerCase() || destination.label?.toLowerCase().replace(/\s+/g, '-')}/${itin.id}`} className={styles.bookBtn}>View More</Link>
                   </div>
 
                   {/* Image Carousel */}
