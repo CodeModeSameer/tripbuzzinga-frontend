@@ -11,7 +11,7 @@ export default function Blogs() {
   if (!blogs || blogs.length === 0) return null;
 
   const featuredBlog = blogs.find(blog => blog.isFeatured) || blogs[blogs.length - 1];
-  const regularBlogs = blogs.filter(blog => !blog.isFeatured);
+  const regularBlogs = blogs.filter(blog => blog.id !== featuredBlog?.id);
 
   return (
     <section className={styles.blogsSection}>
@@ -64,7 +64,7 @@ export default function Blogs() {
                   />
                   <div className={styles.imageOverlay}>
                     <h3 className={styles.overlayTitle}>
-                      <span className={styles.highlightText}>25 BEST PLACES TO VISIT IN INDIA</span> IN SEPTEMBER
+                      {featuredBlog.title}
                     </h3>
                   </div>
                 </div>
