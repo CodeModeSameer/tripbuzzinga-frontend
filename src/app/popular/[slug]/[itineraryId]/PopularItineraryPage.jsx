@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export default function PopularItineraryPage({ slug, itineraryId }) {
   const { popularDestinations } = useSiteData();
-  const destination = popularDestinations?.find(d => d.slug?.toLowerCase() === slug.toLowerCase());
+  const destination = popularDestinations?.find(d => d.slug?.toLowerCase() === slug.toLowerCase() || (d.city || d.name || '').toLowerCase().replace(/\s+/g, '-') === slug.toLowerCase());
   const itinerary = destination?.itineraries?.find(i => String(i.id) === String(itineraryId));
 
   const [mounted, setMounted] = useState(false);
