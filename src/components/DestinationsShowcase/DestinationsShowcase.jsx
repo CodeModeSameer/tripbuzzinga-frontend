@@ -272,7 +272,7 @@ export default function DestinationsShowcase() {
                     {(dest.images || [dest.image]).filter(Boolean).map((imgUrl, idx) => (
                       <SwiperSlide key={idx} style={{ width: "100%", height: "100%", position: "relative" }}>
                         <Image 
-                          src={imgUrl}
+                          src={imgUrl.trim()}
                           alt={dest.name}
                           fill
                           style={{ objectFit: "cover" }}
