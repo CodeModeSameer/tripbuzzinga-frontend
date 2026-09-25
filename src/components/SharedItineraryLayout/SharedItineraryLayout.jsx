@@ -150,7 +150,7 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
             <div className={styles.overviewGrid}>
               <div className={styles.overviewText}>
                 <h2 className={styles.sectionTitle}>Overview</h2>
-                <div className={styles.overviewDesc} dangerouslySetInnerHTML={{ __html: (itinerary.overview || itinerary.description || '').replace(/&nbsp;/g, ' ') }} />
+                <div className={styles.overviewDesc} dangerouslySetInnerHTML={{ __html: (itinerary.overview || itinerary.description || '') }} />
               </div>
               <div className={styles.overviewQuickInfo}>
                 <QuickInfoItem icon={Calendar} label="Duration" value={itinerary.days} />
@@ -179,7 +179,7 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
                   <div className={styles.dayBadge}>Day {dp.day}</div>
                   <div className={styles.dayContent}>
                     <h3 className={styles.dayTitle}>{dp.title}</h3>
-                    <div className={styles.dayDesc} dangerouslySetInnerHTML={{ __html: (dp.desc || dp.description || '').replace(/&nbsp;/g, ' ') }} />
+                    <div className={styles.dayDesc} dangerouslySetInnerHTML={{ __html: (dp.desc || dp.description || '') }} />
                   </div>
                 </div>
               ))}

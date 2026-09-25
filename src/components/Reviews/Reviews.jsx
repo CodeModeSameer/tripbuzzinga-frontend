@@ -96,7 +96,7 @@ export default function Reviews() {
               <div className={styles.cardBody}>
                 <div 
                   className={`${styles.reviewText} ${!expandedReviews[review.id] ? styles.reviewTextCollapsed : ""}`}
-                  dangerouslySetInnerHTML={{ __html: (review.text || '').replace(/&nbsp;/g, ' ') }}
+                  dangerouslySetInnerHTML={{ __html: (review.text || '') }}
                 />
                 <button 
                   className={styles.readMoreBtn} 

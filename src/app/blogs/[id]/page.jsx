@@ -94,7 +94,7 @@ export default function BlogPost({ params }) {
             {blog.content ? (
               <div 
                 className={styles.paragraph} 
-                dangerouslySetInnerHTML={{ __html: (blog.content || '').replace(/&nbsp;/g, ' ') }} 
+                dangerouslySetInnerHTML={{ __html: (blog.content || '') }} 
               />
             ) : (
               <p className={styles.paragraph}>No content provided for this blog post.</p>

@@ -114,7 +114,7 @@ export default function Hero() {
                       <Star fill="#f59e0b" color="#f59e0b" size={14} />
                     </div>
                   </div>
-                  <div className={styles.reviewText} dangerouslySetInnerHTML={{ __html: (review.text || '').replace(/&nbsp;/g, ' ') }} />
+                  <div className={styles.reviewText} dangerouslySetInnerHTML={{ __html: (review.text || '') }} />
                 </div>
               ))}
             </div>

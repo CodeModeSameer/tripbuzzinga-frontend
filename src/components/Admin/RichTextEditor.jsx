@@ -16,6 +16,7 @@ export default function RichTextEditor({ value, onChange, placeholder = "Write s
       toolbar: [
         [{ header: [2, 3, false] }],
         ["bold", "italic", "underline", "strike"],
+        [{ color: [] }, { background: [] }],
         [{ list: "ordered" }, { list: "bullet" }],
         ["link", "clean"],
       ],

@@ -293,7 +293,7 @@ export default function DestinationsShowcase() {
                 <h3 className={styles.destName}>{dest.name}</h3>
                 <div 
                   className={styles.destDesc} 
-                  dangerouslySetInnerHTML={{ __html: (dest.desc || '').replace(/&nbsp;/g, ' ') }} 
+                  dangerouslySetInnerHTML={{ __html: (dest.desc || '') }} 
                 />
                 <Link href={`/destinations/${dest.slug || dest.name.toLowerCase()}`} className={styles.exploreLink}>
                   Explore {dest.name}
