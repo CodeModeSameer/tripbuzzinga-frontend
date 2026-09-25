@@ -236,29 +236,32 @@
   box-shadow: 0 6px 20px rgba(0, 119, 182, 0.4);
 }
 
-/* ---- Image Placeholder ---- */
+/* ---- Image Carousel ---- */
 .itinImageWrap {
   flex: 1;
   max-width: 320px;
+  height: 400px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .itinImage {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: 12px;
+  height: 100%;
   object-fit: cover;
   display: block;
-  box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.12),
-    0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.itinImage:hover {
-  transform: scale(1.03) rotate(1deg);
+.itinImageWrap:hover {
+  transform: scale(1.03);
   box-shadow:
     0 16px 48px rgba(0, 0, 0, 0.15),
     0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .itinImageIcon {
@@ -293,9 +296,7 @@
     display: block;
     max-width: 100%;
     width: 100%;
-  }
-
-  .itinImage {
+    height: auto;
     aspect-ratio: 16 / 9;
   }
 

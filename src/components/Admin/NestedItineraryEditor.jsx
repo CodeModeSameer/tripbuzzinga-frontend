@@ -79,7 +79,17 @@ export default function NestedItineraryEditor({ itineraries, onChange }) {
                 </div>
                 <div className={styles.fieldRow}>
                   <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Budget</label><input className={styles.textInput} value={itin.budget} onChange={(e) => updateItin(idx, "budget", e.target.value)} /></div>
-                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Image Gradient</label><input className={styles.textInput} value={itin.imageGradient || ""} onChange={(e) => updateItin(idx, "imageGradient", e.target.value)} /></div>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Pick-up Location</label><input className={styles.textInput} value={itin.pickup || ""} onChange={(e) => updateItin(idx, "pickup", e.target.value)} placeholder="e.g. Airport, Hotel" /></div>
+                </div>
+                <div className={styles.fieldRow}>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Transfers</label><input className={styles.textInput} value={itin.transfers || ""} onChange={(e) => updateItin(idx, "transfers", e.target.value)} placeholder="e.g. Included, Not Included" /></div>
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.fieldLabel}>Rating (1-5)</label>
+                    <input className={styles.textInput} type="number" min="1" max="5" value={itin.rating || 5} onChange={(e) => updateItin(idx, "rating", Math.min(5, Math.max(1, parseInt(e.target.value) || 5)))} />
+                  </div>
+                </div>
+                <div className={styles.fieldRow}>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Image Gradient (fallback)</label><input className={styles.textInput} value={itin.imageGradient || ""} onChange={(e) => updateItin(idx, "imageGradient", e.target.value)} placeholder="linear-gradient(135deg, #48CAE4, #0077B6)" /></div>
                 </div>
 
                 <div className={styles.fieldGroup}>

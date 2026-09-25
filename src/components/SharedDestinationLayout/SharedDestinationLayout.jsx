@@ -195,27 +195,41 @@ export default function SharedDestinationLayout({ destination, basePath }) {
 
                   {/* Image Carousel */}
                   <div className={styles.itinImageWrap}>
-                    <Swiper
-                      modules={[Autoplay, EffectFade, Pagination]}
-                      effect="fade"
-                      autoplay={{ delay: 2000, disableOnInteraction: false }}
-                      pagination={{ clickable: true }}
-                      loop={images.length > 1}
-                      className="itinCardSwiper"
-                      style={{ width: "100%", height: "100%" }}
-                    >
-                      {images.map((imgUrl, idx) => (
-                        <SwiperSlide key={idx} style={{ width: "100%", height: "100%" }}>
-                          <Image
-                            src={imgUrl}
-                            alt={itin.title || "Itinerary image"}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            className={styles.itinImage}
-                          />
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
+                    {images.length > 0 ? (
+                      <Swiper
+                        modules={[Autoplay, EffectFade, Pagination]}
+                        effect="fade"
+                        autoplay={{ delay: 2000, disableOnInteraction: false }}
+                        pagination={{ clickable: true }}
+                        loop={images.length > 1}
+                        className="itinCardSwiper"
+                        style={{ width: "100%", height: "100%" }}
+                      >
+                        {images.map((imgUrl, idx) => (
+                          <SwiperSlide key={idx} style={{ width: "100%", height: "100%" }}>
+                            <Image
+                              src={imgUrl}
+                              alt={itin.title || "Itinerary image"}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 320px"
+                              className={styles.itinImage}
+                            />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                    ) : (
+                      <div style={{
+                        width: "100%", height: "100%",
+                        background: itin.imageGradient || "linear-gradient(135deg, #48CAE4 0%, #0077B6 100%)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        flexDirection: "column", gap: "8px"
+                      }}>
+                        <Calendar size={40} color="rgba(255,255,255,0.5)" />
+                        <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.85rem", fontWeight: 500 }}>
+                          {itin.days || "Trip"}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
