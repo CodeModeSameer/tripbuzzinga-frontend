@@ -58,12 +58,12 @@ export default function AdminDashboard() {
 
   const {
     hero, setHero,
-    rawPopularDestinations: popular, setPopularDestinations: setPopular,
+    popularDestinations: popular, setPopularDestinations: setPopular,
     flyer, setFlyer,
-    rawExploreInternational: exploreIntl, setExploreInternational: setExploreIntl,
-    rawExploreDomestic: exploreDom, setExploreDomestic: setExploreDom,
+    exploreInternational: exploreIntl, setExploreInternational: setExploreIntl,
+    exploreDomestic: exploreDom, setExploreDomestic: setExploreDom,
     headerCategories, setHeaderCategories,
-    rawTripCategories: tripCategories, setTripCategories,
+    tripCategories, setTripCategories,
     reviews, setReviews,
     faq, setFaq,
     blogs, setBlogs,
@@ -409,8 +409,11 @@ export default function AdminDashboard() {
             data: {
               id: Date.now(),
               name: "",
+              slug: "",
+              tagline: "",
               desc: "",
-              images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"]
+              images: ["https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"],
+              itineraries: []
             }
           });
         }}><Plus size={16} /> Add Destination</button>
@@ -1063,6 +1066,24 @@ export default function AdminDashboard() {
     const saveEdit = () => {
       const cleanData = { ...data };
 
+      // Auto-generate slug for explore destinations from name if not set
+      if (section === "explore" && !cleanData.slug && cleanData.name) {
+        cleanData.slug = cleanData.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      }
+
+      // Auto-generate slug for categories from label if not set
+      if ((section === "header-categories" || section === "trip-categories") && !cleanData.slug && cleanData.label) {
+        cleanData.slug = cleanData.label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      }
+
+      // Clean temporary editing fields from nested itineraries
+      if (Array.isArray(cleanData.itineraries)) {
+        cleanData.itineraries = cleanData.itineraries.map(itin => {
+          const { _imagesText, _inclusionsText, _exclusionsText, ...cleanItin } = itin;
+          return cleanItin;
+        });
+      }
+
       if (section === "popular") {
         const updated = [...popular];
         if (editingItem.isNew) updated.unshift(cleanData);
@@ -1279,9 +1300,10 @@ export default function AdminDashboard() {
             {section === "explore" && (
               <>
                 <div className={styles.fieldRow}>
-                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Name</label><input className={styles.textInput} value={data.name} onChange={(e) => updateField("name", e.target.value)} /></div>
-                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Tagline</label><input className={styles.textInput} value={data.tagline || ""} onChange={(e) => updateField("tagline", e.target.value)} /></div>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Name</label><input className={styles.textInput} value={data.name} onChange={(e) => { updateField("name", e.target.value); if (!data.slug || data.slug === data.name?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')) { updateField("slug", e.target.value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')); } }} /></div>
+                  <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Slug (URL)</label><input className={styles.textInput} value={data.slug || ""} onChange={(e) => updateField("slug", e.target.value)} /></div>
                 </div>
+                <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Tagline</label><input className={styles.textInput} value={data.tagline || ""} onChange={(e) => updateField("tagline", e.target.value)} /></div>
                 <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Description</label><RichTextEditor value={data.desc} onChange={(val) => updateField("desc", val)} /></div>
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel}>Images</label>

@@ -7,7 +7,7 @@ export default function CategoryPage({ slug }) {
   const { headerCategories, tripCategories } = useSiteData();
   const allCategories = [...(headerCategories || []), ...(tripCategories || [])];
   const category = allCategories.find(
-    (c) => c.slug?.toLowerCase() === slug?.toLowerCase()
+    (c) => c.slug?.toLowerCase() === slug?.toLowerCase() || c.label?.toLowerCase().replace(/\s+/g, '-') === slug?.toLowerCase()
   );
 
   return <SharedDestinationLayout destination={category} basePath="/categories" />;
