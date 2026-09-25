@@ -1148,7 +1148,7 @@ export default function AdminDashboard() {
     };
 
     return (
-      <div className={styles.modalOverlay} onClick={() => setEditingItem(null)}>
+      <div className={styles.modalOverlay}>
         <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
           <div className={styles.modalHeader}>
             <h3>Edit {section === "popular" ? "Destination" : section === "explore" ? "Destination" : section === "reviews" ? "Review" : section === "blogs" ? "Blog" : section === "itineraries" ? "Itinerary" : section === "gallery" ? "Photo" : section === "flyer" ? "Banner" : "FAQ"}</h3>
