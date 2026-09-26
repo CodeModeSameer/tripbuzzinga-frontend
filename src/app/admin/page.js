@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import AdminSidebar from "@/components/AdminSidebar/AdminSidebar";
 import NestedItineraryEditor from "@/components/Admin/NestedItineraryEditor";
 import RichTextEditor from "@/components/Admin/RichTextEditor";
@@ -8,7 +8,7 @@ import { useSiteData } from "@/context/SiteDataContext";
 import {
   Plus, Trash2, Save, Edit3, X, GripVertical,
   Image as ImageIcon, Upload, ChevronDown, ChevronUp,
-  Lock, Eye, EyeOff
+  Lock, Eye, EyeOff, Rocket, Loader2
 } from "lucide-react";
 import styles from "./admin.module.css";
 
@@ -69,8 +69,15 @@ export default function AdminDashboard() {
     blogs, setBlogs,
     itineraries, setItineraries,
     gallery, setGallery,
+    loadAdminData,
+    saveItemToDb,
+    deleteItemFromDb,
     publishSiteData,
   } = useSiteData();
+
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [adminLoaded, setAdminLoaded] = useState(false);
 
   const [activeSection, setActiveSection] = useState("hero");
   const [exploreTab, setExploreTab] = useState("international");
@@ -102,7 +109,6 @@ export default function AdminDashboard() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (loginUsername === ADMIN_USERNAME && loginPassword === ADMIN_PASSWORD) {
-      window.localStorage.setItem("tripbuzzinga_admin_mode", "true");
       setIsAuthenticated(true);
       setLoginError("");
     } else {
@@ -111,13 +117,61 @@ export default function AdminDashboard() {
   };
 
   const handleLogout = () => {
-    window.localStorage.removeItem("tripbuzzinga_admin_mode");
     setIsAuthenticated(false);
   };
 
-  const showSaved = () => {
-    setSavedMsg("Changes saved successfully!");
-    setTimeout(() => setSavedMsg(""), 2500);
+  const showSaved = (msg) => {
+    setSavedMsg(msg || "✅ Saved to database!");
+    setTimeout(() => setSavedMsg(""), 3000);
+  };
+
+  // ─── LOAD ADMIN DATA FROM INDIVIDUAL TABLES ON MOUNT ───
+  useEffect(() => {
+    if (isAuthenticated && !adminLoaded) {
+      loadAdminData().then(() => setAdminLoaded(true));
+    }
+  }, [isAuthenticated, adminLoaded, loadAdminData]);
+
+  // ─── PUBLISH ALL DATA TO LIVE SITE ───
+  const handlePublish = async () => {
+    if (isPublishing) return;
+    if (!window.confirm("Publish all saved data to the live website?")) return;
+    setIsPublishing(true);
+    const success = await publishSiteData();
+    setIsPublishing(false);
+    if (success) {
+      showSaved("🚀 Published to live site!");
+    } else {
+      showSaved("❌ Publish failed. Please try again.");
+    }
+  };
+
+  // ─── SAVE HERO TO DB ───
+  const saveHeroToDb = async () => {
+    setIsSaving(true);
+    const result = await saveItemToDb('hero', hero);
+    setIsSaving(false);
+    if (result.success) showSaved("✅ Hero saved to database!");
+    else showSaved("❌ Failed to save hero.");
+  };
+
+  // ─── DELETE WITH DB SYNC ───
+  const handleDelete = async (section, id, listSetter, currentList, tab) => {
+    if (!window.confirm("Are you sure you want to delete this?")) return;
+    
+    // Determine the table for the API
+    let table = section;
+    if (section === 'explore') table = 'explore';
+    
+    // Delete from Supabase
+    if (id && typeof id === 'string' && id.length > 10) {
+      // UUID-style ID - delete from DB
+      await deleteItemFromDb(table, id);
+    }
+    
+    // Update local state
+    listSetter(currentList.filter(item => item.id !== id));
+    showSaved("🗑️ Deleted from database!");
   };
 
   // ─── LOGIN GATE ───
@@ -265,6 +319,11 @@ export default function AdminDashboard() {
           </div>
         ))}
       </div>
+
+      <button className={styles.addBtn} onClick={saveHeroToDb} disabled={isSaving} style={{ marginTop: '20px' }}>
+        {isSaving ? <Loader2 size={16} className="spin" /> : <Save size={16} />}
+        {isSaving ? 'Saving...' : 'Save Hero to Database'}
+      </button>
     </div>
   );
 
@@ -1065,7 +1124,8 @@ export default function AdminDashboard() {
       setEditingItem({ ...editingItem, data: { ...data, [field]: value } });
     };
 
-    const saveEdit = () => {
+    const saveEdit = async () => {
+      setIsSaving(true);
       const cleanData = { ...data };
 
       // Auto-generate slug for explore destinations from name if not set
@@ -1086,6 +1146,26 @@ export default function AdminDashboard() {
         });
       }
 
+      // For explore destinations, add the dest_type so the API knows which type
+      if (section === "explore") {
+        cleanData._destType = editingItem.tab === "international" ? "international" : "domestic";
+      }
+
+      // ─── SAVE TO SUPABASE FIRST ───
+      const result = await saveItemToDb(section, cleanData, editingItem.isNew);
+      setIsSaving(false);
+      
+      if (!result.success) {
+        showSaved("❌ Failed to save: " + (result.error || "Unknown error"));
+        return;
+      }
+
+      // Use the DB-generated id for new items
+      if (editingItem.isNew && result.id) {
+        cleanData.id = result.id;
+      }
+
+      // ─── UPDATE LOCAL STATE ───
       if (section === "popular") {
         const updated = [...popular];
         if (editingItem.isNew) updated.unshift(cleanData);
@@ -1146,7 +1226,7 @@ export default function AdminDashboard() {
       }
       setEditingItem(null);
       setEditingItinIdx(null);
-      showSaved();
+      showSaved("✅ Saved to database!");
     };
 
     return (
@@ -1651,7 +1731,7 @@ export default function AdminDashboard() {
           </div>
           <div className={styles.modalFooter}>
             <button className={styles.cancelBtn} onClick={() => setEditingItem(null)}>Cancel</button>
-            <button className={styles.saveBtn} onClick={saveEdit}><Save size={16} /> Save</button>
+            <button className={styles.saveBtn} onClick={saveEdit} disabled={isSaving}>{isSaving ? <Loader2 size={16} className="spin" /> : <Save size={16} />} {isSaving ? 'Saving...' : 'Save'}</button>
           </div>
         </div>
       </div>
@@ -1680,7 +1760,12 @@ export default function AdminDashboard() {
     <div className={styles.adminLayout}>
       <AdminSidebar activeSection={activeSection} onSectionChange={setActiveSection} />
       <main className={styles.mainContent}>
-        
+        <div className={styles.topBar}>
+          <button className={styles.publishBtn} onClick={handlePublish} disabled={isPublishing}>
+            {isPublishing ? <Loader2 size={18} className="spin" /> : <Rocket size={18} />}
+            {isPublishing ? 'Publishing...' : 'Publish to Live Site'}
+          </button>
+        </div>
 
         {savedMsg && <div className={styles.toast}>{savedMsg}</div>}
         {renderSection()}

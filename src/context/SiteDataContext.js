@@ -12,6 +12,7 @@ const initialHeroData = {
   subheading: "",
   stats: [],
   reviews: [],
+  destinations: [],
 };
 
 const initialPopularData = [];
@@ -37,135 +38,29 @@ const initialItinerariesData = [];
 const initialGalleryData = [];
 
 /* ═══════════════════════════════════════════════════════════════
-   CONTEXT WITH LOCALSTORAGE SYNC
+   CONTEXT
    ═══════════════════════════════════════════════════════════════ */
 
 const SiteDataContext = createContext(null);
 
-/**
- * Helper: read localStorage synchronously (safe for SSR — returns null on server).
- */
-function readLocalStorage(key) {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw = window.localStorage.getItem(key);
-    return raw !== null ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * Custom hook that reads localStorage **synchronously on first render**
- * so the very first paint already contains real data (no flash).
- */
-function useStickyState(defaultValue, key) {
-  const [value, setValue] = useState(() => {
-    const stored = readLocalStorage(key);
-    return stored !== null ? stored : defaultValue;
-  });
-
-  // Save to localStorage when state changes
-  const setStickyValue = useCallback((newValue) => {
-    setValue((prev) => {
-      const finalValue = typeof newValue === 'function' ? newValue(prev) : newValue;
-      window.localStorage.setItem(key, JSON.stringify(finalValue));
-      return finalValue;
-    });
-  }, [key]);
-
-  // Listen for changes from OTHER tabs via the 'storage' event
-  useEffect(() => {
-    const handleStorageChange = (e) => {
-      if (e.key === key && e.newValue) {
-        try {
-          setValue(JSON.parse(e.newValue));
-        } catch (error) {
-          console.error(`Error parsing localStorage for ${key}`, error);
-        }
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [key]);
-
-  return [value, setStickyValue];
-}
-
-// Migrate old `image` string fields to `images` arrays for backward compatibility
-function migrateImages(item) {
-  if (!item) return item;
-  const migrated = { ...item };
-  if (typeof migrated.image === 'string' && migrated.image && !migrated.images) {
-    migrated.images = [migrated.image];
-  }
-  // Also migrate nested itineraries inside explore destinations
-  if (Array.isArray(migrated.itineraries)) {
-    migrated.itineraries = migrated.itineraries.map(itin => migrateImages(itin));
-  }
-  return migrated;
-}
-
-function migrateArray(arr) {
-  if (!Array.isArray(arr)) return arr;
-  return arr.map(item => migrateImages(item));
-}
-
 export function SiteDataProvider({ children }) {
-  const [hero, setHero] = useStickyState(initialHeroData, 'tripbuzzinga_hero');
-  const [popularDestinations, setPopularDestinations] = useStickyState(initialPopularData, 'tripbuzzinga_popular');
-  const [flyer, setFlyer] = useStickyState(initialFlyerData, 'tripbuzzinga_flyers_list');
-  const [exploreInternational, setExploreInternational] = useStickyState(initialExploreIntl, 'tripbuzzinga_exploreIntl');
-  const [exploreDomestic, setExploreDomestic] = useStickyState(initialExploreDom, 'tripbuzzinga_exploreDom');
-  const [reviews, setReviews] = useStickyState(initialReviewsData, 'tripbuzzinga_reviews');
-  const [faq, setFaq] = useStickyState(initialFaqData, 'tripbuzzinga_faq');
-  const [blogs, setBlogs] = useStickyState(initialBlogsData, 'tripbuzzinga_blogs');
-  const [headerCategories, setHeaderCategories] = useStickyState(initialHeaderCategories, 'tripbuzzinga_headerCategories');
-  const [tripCategories, setTripCategories] = useStickyState(initialTripCategories, 'tripbuzzinga_categories');
+  const [hero, setHero] = useState(initialHeroData);
+  const [popularDestinations, setPopularDestinations] = useState(initialPopularData);
+  const [flyer, setFlyer] = useState(initialFlyerData);
+  const [exploreInternational, setExploreInternational] = useState(initialExploreIntl);
+  const [exploreDomestic, setExploreDomestic] = useState(initialExploreDom);
+  const [reviews, setReviews] = useState(initialReviewsData);
+  const [faq, setFaq] = useState(initialFaqData);
+  const [blogs, setBlogs] = useState(initialBlogsData);
+  const [headerCategories, setHeaderCategories] = useState(initialHeaderCategories);
+  const [tripCategories, setTripCategories] = useState(initialTripCategories);
+  const [itineraries, setItineraries] = useState(initialItinerariesData);
+  const [gallery, setGallery] = useState(initialGalleryData);
 
-  // (Legacy migration removed as header categories are now independent)
+  // Track whether data fetch has completed
+  const [isReady, setIsReady] = useState(false);
 
-  const [itineraries, setItineraries] = useStickyState(initialItinerariesData, 'tripbuzzinga_itineraries');
-  const [gallery, setGallery] = useStickyState(initialGalleryData, 'tripbuzzinga_gallery');
-
-  // Track whether the Supabase fetch has completed
-  const [isReady, setIsReady] = useState(() => {
-    // If localStorage already has data, we can show immediately
-    return readLocalStorage('tripbuzzinga_hero') !== null;
-  });
-
-  // Auto-migrate old `image` fields to `images` arrays on mount
-  useEffect(() => {
-    const needsMigration = (arr) => Array.isArray(arr) && arr.some(item => item.image && !item.images);
-    if (needsMigration(popularDestinations)) setPopularDestinations(migrateArray(popularDestinations));
-    if (needsMigration(exploreInternational)) setExploreInternational(migrateArray(exploreInternational));
-    if (needsMigration(exploreDomestic)) setExploreDomestic(migrateArray(exploreDomestic));
-    if (needsMigration(itineraries)) setItineraries(migrateArray(itineraries));
-    if (needsMigration(blogs)) setBlogs(migrateArray(blogs));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const value = {
-    hero, setHero,
-    popularDestinations, setPopularDestinations,
-    flyer, setFlyer,
-    exploreInternational, setExploreInternational,
-    exploreDomestic, setExploreDomestic,
-    reviews, setReviews,
-    faq, setFaq,
-    blogs, setBlogs,
-    headerCategories, setHeaderCategories,
-    tripCategories, setTripCategories,
-    itineraries, setItineraries,
-    gallery, setGallery,
-    isReady,
-  };
-
-  // Fetch published data from Supabase on mount
+  // ─── LIVE SITE: Fetch published data from site_data snapshot ───
   useEffect(() => {
     async function fetchPublishedData() {
       try {
@@ -173,16 +68,6 @@ export function SiteDataProvider({ children }) {
         if (res.ok) {
           const { data } = await res.json();
           if (data && Object.keys(data).length > 0) {
-            // Check if user is in admin mode (has unsaved drafts)
-            const isAdminMode = typeof window !== 'undefined' && window.localStorage.getItem("tripbuzzinga_admin_mode") === "true";
-            
-            if (isAdminMode) {
-              console.log("Admin mode active: preserving local drafts instead of overwriting with live data.");
-              setIsReady(true);
-              return;
-            }
-
-            // Overwrite local state with published data if it exists
             if (data.hero) setHero(data.hero);
             if (data.popularDestinations) setPopularDestinations(data.popularDestinations);
             if (data.flyer) setFlyer(data.flyer);
@@ -206,37 +91,108 @@ export function SiteDataProvider({ children }) {
     fetchPublishedData();
   }, []);
 
-  const publishSiteData = async () => {
+  // ─── ADMIN: Load all data from individual tables ───
+  const loadAdminData = useCallback(async () => {
     try {
-      const payload = {
-        hero,
-        popularDestinations,
-        flyer,
-        exploreInternational,
-        exploreDomestic,
-        reviews,
-        faq,
-        blogs,
-        headerCategories,
-        tripCategories,
-        itineraries,
-        gallery,
-      };
-      const res = await fetch('/api/site-data', {
+      const res = await fetch(`/api/admin/load?t=${Date.now()}`, { cache: 'no-store' });
+      if (!res.ok) throw new Error('Failed to load admin data');
+      const data = await res.json();
+      
+      if (data.hero) setHero(data.hero);
+      if (data.popularDestinations) setPopularDestinations(data.popularDestinations);
+      if (data.flyer) setFlyer(data.flyer);
+      if (data.exploreInternational) setExploreInternational(data.exploreInternational);
+      if (data.exploreDomestic) setExploreDomestic(data.exploreDomestic);
+      if (data.reviews) setReviews(data.reviews);
+      if (data.faq) setFaq(data.faq);
+      if (data.blogs) setBlogs(data.blogs);
+      if (data.headerCategories) setHeaderCategories(data.headerCategories);
+      if (data.tripCategories) setTripCategories(data.tripCategories);
+      if (data.itineraries) setItineraries(data.itineraries);
+      if (data.gallery) setGallery(data.gallery);
+      
+      return true;
+    } catch (err) {
+      console.error('Error loading admin data:', err);
+      return false;
+    }
+  }, []);
+
+  // ─── ADMIN: Save a single item to its individual table ───
+  const saveItemToDb = useCallback(async (table, data, isNew = false) => {
+    try {
+      const res = await fetch('/api/admin/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ table, data, isNew }),
       });
-      if (!res.ok) throw new Error('Failed to publish');
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Save failed');
+      }
+      const result = await res.json();
+      return result; // { success: true, id: "uuid" }
+    } catch (err) {
+      console.error('Save error:', err);
+      return { success: false, error: err.message };
+    }
+  }, []);
+
+  // ─── ADMIN: Delete an item from its individual table ───
+  const deleteItemFromDb = useCallback(async (table, id) => {
+    try {
+      const res = await fetch('/api/admin/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ table, id }),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Delete failed');
+      }
+      return { success: true };
+    } catch (err) {
+      console.error('Delete error:', err);
+      return { success: false, error: err.message };
+    }
+  }, []);
+
+  // ─── ADMIN: Publish all data to site_data snapshot ───
+  const publishSiteData = useCallback(async () => {
+    try {
+      const res = await fetch('/api/admin/publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Publish failed');
+      }
       return true;
     } catch (err) {
       console.error('Publish error:', err);
       return false;
     }
-  };
+  }, []);
 
   const contextValue = {
-    ...value,
+    hero, setHero,
+    popularDestinations, setPopularDestinations,
+    flyer, setFlyer,
+    exploreInternational, setExploreInternational,
+    exploreDomestic, setExploreDomestic,
+    reviews, setReviews,
+    faq, setFaq,
+    blogs, setBlogs,
+    headerCategories, setHeaderCategories,
+    tripCategories, setTripCategories,
+    itineraries, setItineraries,
+    gallery, setGallery,
+    isReady,
+    // Admin functions
+    loadAdminData,
+    saveItemToDb,
+    deleteItemFromDb,
     publishSiteData,
   };
 

@@ -91,27 +91,11 @@ export default function AdminSidebar({ activeSection, onSectionChange }) {
           <UploadCloud size={14} />
           <span>{isPublishing ? "Publishing..." : "Publish"}</span>
         </button>
-        <button 
-          className={styles.viewSiteBtn} 
-          style={{ background: '#f59e0b', color: '#fff', border: 'none' }}
-          onClick={() => {
-            if (window.confirm("WARNING: This will permanently delete any unpublished changes you've made in this browser and sync the data from the live website. Are you sure?")) {
-              window.localStorage.removeItem("tripbuzzinga_admin_mode");
-              window.location.reload();
-            }
-          }}
-        >
-          <Globe size={14} />
-          <span>Sync from Live</span>
-        </button>
-        <Link href="/" className={styles.viewSiteBtn} target="_blank">
+        <Link href="/" className={styles.viewSiteBtn}>
           <Globe size={14} />
           <span>View Site</span>
         </Link>
-        <button className={styles.logoutBtn} onClick={() => {
-          window.localStorage.removeItem("tripbuzzinga_admin_mode");
-          window.location.href = '/admin'; // Triggers logout via state reset on reload
-        }}>
+        <button className={styles.logoutBtn}>
           <LogOut size={16} />
           <span>Logout</span>
         </button>
