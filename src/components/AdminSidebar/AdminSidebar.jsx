@@ -34,25 +34,10 @@ const NAV_SECTIONS = [
 ];
 
 export default function AdminSidebar({ activeSection, onSectionChange }) {
-  const [isPublishing, setIsPublishing] = useState(false);
+
   const { publishSiteData } = useSiteData();
 
-  const handlePublish = async () => {
-    setIsPublishing(true);
-    try {
-      const success = await publishSiteData();
-      if (success) {
-        alert("Publish successful! Your changes are now live on the website.");
-      } else {
-        alert("Failed to publish. Please check your connection or try again.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("An error occurred while trying to publish.");
-    } finally {
-      setIsPublishing(false);
-    }
-  };
+
 
   return (
     <aside className={styles.sidebar}>
@@ -83,14 +68,7 @@ export default function AdminSidebar({ activeSection, onSectionChange }) {
       </nav>
 
       <div className={styles.footer}>
-        <button 
-          className={styles.publishBtn} 
-          onClick={handlePublish}
-          disabled={isPublishing}
-        >
-          <UploadCloud size={14} />
-          <span>{isPublishing ? "Publishing..." : "Publish"}</span>
-        </button>
+
         <Link href="/" className={styles.viewSiteBtn}>
           <Globe size={14} />
           <span>View Site</span>
