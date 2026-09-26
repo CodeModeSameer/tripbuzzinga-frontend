@@ -102,6 +102,7 @@ export default function AdminDashboard() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (loginUsername === ADMIN_USERNAME && loginPassword === ADMIN_PASSWORD) {
+      window.localStorage.setItem("tripbuzzinga_admin_mode", "true");
       setIsAuthenticated(true);
       setLoginError("");
     } else {
@@ -110,6 +111,7 @@ export default function AdminDashboard() {
   };
 
   const handleLogout = () => {
+    window.localStorage.removeItem("tripbuzzinga_admin_mode");
     setIsAuthenticated(false);
   };
 

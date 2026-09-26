@@ -173,6 +173,15 @@ export function SiteDataProvider({ children }) {
         if (res.ok) {
           const { data } = await res.json();
           if (data && Object.keys(data).length > 0) {
+            // Check if user is in admin mode (has unsaved drafts)
+            const isAdminMode = typeof window !== 'undefined' && window.localStorage.getItem("tripbuzzinga_admin_mode") === "true";
+            
+            if (isAdminMode) {
+              console.log("Admin mode active: preserving local drafts instead of overwriting with live data.");
+              setIsReady(true);
+              return;
+            }
+
             // Overwrite local state with published data if it exists
             if (data.hero) setHero(data.hero);
             if (data.popularDestinations) setPopularDestinations(data.popularDestinations);
