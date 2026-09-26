@@ -200,6 +200,9 @@
   font-size: var(--fs-base);
   color: var(--color-gray-600);
   line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .overviewQuickInfo {
@@ -329,6 +332,7 @@
   font-size: var(--fs-sm);
   color: var(--color-gray-600);
   line-height: 1.7;
+  white-space: pre-wrap;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }

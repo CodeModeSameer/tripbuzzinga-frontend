@@ -71,6 +71,7 @@ export default function AdminDashboard() {
     gallery, setGallery,
     loadAdminData,
     saveItemToDb,
+    saveOrderToDb,
     deleteItemFromDb,
     publishSiteData,
   } = useSiteData();
@@ -96,14 +97,24 @@ export default function AdminDashboard() {
   const dragItem = useRef(null);
   const dragOverItem = useRef(null);
 
-  const handleSort = (list, setListFn) => {
+  const handleSort = async (section, list, setListFn) => {
     let _list = [...list];
     const draggedItemContent = _list.splice(dragItem.current, 1)[0];
     _list.splice(dragOverItem.current, 0, draggedItemContent);
     dragItem.current = null;
     dragOverItem.current = null;
-    setListFn(_list);
-    showSaved();
+    
+    // Update local state with new sort_orders
+    const updatedList = _list.map((item, idx) => ({ ...item, sort_order: idx }));
+    setListFn(updatedList);
+    
+    // Save to DB
+    const itemsToSave = updatedList.map(item => ({ id: item.id, sort_order: item.sort_order })).filter(item => item.id);
+    if (itemsToSave.length > 0) {
+      await saveOrderToDb(section, itemsToSave);
+    }
+    
+    showSaved("✅ Order saved!");
   };
 
   const handleLogin = (e) => {
@@ -361,7 +372,7 @@ export default function AdminDashboard() {
             draggable
             onDragStart={() => { dragItem.current = i; }}
             onDragEnter={() => { dragOverItem.current = i; }}
-            onDragEnd={() => handleSort(popular, setPopular)}
+            onDragEnd={() => handleSort('popular', popular, setPopular)}
             onDragOver={(e) => e.preventDefault()}
             style={{ cursor: "grab" }}
           >
@@ -373,7 +384,7 @@ export default function AdminDashboard() {
               </div>
               <div className={styles.itemCardActions}>
                 <button className={styles.editBtn} onClick={() => setEditingItem({ section: "popular", index: i, data: { ...dest, highlights: [...dest.highlights] } })}><Edit3 size={14} /></button>
-                <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setPopular(popular.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
+                <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('popular', item.id, setPopular, popular); }}><Trash2 size={14} /></button>
               </div>
             </div>
             <div className={styles.itemCardMeta}>
@@ -421,7 +432,7 @@ export default function AdminDashboard() {
             draggable
             onDragStart={() => { dragItem.current = i; }}
             onDragEnter={() => { dragOverItem.current = i; }}
-            onDragEnd={() => handleSort(flyer, setFlyer)}
+            onDragEnd={() => handleSort('flyer', flyer, setFlyer)}
             onDragOver={(e) => e.preventDefault()}
             style={{ cursor: "grab" }}
           >
@@ -433,7 +444,7 @@ export default function AdminDashboard() {
               </div>
               <div className={styles.itemCardActions}>
                 <button className={styles.editBtn} onClick={() => setEditingItem({ section: "flyer", index: i, data: { ...item } })}><Edit3 size={14} /></button>
-                <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this banner?")) { setFlyer(flyer.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
+                <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('flyer', item.id, setFlyer, flyer); }}><Trash2 size={14} /></button>
               </div>
             </div>
             <p className={styles.itemCardDesc}>{stripHtml(item.subtitle)}</p>
@@ -487,7 +498,7 @@ export default function AdminDashboard() {
               draggable
               onDragStart={() => { dragItem.current = i; }}
               onDragEnter={() => { dragOverItem.current = i; }}
-              onDragEnd={() => handleSort(list, exploreTab === "international" ? setExploreIntl : setExploreDomestic)}
+              onDragEnd={() => handleSort('explore', list, exploreTab === "international" ? setExploreIntl : setExploreDom)}
               onDragOver={(e) => e.preventDefault()}
               style={{ cursor: "grab" }}
             >
@@ -498,7 +509,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "explore", tab, index: i, data: { ...dest } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setList(list.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('explore', item.id, exploreTab === "international" ? setExploreIntl : setExploreDom, list); }}><Trash2 size={14} /></button>
                 </div>
               </div>
               <p className={styles.itemCardDesc}>{stripHtml(dest.desc)}</p>
@@ -542,7 +553,7 @@ export default function AdminDashboard() {
               draggable
               onDragStart={() => { dragItem.current = i; }}
               onDragEnter={() => { dragOverItem.current = i; }}
-              onDragEnd={() => handleSort(headerCategories, setHeaderCategories)}
+              onDragEnd={() => handleSort('header-categories', headerCategories, setHeaderCategories)}
               onDragOver={(e) => e.preventDefault()}
               style={{ cursor: "grab" }}
             >
@@ -554,7 +565,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "header-categories", index: i, data: { ...cat } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setHeaderCategories(headerCategories.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('header-categories', item.id, setHeaderCategories, headerCategories); }}><Trash2 size={14} /></button>
                 </div>
               </div>
               <p className={styles.itemCardDesc}>{stripHtml(cat.desc)}</p>
@@ -597,7 +608,7 @@ export default function AdminDashboard() {
               draggable
               onDragStart={() => { dragItem.current = i; }}
               onDragEnter={() => { dragOverItem.current = i; }}
-              onDragEnd={() => handleSort(tripCategories, setTripCategories)}
+              onDragEnd={() => handleSort('trip-categories', tripCategories, setTripCategories)}
               onDragOver={(e) => e.preventDefault()}
               style={{ cursor: "grab" }}
             >
@@ -609,7 +620,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "trip-categories", index: i, data: { ...cat } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setTripCategories(tripCategories.filter((_, idx) => idx !== i)); } }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('trip-categories', item.id, setTripCategories, tripCategories); }}><Trash2 size={14} /></button>
                 </div>
               </div>
             </div>
@@ -653,7 +664,7 @@ export default function AdminDashboard() {
             draggable
             onDragStart={() => { dragItem.current = i; }}
             onDragEnter={() => { dragOverItem.current = i; }}
-            onDragEnd={() => handleSort(reviews, setReviews)}
+            onDragEnd={() => handleSort('reviews', reviews, setReviews)}
             onDragOver={(e) => e.preventDefault()}
             style={{ cursor: "grab" }}
           >
@@ -665,7 +676,7 @@ export default function AdminDashboard() {
               </div>
               <div className={styles.itemCardActions}>
                 <button className={styles.editBtn} onClick={() => setEditingItem({ section: "reviews", index: i, data: { ...rev } })}><Edit3 size={14} /></button>
-                <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setReviews(reviews.filter((_, idx) => idx !== i)); showSaved(); } }}><Trash2 size={14} /></button>
+                <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('reviews', item.id, setReviews, reviews); }}><Trash2 size={14} /></button>
               </div>
             </div>
             <p className={styles.itemCardDesc}>{stripHtml(rev.text)}</p>
@@ -738,7 +749,7 @@ export default function AdminDashboard() {
               onDragEnter={() => { dragOverItem.current = i; }}
               onDragEnd={() => {
                 if (faqTab === "All") {
-                  handleSort(faq, setFaq);
+                  handleSort('faq', faq, setFaq);
                 } else {
                   let _full = [...faq];
                   const draggedItem = filteredFaq[dragItem.current];
@@ -766,7 +777,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "faq", index: faq.findIndex(f => f.id === item.id), data: { ...item } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setFaq(faq.filter(f => f.id !== item.id)); showSaved(); } }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('faq', item.id, setFaq, faq); }}><Trash2 size={14} /></button>
                 </div>
               </div>
               <p className={styles.itemCardDesc}>{stripHtml(item.answer)}</p>
@@ -839,7 +850,7 @@ export default function AdminDashboard() {
               onDragEnter={() => { dragOverItem.current = i; }}
               onDragEnd={() => {
                 if (galleryTab === "All") {
-                  handleSort(gallery, setGallery);
+                  handleSort('gallery', gallery, setGallery);
                 } else {
                   let _full = [...gallery];
                   const draggedItem = filteredGallery[dragItem.current];
@@ -867,7 +878,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "gallery", index: gallery.findIndex(g => g.id === item.id), data: { ...item } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setGallery(gallery.filter(g => g.id !== item.id)); showSaved(); } }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('gallery', item.id, setGallery, gallery); }}><Trash2 size={14} /></button>
                 </div>
               </div>
               <p className={styles.itemCardDesc}>{stripHtml(item.caption || "No caption")}</p>
@@ -945,7 +956,7 @@ export default function AdminDashboard() {
               onDragEnter={() => { dragOverItem.current = i; }}
               onDragEnd={() => {
                 if (blogTab === "All") {
-                  handleSort(blogs, setBlogs);
+                  handleSort('blogs', blogs, setBlogs);
                 } else {
                   let _full = [...blogs];
                   const draggedItem = filteredBlogs[dragItem.current];
@@ -974,7 +985,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "blogs", index: blogs.findIndex(b => b.id === item.id), data: { ...item } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setBlogs(blogs.filter(b => b.id !== item.id)); showSaved(); } }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('blogs', item.id, setBlogs, blogs); }}><Trash2 size={14} /></button>
                 </div>
               </div>
               <p className={styles.itemCardDesc}>{item.category} · {item.publishedAt}</p>
@@ -1068,7 +1079,7 @@ export default function AdminDashboard() {
               onDragEnter={() => { dragOverItem.current = i; }}
               onDragEnd={() => {
                 if (itinTab === "All") {
-                  handleSort(itineraries, setItineraries);
+                  handleSort('itineraries', itineraries, setItineraries);
                 } else {
                   let _full = [...itineraries];
                   const draggedItem = filteredItineraries[dragItem.current];
@@ -1097,7 +1108,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "itineraries", index: itineraries.findIndex(it => it.id === item.id), data: { ...item, locations: [...(item.locations || [])], categories: [...(item.categories || [])] } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={() => { if(window.confirm("Are you sure you want to delete this?")) { setItineraries(itineraries.filter(it => it.id !== item.id)); showSaved(); } }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('itineraries', item.id, setItineraries, itineraries); }}><Trash2 size={14} /></button>
                 </div>
               </div>
               <div className={styles.itemCardMeta}>

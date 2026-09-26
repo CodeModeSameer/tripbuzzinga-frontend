@@ -138,6 +138,25 @@ export function SiteDataProvider({ children }) {
     }
   }, []);
 
+  // ─── ADMIN: Save sort order for multiple items ───
+  const saveOrderToDb = useCallback(async (table, items) => {
+    try {
+      const res = await fetch('/api/admin/save-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ table, items }),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Save order failed');
+      }
+      return { success: true };
+    } catch (err) {
+      console.error('Save order error:', err);
+      return { success: false, error: err.message };
+    }
+  }, []);
+
   // ─── ADMIN: Delete an item from its individual table ───
   const deleteItemFromDb = useCallback(async (table, id) => {
     try {
@@ -192,6 +211,7 @@ export function SiteDataProvider({ children }) {
     // Admin functions
     loadAdminData,
     saveItemToDb,
+    saveOrderToDb,
     deleteItemFromDb,
     publishSiteData,
   };
