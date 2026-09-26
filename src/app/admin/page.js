@@ -384,7 +384,7 @@ export default function AdminDashboard() {
               </div>
               <div className={styles.itemCardActions}>
                 <button className={styles.editBtn} onClick={() => setEditingItem({ section: "popular", index: i, data: { ...dest, highlights: [...dest.highlights] } })}><Edit3 size={14} /></button>
-                <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('popular', item.id, setPopular, popular); }}><Trash2 size={14} /></button>
+                <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('popular', dest.id, setPopular, popular); }}><Trash2 size={14} /></button>
               </div>
             </div>
             <div className={styles.itemCardMeta}>
@@ -509,7 +509,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "explore", tab, index: i, data: { ...dest } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('explore', item.id, exploreTab === "international" ? setExploreIntl : setExploreDom, list); }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('explore', dest.id, exploreTab === "international" ? setExploreIntl : setExploreDom, list); }}><Trash2 size={14} /></button>
                 </div>
               </div>
               <p className={styles.itemCardDesc}>{stripHtml(dest.desc)}</p>
@@ -565,7 +565,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "header-categories", index: i, data: { ...cat } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('header-categories', item.id, setHeaderCategories, headerCategories); }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('header-categories', cat.id, setHeaderCategories, headerCategories); }}><Trash2 size={14} /></button>
                 </div>
               </div>
               <p className={styles.itemCardDesc}>{stripHtml(cat.desc)}</p>
@@ -620,7 +620,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className={styles.itemCardActions}>
                   <button className={styles.editBtn} onClick={() => setEditingItem({ section: "trip-categories", index: i, data: { ...cat } })}><Edit3 size={14} /></button>
-                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('trip-categories', item.id, setTripCategories, tripCategories); }}><Trash2 size={14} /></button>
+                  <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('trip-categories', cat.id, setTripCategories, tripCategories); }}><Trash2 size={14} /></button>
                 </div>
               </div>
             </div>
@@ -676,7 +676,7 @@ export default function AdminDashboard() {
               </div>
               <div className={styles.itemCardActions}>
                 <button className={styles.editBtn} onClick={() => setEditingItem({ section: "reviews", index: i, data: { ...rev } })}><Edit3 size={14} /></button>
-                <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('reviews', item.id, setReviews, reviews); }}><Trash2 size={14} /></button>
+                <button className={styles.deleteBtn} onClick={(e) => { e.stopPropagation(); handleDelete('reviews', rev.id, setReviews, reviews); }}><Trash2 size={14} /></button>
               </div>
             </div>
             <p className={styles.itemCardDesc}>{stripHtml(rev.text)}</p>
