@@ -1771,13 +1771,6 @@ export default function AdminDashboard() {
     <div className={styles.adminLayout}>
       <AdminSidebar activeSection={activeSection} onSectionChange={setActiveSection} />
       <main className={styles.mainContent}>
-        <div className={styles.topBar}>
-          <button className={styles.publishBtn} onClick={handlePublish} disabled={isPublishing}>
-            {isPublishing ? <Loader2 size={18} className="spin" /> : <Rocket size={18} />}
-            {isPublishing ? 'Publishing...' : 'Publish to Live Site'}
-          </button>
-        </div>
-
         {savedMsg && <div className={styles.toast}>{savedMsg}</div>}
         {renderSection()}
         {renderEditModal()}
