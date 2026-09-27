@@ -154,6 +154,36 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
+/* ---- Rich Text Content Fixes ---- */
+/* Preserves paragraph spacing from the WYSIWYG editor on the live site */
+.richText p,
+[class*="Desc"] p,
+[class*="desc"] p,
+[class*="answer"] p,
+[class*="Text"] p,
+[class*="content"] p {
+  margin-bottom: 10px;
+}
+
+.richText p:last-child,
+[class*="Desc"] p:last-child,
+[class*="desc"] p:last-child,
+[class*="answer"] p:last-child,
+[class*="Text"] p:last-child,
+[class*="content"] p:last-child {
+  margin-bottom: 0;
+}
+
+/* Ensure empty paragraphs (line gaps) retain their height */
+.richText p:empty::before,
+[class*="Desc"] p:empty::before,
+[class*="desc"] p:empty::before,
+[class*="answer"] p:empty::before,
+[class*="Text"] p:empty::before,
+[class*="content"] p:empty::before {
+  content: "\\00a0";
+}
+
 /* ---- Container ---- */
 .container {
   width: 100%;
