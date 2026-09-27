@@ -133,6 +133,9 @@
 
 .paragraph {
   margin-bottom: 24px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 /* Responsive */
