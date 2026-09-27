@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import {
   ArrowLeft, Star, Calendar, MapPin, Car,
   Wallet, CheckCircle2, XCircle, Building2, FileText,
-  Clock, ImageIcon,
+  Clock, ImageIcon, ChevronDown, ChevronUp
 } from "lucide-react";
 import Image from "next/image";
 import styles from "./SharedItineraryLayout.module.css";
@@ -32,6 +32,42 @@ const QuickInfoItem = ({ icon: Icon, label, value }) => (
     </div>
   </div>
 );
+
+/* ── Expandable description for day-by-day ── */
+const ExpandableDesc = ({ htmlContent }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isTruncated, setIsTruncated] = useState(false);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      // Check if scrollHeight is strictly greater than clientHeight
+      setIsTruncated(contentRef.current.scrollHeight > contentRef.current.clientHeight);
+    }
+  }, [htmlContent]);
+
+  return (
+    <div className={styles.expandableWrapper}>
+      <div 
+        ref={contentRef}
+        className={`${styles.dayDesc} ${isExpanded ? styles.expanded : styles.collapsed}`} 
+        dangerouslySetInnerHTML={{ __html: htmlContent }} 
+      />
+      {isTruncated && (
+        <button 
+          className={styles.expandBtn} 
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          {isExpanded ? (
+            <>Show Less <ChevronUp size={14} /></>
+          ) : (
+            <>Read More <ChevronDown size={14} /></>
+          )}
+        </button>
+      )}
+    </div>
+  );
+};
 
 export default function SharedItineraryLayout({ itinerary, basePath }) {
   const titleRef = useRef(null);
@@ -179,7 +215,7 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
                   <div className={styles.dayBadge}>Day {dp.day}</div>
                   <div className={styles.dayContent}>
                     <h3 className={styles.dayTitle}>{dp.title}</h3>
-                    <div className={styles.dayDesc} dangerouslySetInnerHTML={{ __html: (dp.desc || dp.description || '') }} />
+                    <ExpandableDesc htmlContent={dp.desc || dp.description || ''} />
                   </div>
                 </div>
               ))}
