@@ -61,6 +61,8 @@ export async function POST() {
       price: d.price,
       highlights: d.highlights,
       type: d.type,
+      customRoute: d.custom_route,
+      linkUrl: d.link_url,
     });
 
     const convertReview = (r) => ({

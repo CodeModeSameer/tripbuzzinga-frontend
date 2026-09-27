@@ -68,6 +68,8 @@ export async function POST(request) {
           type: data.type || '',
           status: data.status || 'published',
           sort_order: data.sort_order ?? 0,
+          custom_route: data.customRoute || '',
+          link_url: data.linkUrl || '',
           updated_at: new Date().toISOString(),
         };
         break;
