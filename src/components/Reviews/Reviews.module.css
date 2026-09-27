@@ -140,6 +140,7 @@
   position: relative;
   z-index: 1;
   margin-bottom: 20px;
+  min-width: 0;
 }
 
 .reviewText {
@@ -147,6 +148,9 @@
   color: #4b5563;
   line-height: 1.6;
   margin: 0 0 8px 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .reviewTextCollapsed {
