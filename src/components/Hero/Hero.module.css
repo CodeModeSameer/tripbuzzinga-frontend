@@ -211,6 +211,9 @@
   padding: 24px;
   color: white;
   transition: transform 0.2s ease;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .reviewCard:hover {
@@ -230,6 +233,8 @@
   font-weight: 600;
   font-size: 1.1rem;
   color: white;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .stars {
@@ -241,6 +246,8 @@
   color: #d1d5db;
   font-size: 0.95rem;
   line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* BOTTOM STATS */
