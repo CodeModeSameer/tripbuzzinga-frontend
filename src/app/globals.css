@@ -181,7 +181,7 @@ h1, h2, h3, h4, h5, h6 {
 [class*="answer"] p:empty::before,
 [class*="Text"] p:empty::before,
 [class*="content"] p:empty::before {
-  content: "\\00a0";
+  content: "\00a0";
 }
 
 /* ---- Container ---- */
