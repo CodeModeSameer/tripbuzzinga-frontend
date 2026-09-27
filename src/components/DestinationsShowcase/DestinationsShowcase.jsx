@@ -295,7 +295,7 @@ export default function DestinationsShowcase() {
                   className={styles.destDesc} 
                   dangerouslySetInnerHTML={{ __html: (dest.desc || '') }} 
                 />
-                <Link href={`/destinations/${dest.slug || dest.name.toLowerCase()}`} className={styles.exploreLink}>
+                <Link href={dest.linkUrl ? dest.linkUrl : `/destinations/${dest.slug || dest.name.toLowerCase()}`} className={styles.exploreLink}>
                   Explore {dest.name}
                   <ArrowRight size={16} className={styles.exploreLinkArrow} />
                 </Link>
