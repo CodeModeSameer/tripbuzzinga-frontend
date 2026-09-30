@@ -184,15 +184,15 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
           {/* Overview Card */}
           <div className={styles.overviewCard} ref={overviewRef}>
             <div className={styles.overviewGrid}>
-              <div className={styles.overviewText}>
-                <h2 className={styles.sectionTitle}>Overview</h2>
-                <div className={styles.overviewDesc} dangerouslySetInnerHTML={{ __html: (itinerary.overview || itinerary.description || '') }} />
-              </div>
               <div className={styles.overviewQuickInfo}>
                 <QuickInfoItem icon={Calendar} label="Duration" value={itinerary.days} />
                 <QuickInfoItem icon={MapPin} label="Pick-up" value={itinerary.pickup} />
                 <QuickInfoItem icon={Car} label="Transfers" value={itinerary.transfers} />
                 <QuickInfoItem icon={Wallet} label="Budget" value={itinerary.budget} />
+              </div>
+              <div className={styles.overviewText}>
+                <h2 className={styles.sectionTitle}>Overview</h2>
+                <div className={styles.overviewDesc} dangerouslySetInnerHTML={{ __html: (itinerary.overview || itinerary.description || '') }} />
               </div>
             </div>
             {itinerary.budgetNote && (

@@ -191,9 +191,9 @@
 }
 
 .overviewGrid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
 }
 
 .overviewText {
@@ -211,7 +211,7 @@
 
 .overviewQuickInfo {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-md);
 }
 
@@ -649,7 +649,7 @@
   }
 
   .overviewGrid {
-    grid-template-columns: 1fr;
+    gap: var(--space-md);
   }
 
   .overviewQuickInfo {
