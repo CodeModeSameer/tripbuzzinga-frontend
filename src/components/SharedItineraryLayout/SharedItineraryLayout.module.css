@@ -209,6 +209,12 @@
   overflow-wrap: break-word;
 }
 
+.overviewDivider {
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: var(--space-md) 0;
+}
+
 .overviewQuickInfo {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -344,6 +350,13 @@
 .collapsed {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.collapsed4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

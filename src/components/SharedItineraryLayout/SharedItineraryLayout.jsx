@@ -34,7 +34,7 @@ const QuickInfoItem = ({ icon: Icon, label, value }) => (
 );
 
 /* ── Expandable description for day-by-day ── */
-const ExpandableDesc = ({ htmlContent }) => {
+const ExpandableDesc = ({ htmlContent, lines = 3, textClass = styles.dayDesc }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isTruncated, setIsTruncated] = useState(false);
   const contentRef = useRef(null);
@@ -46,11 +46,13 @@ const ExpandableDesc = ({ htmlContent }) => {
     }
   }, [htmlContent]);
 
+  const collapsedClass = lines === 4 ? styles.collapsed4 : styles.collapsed;
+
   return (
     <div className={styles.expandableWrapper}>
       <div 
         ref={contentRef}
-        className={`${styles.dayDesc} ${isExpanded ? styles.expanded : styles.collapsed}`} 
+        className={`${textClass} ${isExpanded ? styles.expanded : collapsedClass}`} 
         dangerouslySetInnerHTML={{ __html: htmlContent }} 
       />
       {isTruncated && (
@@ -190,9 +192,16 @@ export default function SharedItineraryLayout({ itinerary, basePath }) {
                 <QuickInfoItem icon={Car} label="Transfers" value={itinerary.transfers} />
                 <QuickInfoItem icon={Wallet} label="Budget" value={itinerary.budget} />
               </div>
+              
+              <hr className={styles.overviewDivider} />
+
               <div className={styles.overviewText}>
                 <h2 className={styles.sectionTitle}>Overview</h2>
-                <div className={styles.overviewDesc} dangerouslySetInnerHTML={{ __html: (itinerary.overview || itinerary.description || '') }} />
+                <ExpandableDesc 
+                  htmlContent={itinerary.overview || itinerary.description || ''} 
+                  lines={4} 
+                  textClass={styles.overviewDesc} 
+                />
               </div>
             </div>
             {itinerary.budgetNote && (
