@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ExternalLink, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./Reviews.module.css";
+import cleanHtml from "@/lib/cleanHtml";
 
 const GoogleIcon = () => (
   <svg width="18" height="18" viewBox="0 0 48 48" className={styles.googleIcon}>
@@ -96,7 +97,7 @@ export default function Reviews() {
               <div className={styles.cardBody}>
                 <div 
                   className={`${styles.reviewText} ${!expandedReviews[review.id] ? styles.reviewTextCollapsed : ""}`}
-                  dangerouslySetInnerHTML={{ __html: (review.text || '') }}
+                  dangerouslySetInnerHTML={{ __html: cleanHtml(review.text) }}
                 />
                 <button 
                   className={styles.readMoreBtn} 

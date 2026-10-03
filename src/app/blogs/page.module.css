@@ -159,3 +159,10 @@
   color: #6b7280;
   font-size: 1.1rem;
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .hero { padding: 36px 16px; }
+  .title { font-size: 1.75rem; }
+  .container { padding: 24px 16px 48px; }
+}

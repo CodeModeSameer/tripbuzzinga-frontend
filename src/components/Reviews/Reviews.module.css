@@ -257,3 +257,18 @@
     flex: 0 0 100%;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .container { padding: 0 var(--space-md); }
+  .header { margin-bottom: var(--space-xl); }
+  .subtitle { font-size: 0.7rem; letter-spacing: 2px; }
+  .title { font-size: 1.6rem; }
+  .cardsContainer { gap: 14px; margin-bottom: 20px; }
+  .reviewCard { flex: 0 0 86%; min-width: 0; padding: 18px; }
+  .cardHeader { margin-bottom: 12px; }
+  .reviewText { font-size: 0.85rem; white-space: normal; }
+  .cardBody { margin-bottom: 14px; }
+  .tripCard { padding: 10px; }
+  .tripImageWrapper { width: 64px; height: 42px; }
+}

@@ -248,12 +248,58 @@
     flex: none;
   }
 
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .items {
+    gap: var(--space-2xl);
+  }
+
+  .imageWrap:hover {
+    transform: none;
+  }
+
+  .imageContainer {
+    aspect-ratio: 16 / 11;
+  }
+
   .textContent {
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    flex: none;
+    padding: 0 var(--space-xs);
+    overflow: hidden;
+  }
+
+  .destName {
+    margin-bottom: var(--space-sm);
   }
 
   .destDesc {
     text-align: center;
+    line-height: 1.65;
+    font-size: var(--fs-sm);
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .exploreLink {
+    margin-top: var(--space-md);
+  }
+
+  .viewMoreContainer {
+    margin-top: var(--space-2xl);
+  }
+
+  .viewMoreBtn {
+    padding: 10px 26px;
+    font-size: 0.875rem;
   }
 
   .exploreLink {

@@ -17,6 +17,7 @@ import styles from "./SharedItineraryLayout.module.css";
 import Navbar from "@/components/Navbar/Navbar";
 import GlobalBottomSections from "@/components/GlobalBottomSections/GlobalBottomSections";
 import Footer from "@/components/Footer/Footer";
+import cleanHtml from "@/lib/cleanHtml";
 
 /* ── Tiny helper: resolve banner images once ── */
 const resolveImages = (itin) =>
@@ -53,7 +54,7 @@ const ExpandableDesc = ({ htmlContent, lines = 3, textClass = styles.dayDesc }) 
       <div 
         ref={contentRef}
         className={`${textClass} ${isExpanded ? styles.expanded : collapsedClass}`} 
-        dangerouslySetInnerHTML={{ __html: htmlContent }} 
+        dangerouslySetInnerHTML={{ __html: cleanHtml(htmlContent) }} 
       />
       {isTruncated && (
         <button 

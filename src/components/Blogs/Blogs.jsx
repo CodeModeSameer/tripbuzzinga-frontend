@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./Blogs.module.css";
+import cleanHtml from "@/lib/cleanHtml";
 
 export default function Blogs() {
   const { blogs } = useSiteData();
@@ -74,7 +75,7 @@ export default function Blogs() {
                     <span className={styles.readTime}>{featuredBlog.readingTime}</span>
                   </div>
                   <h3 className={styles.featuredTitle}>{featuredBlog.title}</h3>
-                  <div className={styles.featuredDesc} dangerouslySetInnerHTML={{ __html: featuredBlog.description }} />
+                  <div className={styles.featuredDesc} dangerouslySetInnerHTML={{ __html: cleanHtml(featuredBlog.description) }} />
                 </div>
               </Link>
             </div>

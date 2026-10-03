@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./page.module.css";
+import cleanHtml from "@/lib/cleanHtml";
 
 export default function BlogPost({ params }) {
   // In Next.js 15, params is a Promise, so we use React.use() to unwrap it
@@ -94,7 +95,7 @@ export default function BlogPost({ params }) {
             {blog.content ? (
               <div 
                 className={styles.paragraph} 
-                dangerouslySetInnerHTML={{ __html: (blog.content || '') }} 
+                dangerouslySetInnerHTML={{ __html: cleanHtml(blog.content) }} 
               />
             ) : (
               <p className={styles.paragraph}>No content provided for this blog post.</p>

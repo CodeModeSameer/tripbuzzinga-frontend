@@ -7,6 +7,7 @@ import GlobalBottomSections from "@/components/GlobalBottomSections/GlobalBottom
 import Footer from "@/components/Footer/Footer";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./FaqsPage.module.css";
+import cleanHtml from "@/lib/cleanHtml";
 
 export default function FaqsPage() {
   const { faq: FAQ_DATA } = useSiteData();
@@ -112,7 +113,7 @@ export default function FaqsPage() {
                         opacity: isOpen ? 1 : 0
                       }}
                     >
-                      <div className={styles.answer} dangerouslySetInnerHTML={{ __html: item.answer }} />
+                      <div className={styles.answer} dangerouslySetInnerHTML={{ __html: cleanHtml(item.answer) }} />
                     </div>
                   </div>
                 );

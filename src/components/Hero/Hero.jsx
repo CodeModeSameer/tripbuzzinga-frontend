@@ -5,6 +5,7 @@ import Image from "next/image";
 import { MessageSquare, Users, Map, Briefcase, Star } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./Hero.module.css";
+import cleanHtml from "@/lib/cleanHtml";
 
 export default function Hero() {
   const { hero } = useSiteData();
@@ -114,7 +115,7 @@ export default function Hero() {
                       <Star fill="#f59e0b" color="#f59e0b" size={14} />
                     </div>
                   </div>
-                  <div className={styles.reviewText} dangerouslySetInnerHTML={{ __html: (review.text || '') }} />
+                  <div className={styles.reviewText} dangerouslySetInnerHTML={{ __html: cleanHtml(review.text) }} />
                 </div>
               ))}
             </div>

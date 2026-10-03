@@ -373,9 +373,23 @@
     padding: var(--space-3xl) 0;
   }
 
+  .header {
+    margin-bottom: var(--space-xl);
+    padding: 0 var(--space-md);
+  }
+
   .card {
-    flex: 0 0 280px;
-    height: 440px;
+    flex: 0 0 250px;
+    height: 360px;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .carouselTrack {
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-md);
   }
 
   .title {
@@ -383,8 +397,21 @@
     letter-spacing: 2px;
   }
 
+  .airplaneLine {
+    width: 50px;
+  }
+
+  .toggleButton {
+    padding: 8px 18px;
+    font-size: 0.8rem;
+  }
+
   .cardTitle {
     font-size: var(--fs-lg);
+  }
+
+  .highlight {
+    font-size: 0.75rem;
   }
 
   .price {
@@ -394,11 +421,18 @@
 
 @media (max-width: 480px) {
   .card {
-    flex: 0 0 260px;
-    height: 420px;
+    flex: 0 0 230px;
+    height: 330px;
   }
 
   .cardContent {
     padding: var(--space-md);
+  }
+
+  .locationBadge,
+  .durationBadge {
+    padding: 4px 10px;
+    font-size: 0.625rem;
+    letter-spacing: 1px;
   }
 }

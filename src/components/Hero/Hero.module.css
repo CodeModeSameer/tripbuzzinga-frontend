@@ -388,4 +388,61 @@
     width: 24px;
     height: 24px;
   }
+
+  .hero {
+    min-height: 100svh;
+    padding-top: 64px;
+  }
+
+  .heroContent {
+    padding: 32px 16px 16px;
+  }
+
+  .headline {
+    margin-bottom: 16px;
+  }
+
+  .subtextContainer {
+    margin-bottom: 20px;
+  }
+
+  .drawnArrow {
+    display: none;
+  }
+
+  .searchWrapper {
+    width: 100%;
+  }
+
+  .searchBar {
+    padding: 6px 6px 6px 18px;
+  }
+
+  .searchInput {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+    font-size: 0.95rem;
+  }
+
+  .searchBtn {
+    padding: 10px 20px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .headline {
+    font-size: 1.85rem;
+  }
+
+  .animatedDestContainer {
+    min-width: 130px;
+  }
+
+  .inlineImageWrapper {
+    width: 56px;
+    height: 26px;
+    margin: 0 6px;
+  }
 }

@@ -255,3 +255,16 @@
     display: none;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .title { font-size: 1.6rem; }
+  .desc { font-size: 0.9rem; }
+  .filtersWrapper { justify-content: flex-start; margin-bottom: 20px; padding: 0 16px 8px; }
+  .filterBtn, .viewMoreBtn { padding: 7px 16px; font-size: 0.8rem; }
+  .swiperWrapper { padding: 10px 0 30px; }
+  .swiperContainer :global(.swiper-slide) { width: 240px !important; height: 300px !important; border-radius: 16px; }
+  .slideInner { border-radius: 16px; }
+  .slideOverlay { padding: 18px; }
+  .caption { font-size: 1rem; }
+}

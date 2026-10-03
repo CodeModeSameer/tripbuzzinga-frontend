@@ -719,3 +719,39 @@
 .itinImage {
   object-fit: cover;
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .bannerContent { padding: 0 var(--space-md); max-width: 100%; }
+  .bannerTitle { font-size: clamp(1.6rem, 8vw, 2.25rem); overflow-wrap: anywhere; }
+  .bannerDestLabel { font-size: 0.7rem; letter-spacing: 2px; }
+  .bannerMeta { gap: 10px; }
+  .bannerMetaItem { font-size: 0.75rem; }
+  .bannerWave svg { height: 32px; }
+  .content { padding: 0 var(--space-md) var(--space-3xl); }
+  .sectionTitle { font-size: 1.25rem; margin-bottom: var(--space-md); }
+  .overviewCard { padding: var(--space-md); border-radius: 14px; margin-bottom: var(--space-2xl); }
+  .overviewQuickInfo { gap: 8px; }
+  .quickInfoItem { padding: 10px; gap: 8px; border-radius: 10px; min-width: 0; }
+  .quickInfoLabel { font-size: 0.625rem; }
+  .quickInfoValue { font-size: 0.78rem; overflow-wrap: anywhere; }
+  .overviewDesc { font-size: 0.875rem; line-height: 1.7; }
+  .daySection { margin-bottom: var(--space-2xl); }
+  .timeline { gap: var(--space-md); }
+  .dayCard { padding-left: 44px; }
+  .dayBadge { width: 36px; height: 36px; font-size: 8px; }
+  .timeline::before { left: 17px; }
+  .dayContent { padding: var(--space-md); }
+  .dayContent:hover, .hotelCard:hover { transform: none; }
+  .dayTitle { font-size: 1rem; }
+  .dayDesc { font-size: 0.82rem; line-height: 1.65; }
+  .inclExclGrid { gap: var(--space-md); margin-bottom: var(--space-2xl); }
+  .inclCard, .exclCard, .termsList { padding: var(--space-md); }
+  .inclTitle, .exclTitle { font-size: 1rem; margin-bottom: var(--space-md); }
+  .inclItem, .exclItem, .termsItem { font-size: 0.82rem; }
+  .hotelGrid { grid-template-columns: 1fr; gap: var(--space-md); }
+  .hotelsSection, .termsSection { margin-bottom: var(--space-2xl); }
+  .ctaCard { padding: var(--space-lg) var(--space-md); gap: var(--space-md); border-radius: 16px; }
+  .ctaTitle { font-size: 1.25rem; }
+  .ctaBtnPrimary, .ctaBtnSecondary { padding: 12px 20px; }
+}

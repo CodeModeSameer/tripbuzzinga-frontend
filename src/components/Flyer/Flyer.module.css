@@ -213,3 +213,13 @@
     align-self: flex-start;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .flyerWrapper { height: 160px; }
+  .flyerTitle { font-size: 1.25rem; }
+}
+@media (max-width: 400px) {
+  .flyerWrapper { height: 150px; }
+  .flyerTitle { font-size: 1.1rem; }
+}

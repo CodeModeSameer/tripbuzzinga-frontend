@@ -136,3 +136,8 @@
     font-size: 2.5rem;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .title { font-size: 1.75rem; }
+}

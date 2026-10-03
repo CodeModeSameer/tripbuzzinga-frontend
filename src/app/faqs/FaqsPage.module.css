@@ -232,3 +232,9 @@
     width: 100%;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .heroTitle { font-size: 2rem; }
+  .title { font-size: 1.35rem; }
+}

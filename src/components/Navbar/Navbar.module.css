@@ -303,3 +303,9 @@
     cursor: pointer;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .navInner { padding: 10px 16px; }
+  .logoTitle { font-size: 1.1rem; }
+}

@@ -100,3 +100,9 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .legalHeroTitle { font-size: 1.6rem; }
+  .legalContainer { padding: 28px 16px; }
+}

@@ -57,3 +57,8 @@
     height: 18px;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .socialBtn { width: 32px; height: 32px; }
+}

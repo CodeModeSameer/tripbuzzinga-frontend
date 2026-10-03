@@ -184,6 +184,81 @@ h1, h2, h3, h4, h5, h6 {
   content: "\00a0";
 }
 
+/* ---- Mobile design tokens (scale everything down on small screens) ---- */
+@media (max-width: 768px) {
+  :root {
+    --fs-xs: 0.7rem;
+    --fs-sm: 0.8125rem;
+    --fs-base: 0.9375rem;
+    --fs-md: 1rem;
+    --fs-lg: 1.0625rem;
+    --fs-xl: 1.25rem;
+    --fs-2xl: 1.5rem;
+    --fs-3xl: 1.75rem;
+    --fs-4xl: 2rem;
+    --fs-5xl: 2.25rem;
+
+    --space-lg: 1.25rem;
+    --space-xl: 1.5rem;
+    --space-2xl: 2rem;
+    --space-3xl: 2.5rem;
+    --space-4xl: 3.5rem;
+
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+    --nav-height: 64px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --fs-base: 0.9rem;
+    --fs-xl: 1.15rem;
+    --fs-2xl: 1.375rem;
+    --fs-3xl: 1.625rem;
+    --fs-4xl: 1.75rem;
+    --fs-5xl: 2rem;
+
+    --space-xl: 1.25rem;
+    --space-2xl: 1.75rem;
+    --space-3xl: 2rem;
+    --space-4xl: 2.75rem;
+  }
+}
+
+/* ---- Rich text wrapping safety (WYSIWYG content) ---- */
+.richText,
+[class*="Desc"],
+[class*="desc"],
+[class*="answer"],
+[class*="reviewText"],
+[class*="content"] {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .richText *,
+  [class*="Desc"] *,
+  [class*="desc"] *,
+  [class*="answer"] *,
+  [class*="reviewText"] * {
+    white-space: normal !important;
+    max-width: 100%;
+  }
+
+  .richText img,
+  [class*="Desc"] img,
+  [class*="desc"] img,
+  [class*="content"] img {
+    height: auto !important;
+  }
+
+  h1, h2, h3, h4, h5, h6, p, li, a, span {
+    overflow-wrap: break-word;
+  }
+}
+
 /* ---- Container ---- */
 .container {
   width: 100%;

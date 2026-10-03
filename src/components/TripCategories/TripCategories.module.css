@@ -108,3 +108,12 @@
     font-size: 12px;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .pillContainer { padding: 12px 12px; }
+  .scrollTrack { gap: 10px; }
+  .categoryItem { padding: 6px; gap: 8px; }
+  .imageWrapper { width: 96px; height: 58px; }
+  .label { font-size: 11px; }
+}

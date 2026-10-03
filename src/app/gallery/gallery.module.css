@@ -184,3 +184,8 @@
     grid-row: span 1;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .title { font-size: 1.75rem; }
+}

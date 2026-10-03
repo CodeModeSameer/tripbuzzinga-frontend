@@ -161,3 +161,12 @@
     font-size: 1.8rem;
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .modal { width: 92%; padding: 28px 20px; max-height: 90vh; overflow-y: auto; }
+  .title { font-size: 1.5rem; }
+  .form, .row { gap: 16px; }
+  .inputGroup select { font-size: 0.95rem; }
+  .submitBtn { padding: 12px 28px; font-size: 0.95rem; width: 100%; }
+}

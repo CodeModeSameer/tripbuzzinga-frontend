@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Search, Plus, Minus } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./FAQ.module.css";
+import cleanHtml from "@/lib/cleanHtml";
 
 export default function FAQ() {
   const { faq: FAQ_DATA } = useSiteData();
@@ -55,7 +56,7 @@ export default function FAQ() {
                     className={styles.accordionBody} 
                     style={{ maxHeight: isOpen ? "200px" : "0", paddingBottom: isOpen ? "24px" : "0" }}
                   >
-                    <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: item.answer }} />
+                    <div className={styles.answerText} dangerouslySetInnerHTML={{ __html: cleanHtml(item.answer) }} />
                   </div>
                 </div>
               );

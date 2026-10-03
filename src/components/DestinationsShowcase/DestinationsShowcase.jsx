@@ -11,6 +11,7 @@ import "swiper/css/pagination";
 import { ArrowRight, Globe, MapPin } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./DestinationsShowcase.module.css";
+import cleanHtml from "@/lib/cleanHtml";
 
 export default function DestinationsShowcase() {
   const { exploreInternational: INTERNATIONAL, exploreDomestic: DOMESTIC } = useSiteData();
@@ -293,7 +294,7 @@ export default function DestinationsShowcase() {
                 <h3 className={styles.destName}>{dest.name}</h3>
                 <div 
                   className={styles.destDesc} 
-                  dangerouslySetInnerHTML={{ __html: (dest.desc || '') }} 
+                  dangerouslySetInnerHTML={{ __html: cleanHtml(dest.desc) }} 
                 />
                 <Link href={dest.linkUrl ? dest.linkUrl : `/destinations/${dest.slug || dest.name.toLowerCase()}`} className={styles.exploreLink}>
                   Explore {dest.name}

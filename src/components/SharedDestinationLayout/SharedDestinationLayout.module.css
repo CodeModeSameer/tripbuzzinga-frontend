@@ -311,3 +311,20 @@
     font-size: var(--fs-xs);
   }
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .bannerContent { padding: var(--space-2xl) var(--space-md); max-width: 100%; }
+  .bannerTitle { font-size: clamp(1.75rem, 9vw, 2.5rem); letter-spacing: 2px; overflow-wrap: anywhere; }
+  .bannerTagline { font-size: 0.9rem; letter-spacing: 1px; }
+  .bannerWave svg { height: 36px; }
+  .itineraries { padding: var(--space-2xl) 0 var(--space-3xl); }
+  .itinerariesContainer { padding: 0 var(--space-md); gap: var(--space-2xl); }
+  .itinCard:hover, .itinImageWrap:hover { transform: none; }
+  .itinCardHeader { margin-bottom: var(--space-md); }
+  .itinTitle { font-size: 1.15rem; }
+  .itinDetailRow { gap: 8px; align-items: flex-start; }
+  .itinLabel { min-width: 92px; font-size: 0.8rem; }
+  .itinValue { font-size: 0.8rem; min-width: 0; overflow-wrap: anywhere; }
+  .bookBtn { float: none; display: block; width: 100%; text-align: center; padding: 10px 20px; }
+}

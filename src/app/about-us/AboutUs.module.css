@@ -122,3 +122,10 @@
   line-height: 1.7;
   font-size: 1rem;
 }
+
+/* === MOBILE POLISH (auto) === */
+@media (max-width: 768px) {
+  .aboutHeroTitle { font-size: 1.75rem; }
+  .aboutContainer { padding: 28px 16px; }
+  .quoteSection { padding: 24px 16px; }
+}
