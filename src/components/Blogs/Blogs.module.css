@@ -216,24 +216,3 @@
   }
 }
 
-/* === MOBILE POLISH (auto) === */
-@media (max-width: 640px) {
-  .container { padding: 0 var(--space-md); }
-  .header { margin-bottom: var(--space-xl); }
-  .subtitle { font-size: 0.7rem; letter-spacing: 2px; }
-  .title { font-size: 1.6rem; }
-  .content { gap: 14px; margin-bottom: 20px; }
-  .regularBlogsCol { gap: 10px; }
-  .regularBlogCard { flex-direction: row; align-items: center; gap: 12px; padding: 10px; }
-  .regularImageWrapper { width: 96px; height: 72px; }
-  .regularBlogInfo { gap: 6px; min-width: 0; }
-  .metaRow { font-size: 0.7rem; }
-  .regularTitle { font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .featuredImageWrapper { height: 200px; min-height: 200px; }
-  .imageOverlay { padding: 24px 16px 16px; }
-  .overlayTitle { font-size: 1.15rem; }
-  .featuredContent { padding: 16px; gap: 8px; }
-  .featuredTitle { font-size: 1.05rem; }
-  .featuredDesc { font-size: 0.85rem; }
-  .viewAllBtn { font-size: 0.85rem; padding: 9px 22px; }
-}
