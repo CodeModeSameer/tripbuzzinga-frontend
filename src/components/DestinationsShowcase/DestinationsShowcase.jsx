@@ -13,6 +13,31 @@ import { useSiteData } from "@/context/SiteDataContext";
 import styles from "./DestinationsShowcase.module.css";
 import cleanHtml from "@/lib/cleanHtml";
 
+/* Image with graceful fallback: if the URL is broken (e.g. deleted from
+   ImageKit), show a soft gradient instead of the browser's broken-image icon. */
+function SafeImage({ src, alt }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div
+        role="img"
+        aria-label={alt}
+        style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, #48CAE4 0%, #0077B6 100%)" }}
+      />
+    );
+  }
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      style={{ objectFit: "cover" }}
+      sizes="(max-width: 768px) 100vw, 50vw"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 export default function DestinationsShowcase() {
   const { exploreInternational: INTERNATIONAL, exploreDomestic: DOMESTIC } = useSiteData();
   const [activeTab, setActiveTab] = useState("international");
@@ -272,13 +297,7 @@ export default function DestinationsShowcase() {
                   >
                     {(dest.images || [dest.image]).filter(Boolean).map((imgUrl, idx) => (
                       <SwiperSlide key={idx} style={{ width: "100%", height: "100%", position: "relative" }}>
-                        <Image 
-                          src={imgUrl.trim()}
-                          alt={dest.name}
-                          fill
-                          style={{ objectFit: "cover" }}
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                        />
+                        <SafeImage src={imgUrl.trim()} alt={dest.name} />
                       </SwiperSlide>
                     ))}
                   </Swiper>
