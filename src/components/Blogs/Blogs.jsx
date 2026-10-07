@@ -12,7 +12,7 @@ export default function Blogs() {
   if (!blogs || blogs.length === 0) return null;
 
   const featuredBlog = blogs.find(blog => blog.isFeatured) || blogs[blogs.length - 1];
-  const regularBlogs = blogs.filter(blog => blog.id !== featuredBlog?.id);
+  const regularBlogs = blogs.filter(blog => blog.id !== featuredBlog?.id).slice(0, 3);
 
   return (
     <section className={styles.blogsSection}>
