@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, MapPin } from "lucide-react";
 import { useSiteData } from "@/context/SiteDataContext";
+import cleanHtml from "@/lib/cleanHtml";
 import styles from "./page.module.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -37,7 +38,7 @@ export default function AllDestinationsPage() {
                 </div>
                 <div className={styles.cardContent}>
                   <h3 className={styles.cardTitle}>{dest.name}</h3>
-                  <p className={styles.cardDesc}>{(dest.desc || '').replace(/<[^>]*>?/gm, '').slice(0, 100)}...</p>
+                  <p className={styles.cardDesc}>{cleanHtml(dest.desc).replace(/<[^>]*>?/gm, '').slice(0, 100)}...</p>
                   
                   <div className={styles.cardFooter}>
                     <span className={styles.locationTag}>
